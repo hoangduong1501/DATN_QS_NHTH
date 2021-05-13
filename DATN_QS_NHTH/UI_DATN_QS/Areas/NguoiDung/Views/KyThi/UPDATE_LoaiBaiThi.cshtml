@@ -1,0 +1,49 @@
+﻿
+@model UI_DATN_QS.Models.DB_Entities.LOAI_BAI_THI
+
+<div class="container">
+    <div class="col-md-12">
+        <br />
+        <br />
+        <h3 class="text-center" id="exampleModalLongTitle">CẬP NHẬT LOẠI BÀI THI</h3>
+        <br />
+        @using (Html.BeginForm("UPDATE_LoaiBaiThi", "KyThi", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("ID_LBaiThi", Model.ID_LBaiThi)
+
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Mã loại đề</label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.TextBoxFor(mo => mo.MA_LBaiThi, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(mo => mo.MA_LBaiThi, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Tên loại đề</label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.TextBoxFor(mo => mo.TEN_LBaiThi, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(mo => mo.TEN_LBaiThi, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Ghi chú</label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.TextAreaFor(mo => mo.NOTE_LBaiThi, new { @class = "form-control", @rows = "2" })
+                    @Html.ValidationMessageFor(mo => mo.NOTE_LBaiThi, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label"></label>
+                <div class="col-sm-8 col-md-10">
+                    <button class="btn btn-success">
+                        <i class="fas fa-download"></i> Lưu
+                    </button>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

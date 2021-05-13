@@ -1,0 +1,117 @@
+﻿
+@using UI_DATN_QS.Models.DB_Models;
+
+@model IEnumerable<LopHoc_Model>
+
+
+@using (Html.BeginForm("DELETE_LopHoc", "HocVien", FormMethod.Post))
+{
+    <div class="container-fluid">
+        <br />
+        <a class="btn btn-primary" href="@Url.Action("INSERT_LopHoc", "HocVien", new { area = "NguoiDung" })">
+            <i class="fas fa-plus"></i> Tạo Lớp
+        </a>
+        <a class="btn btn-primary" href="@Url.Action("INSERT_LopHoc", "HocVien", new { area = "NguoiDung" })">
+            <i class="fas fa-file-excel"></i> Tạo Từ File
+        </a>
+        <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit">
+            <i class="fas fa-trash-alt"></i> Xóa Mục Đã Chọn
+        </button>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 table-responsive" style="padding-top: 1rem;">
+                <table id="dataTable" class="table table-bordered  display nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th class="text-center"><i class="fas fa-paw text-dark"></i></th>
+                            <th class="text-center"><input type="checkbox" id="checkBoxAll" /></th>
+                            <th>Mã lớp</th>
+                            <th>Tên lớp</th>
+                            <th>Niên khóa</th>
+                            <th>Ngành học</th>
+                            <th>Khóa học</th>
+                            <th>Sỉ số</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int count = 1; }
+                        @foreach (LopHoc_Model item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">@(count++)</td>
+                                <td class="text-center">
+                                    <input type="checkbox" class="CheckBoxItem" name="ID_LopHoc" value="@item.ID_NganhHoc" />
+                                </td>
+                                <td>@item.MA_LopHoc</td>
+                                <td>@item.TEN_LopHoc</td>
+                                <td class="text-center">@item.TEN_NienKhoa</td>
+                                <td>@item.TEN_NganhHoc</td>
+                                <td>@item.TEN_KhoaHoc</td>
+                                <td class="text-center">@item.NUM_LopHoc</td>
+                                <td>
+                                    <a class="btn btn-sm btn-outline-primary rounded-circle" href="@Url.Action("UPDATE_LopHoc", "HocVien", new { pID_LopHoc = item.ID_LopHoc })" data-toggle="tooltip" data-placement="right" title="Chỉnh Sửa">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-outline-danger rounded-circle" href="@Url.Action("DELETE_LopHoc", "HocVien", new { pID_LopHoc = item.ID_LopHoc })" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="right" title="Xóa">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-outline-dark rounded-circle" href="@Url.Action("DELETE_LopHoc", "HocVien", new { pID_LopHoc = item.ID_LopHoc })" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="right" title="Xóa">
+                                        <i class="fas fa-list"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th class="text-center"><i class="fas fa-paw text-dark"></i></th>
+                            <th></th>
+                            <th>Mã lớp</th>
+                            <th>Tên lớp</th>
+                            <th>Niên khóa</th>
+                            <th>Ngành học</th>
+                            <th>Khóa học</th>
+                            <th>Sỉ số</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+<br />
+<br />
+
+@section JSFooter{
+    <script>
+        $(document).ready(function () {
+
+            $('table.display').DataTable({
+                responsive: true,
+                "order": [[4, "desc"]],
+                "columnDefs": [
+                    { "orderable": false, "targets": 0 },
+                    { "orderable": false, "targets": 1 },
+                    { "orderable": false, "targets": 8 }
+                ]
+            });
+
+            $("#notify_Popup").modal();
+
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked"))
+                    $('.CheckBoxItem').prop('checked', true);
+                else $('.CheckBoxItem').prop('checked', false);
+            });
+        });
+    </script>
+
+}

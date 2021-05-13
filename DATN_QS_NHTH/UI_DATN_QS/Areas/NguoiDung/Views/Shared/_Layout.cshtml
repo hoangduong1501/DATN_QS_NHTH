@@ -1,0 +1,241 @@
+﻿@{
+    //ViewBag.Notify_Message = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Quiz System - NguoiDungment</title>
+
+    <link href="~/Content/Styles_Layout.css" rel="stylesheet" />
+    <link href="~/Content/Style_Scrollbar_Custom.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+
+</head>
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand" href="">
+            <i class="fas fa-graduation-cap text-primary"></i>
+            Quiz System
+        </a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#" title="Ẩn/ Hiện menu"><i class="fas fa-bars text-light"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ml-auto ml-md-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog fa-fw text-light"></i></a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    @Html.ActionLink("Hồ Sơ", "Profile_Login_AD", "LoginNguoiDung", new { area = "NguoiDung" }, new { @class = "dropdown-item" })
+                    <a class="dropdown-item" href="" data-toggle="modal" data-target="#exampleModalCenter">Đổi Mật Khẩu</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="login.html">Đăng Xuất</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div>
+                            <img id="anh_NguoiDung" class="avatar-side-nav" src="https://drive.google.com/uc?id=148ojOziml1ijmhyxJU52TJ12vGNEhOBQ" />
+                            <h5 id="name_NguoiDung" class="nav-link text-center text-light" style="padding: 5% 6% 0 6%;">Nguyễn Hoàng Dương</h5>
+                        </div>
+                        <div class="sb-sidenav-menu-heading text-light">QUẢN LÝ</div>
+                        <a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                            Trang Chủ
+                        </a>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts_HocVien" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-graduate"></i></div>
+                            Học Viên
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts_HocVien" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                @Html.ActionLink("Hồ Sơ Học Viên", "GET_HocVien", "HocVien", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Lớp Học", "GET_LopHoc", "HocVien", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Khóa Học", "GET_KhoaHoc", "KyThi", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Ngành Học", "GET_NganhHoc", "HocVien", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts_KyThi" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Kỳ Thi
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts_KyThi" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                @Html.ActionLink("Loại Đề", "GET_LoaiBaiThi", "KyThi", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Môn Học", "GET_MonHoc", "KyThi", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Câu Hỏi Thi", "CauHoi_KyThi_MA", "KyThi", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Đề Thi", "DeThi_KyThi_MA", "KyThi", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Niên Khóa", "GET_NienKhoa", "KyThi", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts_KetQua" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Kết Quả
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts_KetQua" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">Điểm Theo Môn Học</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Điểm Theo Lớp Học</a>
+                            </nav>
+                        </div>
+
+                        @*<a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Thống Kê
+                        </a>*@
+                        <a class="nav-link" href="@Url.Action("GET_NguoiDung", "NguoiDung", new { area = "NguoiDung" })">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users-cog"></i></div>
+                            Người Dùng
+                        </a>
+
+                        <div class="sb-sidenav-menu-heading text-light">CÀI ĐẶT</div>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts_TaiKhoan" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-cog"></i></div>
+                            Tài Khoản
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts_TaiKhoan" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">Đổi Mật Khẩu</a>
+                                @Html.ActionLink("Hồ Sơ", "Profile_Login_AD", "LoginNguoiDung", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts_TroGiup" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-info-circle"></i></div>
+                            Hướng Dẫn
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts_TroGiup" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">Hướng Dẫn</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Thông Tin</a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    Start Bootstrap
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            @RenderBody()
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2020</div>
+
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    @* popupdelete thông báo  *@
+    <div class="modal fade" id="delete_Popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="title_Popup">
+                        <i class="fas fa-exclamation-triangle text-warning"></i> Thông Báo
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="modal-title" id="message_Popup">Bạn có chắc muốn xóa?</h6>
+                </div>
+                <div id="footer_Popup" class="modal-footer">
+                    <button onclick="BackToFirst()" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* popupdelte thông báo  *@
+
+    @* popup_Notify thông báo  *@
+    @{
+        if (ViewBag.Notify_Status != null)
+        {
+            <div class="modal fade" id="notify_Popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="title_Popup">
+                                <i class="fas fa-exclamation-triangle text-warning"></i> @ViewBag.Notify_Status.Title
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h6 class="modal-title" id="message_Popup">@ViewBag.Notify_Status.Message</h6>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+    @* popup_Notify thông báo  *@
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/Script/Scripts_Layout.js"></script>
+    <script src="~/Script/Script_Notify.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>*@
+    @*<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>*@
+    @*<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>*@
+    <script type="text/javascript" src="~/Script/datatables1-10-20.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            //$('table.display').DataTable({
+            //    responsive: true,
+            //    "order": [[2, "asc"]],
+            //    "columnDefs": [
+            //        { "orderable": false, "targets": 0 },
+            //        { "orderable": false, "targets": 1 }
+            //    ]
+            //});
+
+            //$("#notify_Popup").modal();
+
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked"))
+                    $('.CheckBoxItem').prop('checked', true);
+                else $('.CheckBoxItem').prop('checked', false);
+            });
+        });
+
+    </script>
+    @RenderSection("JSFooter", required: false)
+
+</body>
+</html>

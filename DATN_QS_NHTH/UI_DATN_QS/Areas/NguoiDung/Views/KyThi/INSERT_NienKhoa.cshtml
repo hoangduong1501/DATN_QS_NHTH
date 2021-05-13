@@ -1,0 +1,48 @@
+﻿
+@model UI_DATN_QS.Models.DB_Entities.NIEN_KHOA
+
+<div class="container">
+<div class="col-md-12">
+    <br />
+    <br />
+    <h3 class="text-center" id="exampleModalLongTitle">TẠO NIÊN KHÓA</h3>
+    <br />
+    @using (Html.BeginForm("INSERT_NienKhoa", "KyThi", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group row">
+            <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Mã niên khóa</label>
+            <div class="col-sm-8 col-md-10">
+                @Html.TextBoxFor(mo => mo.MA_NienKhoa, new { @class = "form-control" })
+                @Html.ValidationMessageFor(mo => mo.MA_NienKhoa, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Tên niên khóa</label>
+            <div class="col-sm-8 col-md-10">
+                @Html.TextBoxFor(mo => mo.TEN_NienKhoa, new { @class = "form-control" })
+                @Html.ValidationMessageFor(mo => mo.TEN_NienKhoa, null, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Ghi chú</label>
+            <div class="col-sm-8 col-md-10">
+                @Html.TextAreaFor(mo => mo.NOTE_NienKhoa, new { @class = "form-control", @rows = "2" })
+                @Html.ValidationMessageFor(mo => mo.NOTE_NienKhoa, null, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label"></label>
+            <div class="col-sm-8 col-md-10">
+                <button class="btn btn-success">
+                    <i class="fas fa-download"></i> Lưu
+                </button>
+            </div>
+        </div>
+
+    }
+</div>
+</div>

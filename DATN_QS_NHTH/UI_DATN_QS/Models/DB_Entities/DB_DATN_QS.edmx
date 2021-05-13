@@ -1,0 +1,627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_DATN_QSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BANG_DIEM">
+          <Key>
+            <PropertyRef Name="ID_BangDiem" />
+          </Key>
+          <Property Name="ID_BangDiem" Type="int" Nullable="false" />
+          <Property Name="ID_HocVien" Type="int" />
+          <Property Name="ID_DeThi" Type="int" />
+          <Property Name="DIEM_BangDiem" Type="int" />
+          <Property Name="TGIAN_BangDiem" Type="int" />
+          <Property Name="IS_Deleted" Type="int" />
+          <Property Name="TIME_Create" Type="date" />
+          <Property Name="TIME_Update" Type="date" />
+        </EntityType>
+        <EntityType Name="CAU_HOI">
+          <Key>
+            <PropertyRef Name="ID_CauHoi" />
+          </Key>
+          <Property Name="ID_CauHoi" Type="int" Nullable="false" />
+          <Property Name="NDUNG_CauHoi" Type="ntext" />
+          <Property Name="ANH_CauHoi" Type="image" />
+          <Property Name="LCHON_1" Type="ntext" />
+          <Property Name="LCHON_2" Type="ntext" />
+          <Property Name="LCHON_3" Type="ntext" />
+          <Property Name="LCHON_4" Type="ntext" />
+          <Property Name="LCHON_Dung" Type="ntext" />
+          <Property Name="ID_Chuong" Type="int" />
+          <Property Name="ID_MonHoc" Type="int" />
+          <Property Name="IS_Deleted" Type="int" />
+          <Property Name="TIME_Create" Type="date" />
+          <Property Name="TIME_Update" Type="date" />
+        </EntityType>
+        <EntityType Name="CT_DE_THI">
+          <Key>
+            <PropertyRef Name="ID_CTDeThi" />
+          </Key>
+          <Property Name="ID_CTDeThi" Type="int" Nullable="false" />
+          <Property Name="ID_CauHoi" Type="int" />
+          <Property Name="ID_DeThi" Type="int" />
+          <Property Name="IS_Deleted" Type="int" />
+          <Property Name="TIME_Create" Type="date" />
+          <Property Name="TIME_Update" Type="date" />
+        </EntityType>
+        <EntityType Name="CT_LOP_HOC">
+          <Key>
+            <PropertyRef Name="ID_CTLopHoc" />
+          </Key>
+          <Property Name="ID_CTLopHoc" Type="int" Nullable="false" />
+          <Property Name="ID_LopHoc" Type="int" />
+          <Property Name="ID_HocVien" Type="int" />
+          <Property Name="IS_Deleted" Type="int" />
+          <Property Name="TIME_Create" Type="date" />
+          <Property Name="TIME_Update" Type="date" />
+        </EntityType>
+        <EntityType Name="DE_THI">
+          <Key>
+            <PropertyRef Name="ID_DeThi" />
+          </Key>
+          <Property Name="ID_DeThi" Type="int" Nullable="false" />
+          <Property Name="MA_DeThi" Type="nchar" MaxLength="20" />
+          <Property Name="TEN_DenThi" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_LBaiThi" Type="int" />
+          <Property Name="ID_MonHoc" Type="int" />
+          <Property Name="PASS_DeThi" Type="nchar" MaxLength="32" />
+          <Property Name="TGIAN_DeThi" Type="int" />
+          <Property Name="IS_Locked" Type="int" />
+          <Property Name="IS_Deleted" Type="int" />
+          <Property Name="TIME_Create" Type="date" />
+          <Property Name="TIME_Update" Type="date" />
+        </EntityType>
+        <EntityType Name="HOC_VIEN">
+          <Key>
+            <PropertyRef Name="ID_HocVien" />
+          </Key>
+          <Property Name="ID_HocVien" Type="int" Nullable="false" />
+          <Property Name="MA_HocVien" Type="nchar" MaxLength="20" />
+          <Property Name="TEN_HocVien" Type="nvarchar" MaxLength="50" />
+          <Property Name="NSINH_HocVien" Type="date" />
+          <Property Name="GTINH_HocVien" Type="int" />
+          <Property Name="ANH_HocVien" Type="image" />
+          <Property Name="ID_TaiKhoan" Type="int" />
+        </EntityType>
+        <EntityType Name="KHOA_HOC">
+          <Key>
+            <PropertyRef Name="ID_KhoaHoc" />
+          </Key>
+          <Property Name="ID_KhoaHoc" Type="int" Nullable="false" />
+          <Property Name="MA_KhoaHoc" Type="nchar" MaxLength="20" />
+          <Property Name="TEN_KhoaHoc" Type="nvarchar" MaxLength="50" />
+          <Property Name="NOTE_KhoaHoc" Type="ntext" />
+          <Property Name="IS_Deleted" Type="int" />
+          <Property Name="TIME_Create" Type="date" />
+          <Property Name="TIME_Update" Type="date" />
+        </EntityType>
+        <EntityType Name="LOAI_BAI_THI">
+          <Key>
+            <PropertyRef Name="ID_LBaiThi" />
+          </Key>
+          <Property Name="ID_LBaiThi" Type="int" Nullable="false" />
+          <Property Name="MA_LBaiThi" Type="nchar" MaxLength="20" />
+          <Property Name="TEN_LBaiThi" Type="nvarchar" MaxLength="50" />
+          <Property Name="NOTE_LBaiThi" Type="ntext" />
+          <Property Name="IS_Deleted" Type="int" />
+          <Property Name="TIME_Create" Type="date" />
+          <Property Name="TIME_Update" Type="date" />
+        </EntityType>
+        <EntityType Name="LOP_HOC">
+          <Key>
+            <PropertyRef Name="ID_LopHoc" />
+          </Key>
+          <Property Name="ID_LopHoc" Type="int" Nullable="false" />
+          <Property Name="MA_LopHoc" Type="nchar" MaxLength="20" />
+          <Property Name="TEN_LopHoc" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_NganhHoc" Type="int" />
+          <Property Name="ID_NienKhoa" Type="int" />
+          <Property Name="ID_KhoaHoc" Type="int" />
+          <Property Name="IS_Deleted" Type="int" />
+          <Property Name="TIME_Create" Type="date" />
+          <Property Name="TIME_Update" Type="date" />
+        </EntityType>
+        <EntityType Name="MON_HOC">
+          <Key>
+            <PropertyRef Name="ID_MonHoc" />
+          </Key>
+          <Property Name="ID_MonHoc" Type="int" Nullable="false" />
+          <Property Name="MA_MonHoc" Type="nchar" MaxLength="20" />
+          <Property Name="TEN_MonHoc" Type="nvarchar" MaxLength="50" />
+          <Property Name="NOTE_MonHoc" Type="ntext" />
+          <Property Name="IS_Deleted" Type="int" />
+          <Property Name="TIME_Create" Type="date" />
+          <Property Name="TIME_Update" Type="date" />
+        </EntityType>
+        <EntityType Name="NIEN_KHOA">
+          <Key>
+            <PropertyRef Name="ID_NienKhoa" />
+          </Key>
+          <Property Name="ID_NienKhoa" Type="int" Nullable="false" />
+          <Property Name="MA_NienKhoa" Type="nchar" MaxLength="20" />
+          <Property Name="TEN_NienKhoa" Type="nvarchar" MaxLength="50" />
+          <Property Name="NOTE_NienKhoa" Type="ntext" />
+          <Property Name="IS_Deleted" Type="int" />
+          <Property Name="TIME_Create" Type="date" />
+          <Property Name="TIME_Update" Type="date" />
+        </EntityType>
+        <EntityType Name="NGANH_HOC">
+          <Key>
+            <PropertyRef Name="ID_NganhHoc" />
+          </Key>
+          <Property Name="ID_NganhHoc" Type="int" Nullable="false" />
+          <Property Name="MA_NganhHoc" Type="nchar" MaxLength="20" />
+          <Property Name="TEN_NganhHoc" Type="nvarchar" MaxLength="50" />
+          <Property Name="NOTE_NganhHoc" Type="ntext" />
+          <Property Name="IS_Deleted" Type="int" />
+          <Property Name="TIME_Create" Type="date" />
+          <Property Name="TIME_Update" Type="date" />
+        </EntityType>
+        <EntityType Name="NGUOI_DUNG">
+          <Key>
+            <PropertyRef Name="ID_NguoiDung" />
+          </Key>
+          <Property Name="ID_NguoiDung" Type="int" Nullable="false" />
+          <Property Name="MA_NguoiDung" Type="nchar" MaxLength="20" />
+          <Property Name="TEN_NguoiDung" Type="nvarchar" MaxLength="50" />
+          <Property Name="NSINH_NguoiDung" Type="date" />
+          <Property Name="MAIL_NguoiDung" Type="nchar" MaxLength="50" />
+          <Property Name="ANH_NguoiDung" Type="image" />
+          <Property Name="ID_TaiKhoan" Type="int" />
+        </EntityType>
+        <EntityType Name="TAI_KHOAN">
+          <Key>
+            <PropertyRef Name="ID_TaiKhoan" />
+          </Key>
+          <Property Name="ID_TaiKhoan" Type="int" Nullable="false" />
+          <Property Name="USER_TaiKhoan" Type="nchar" MaxLength="20" />
+          <Property Name="PASS_TaiKhoan" Type="nchar" MaxLength="32" />
+          <Property Name="NOTE_TaiKhoan" Type="ntext" />
+          <Property Name="IS_Locked" Type="int" />
+          <Property Name="IS_Deleted" Type="int" />
+          <Property Name="TIME_Create" Type="date" />
+          <Property Name="TIME_Update" Type="date" />
+        </EntityType>
+        <EntityContainer Name="DB_DATN_QSModelStoreContainer">
+          <EntitySet Name="BANG_DIEM" EntityType="Self.BANG_DIEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAU_HOI" EntityType="Self.CAU_HOI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CT_DE_THI" EntityType="Self.CT_DE_THI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CT_LOP_HOC" EntityType="Self.CT_LOP_HOC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DE_THI" EntityType="Self.DE_THI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HOC_VIEN" EntityType="Self.HOC_VIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHOA_HOC" EntityType="Self.KHOA_HOC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAI_BAI_THI" EntityType="Self.LOAI_BAI_THI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOP_HOC" EntityType="Self.LOP_HOC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MON_HOC" EntityType="Self.MON_HOC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NIEN_KHOA" EntityType="Self.NIEN_KHOA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NGANH_HOC" EntityType="Self.NGANH_HOC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NGUOI_DUNG" EntityType="Self.NGUOI_DUNG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAI_KHOAN" EntityType="Self.TAI_KHOAN" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_DATN_QSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BANG_DIEM">
+          <Key>
+            <PropertyRef Name="ID_BangDiem" />
+          </Key>
+          <Property Name="ID_BangDiem" Type="Int32" Nullable="false" />
+          <Property Name="ID_HocVien" Type="Int32" />
+          <Property Name="ID_DeThi" Type="Int32" />
+          <Property Name="DIEM_BangDiem" Type="Int32" />
+          <Property Name="TGIAN_BangDiem" Type="Int32" />
+          <Property Name="IS_Deleted" Type="Int32" />
+          <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+          <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="CT_DE_THI">
+          <Key>
+            <PropertyRef Name="ID_CTDeThi" />
+          </Key>
+          <Property Name="ID_CTDeThi" Type="Int32" Nullable="false" />
+          <Property Name="ID_CauHoi" Type="Int32" />
+          <Property Name="ID_DeThi" Type="Int32" />
+          <Property Name="IS_Deleted" Type="Int32" />
+          <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+          <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="CT_LOP_HOC">
+          <Key>
+            <PropertyRef Name="ID_CTLopHoc" />
+          </Key>
+          <Property Name="ID_CTLopHoc" Type="Int32" Nullable="false" />
+          <Property Name="ID_LopHoc" Type="Int32" />
+          <Property Name="ID_HocVien" Type="Int32" />
+          <Property Name="IS_Deleted" Type="Int32" />
+          <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+          <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="DE_THI">
+          <Key>
+            <PropertyRef Name="ID_DeThi" />
+          </Key>
+          <Property Name="ID_DeThi" Type="Int32" Nullable="false" />
+          <Property Name="MA_DeThi" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TEN_DenThi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_LBaiThi" Type="Int32" />
+          <Property Name="ID_MonHoc" Type="Int32" />
+          <Property Name="PASS_DeThi" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="TGIAN_DeThi" Type="Int32" />
+          <Property Name="IS_Locked" Type="Int32" />
+          <Property Name="IS_Deleted" Type="Int32" />
+          <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+          <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="HOC_VIEN">
+          <Key>
+            <PropertyRef Name="ID_HocVien" />
+          </Key>
+          <Property Name="ID_HocVien" Type="Int32" Nullable="false" />
+          <Property Name="MA_HocVien" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TEN_HocVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NSINH_HocVien" Type="DateTime" Precision="0" />
+          <Property Name="GTINH_HocVien" Type="Int32" />
+          <Property Name="ANH_HocVien" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ID_TaiKhoan" Type="Int32" />
+        </EntityType>
+        <EntityType Name="LOAI_BAI_THI">
+          <Key>
+            <PropertyRef Name="ID_LBaiThi" />
+          </Key>
+          <Property Name="ID_LBaiThi" Type="Int32" Nullable="false" />
+          <Property Name="MA_LBaiThi" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TEN_LBaiThi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NOTE_LBaiThi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IS_Deleted" Type="Int32" />
+          <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+          <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="MON_HOC">
+          <Key>
+            <PropertyRef Name="ID_MonHoc" />
+          </Key>
+          <Property Name="ID_MonHoc" Type="Int32" Nullable="false" />
+          <Property Name="MA_MonHoc" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TEN_MonHoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NOTE_MonHoc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IS_Deleted" Type="Int32" />
+          <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+          <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="NGUOI_DUNG">
+          <Key>
+            <PropertyRef Name="ID_NguoiDung" />
+          </Key>
+          <Property Name="ID_NguoiDung" Type="Int32" Nullable="false" />
+          <Property Name="MA_NguoiDung" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TEN_NguoiDung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NSINH_NguoiDung" Type="DateTime" Precision="0" />
+          <Property Name="MAIL_NguoiDung" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="ANH_NguoiDung" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ID_TaiKhoan" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TAI_KHOAN">
+          <Key>
+            <PropertyRef Name="ID_TaiKhoan" />
+          </Key>
+          <Property Name="ID_TaiKhoan" Type="Int32" Nullable="false" />
+          <Property Name="USER_TaiKhoan" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="PASS_TaiKhoan" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="NOTE_TaiKhoan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IS_Locked" Type="Int32" />
+          <Property Name="IS_Deleted" Type="Int32" />
+          <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+          <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="DB_DATN_QSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BANG_DIEM" EntityType="Self.BANG_DIEM" />
+          <EntitySet Name="CT_DE_THI" EntityType="Self.CT_DE_THI" />
+          <EntitySet Name="CT_LOP_HOC" EntityType="Self.CT_LOP_HOC" />
+          <EntitySet Name="DE_THI" EntityType="Self.DE_THI" />
+          <EntitySet Name="HOC_VIEN" EntityType="Self.HOC_VIEN" />
+          <EntitySet Name="LOAI_BAI_THI" EntityType="Self.LOAI_BAI_THI" />
+          <EntitySet Name="MON_HOC" EntityType="Self.MON_HOC" />
+          <EntitySet Name="NGUOI_DUNG" EntityType="Self.NGUOI_DUNG" />
+          <EntitySet Name="TAI_KHOAN" EntityType="Self.TAI_KHOAN" />
+          <EntitySet Name="NGANH_HOC" EntityType="DB_DATN_QSModel.NGANH_HOC" />
+          <EntitySet Name="NIEN_KHOA" EntityType="DB_DATN_QSModel.NIEN_KHOA" />
+          <EntitySet Name="KHOA_HOC" EntityType="DB_DATN_QSModel.KHOA_HOC" />
+          <EntitySet Name="LOP_HOC" EntityType="DB_DATN_QSModel.LOP_HOC" />
+          <EntitySet Name="CAU_HOI" EntityType="DB_DATN_QSModel.CAU_HOI" />
+        </EntityContainer>
+        <EntityType Name="NGANH_HOC">
+          <Key>
+            <PropertyRef Name="ID_NganhHoc" />
+          </Key>
+          <Property Name="ID_NganhHoc" Type="Int32" Nullable="false" />
+          <Property Name="MA_NganhHoc" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TEN_NganhHoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NOTE_NganhHoc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IS_Deleted" Type="Int32" />
+          <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+          <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="NIEN_KHOA">
+          <Key>
+            <PropertyRef Name="ID_NienKhoa" />
+          </Key>
+          <Property Name="ID_NienKhoa" Type="Int32" Nullable="false" />
+          <Property Name="MA_NienKhoa" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TEN_NienKhoa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NOTE_NienKhoa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IS_Deleted" Type="Int32" />
+          <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+          <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="KHOA_HOC">
+          <Key>
+            <PropertyRef Name="ID_KhoaHoc" />
+          </Key>
+          <Property Name="ID_KhoaHoc" Type="Int32" Nullable="false" />
+          <Property Name="MA_KhoaHoc" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TEN_KhoaHoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NOTE_KhoaHoc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IS_Deleted" Type="Int32" />
+          <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+          <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="LOP_HOC">
+          <Key>
+            <PropertyRef Name="ID_LopHoc" />
+          </Key>
+          <Property Name="ID_LopHoc" Type="Int32" Nullable="false" />
+          <Property Name="MA_LopHoc" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TEN_LopHoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_NganhHoc" Type="Int32" />
+          <Property Name="ID_NienKhoa" Type="Int32" />
+          <Property Name="ID_KhoaHoc" Type="Int32" />
+          <Property Name="IS_Deleted" Type="Int32" />
+          <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+          <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="CAU_HOI">
+          <Key>
+            <PropertyRef Name="ID_CauHoi" />
+          </Key>
+          <Property Name="ID_CauHoi" Type="Int32" Nullable="false" />
+          <Property Name="NDUNG_CauHoi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ANH_CauHoi" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="LCHON_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LCHON_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LCHON_3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LCHON_4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LCHON_Dung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Chuong" Type="Int32" />
+          <Property Name="ID_MonHoc" Type="Int32" />
+          <Property Name="IS_Deleted" Type="Int32" />
+          <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+          <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_DATN_QSModelStoreContainer" CdmEntityContainer="DB_DATN_QSEntities">
+          <EntitySetMapping Name="BANG_DIEM">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.BANG_DIEM">
+              <MappingFragment StoreEntitySet="BANG_DIEM">
+                <ScalarProperty Name="ID_BangDiem" ColumnName="ID_BangDiem" />
+                <ScalarProperty Name="ID_HocVien" ColumnName="ID_HocVien" />
+                <ScalarProperty Name="ID_DeThi" ColumnName="ID_DeThi" />
+                <ScalarProperty Name="DIEM_BangDiem" ColumnName="DIEM_BangDiem" />
+                <ScalarProperty Name="TGIAN_BangDiem" ColumnName="TGIAN_BangDiem" />
+                <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+                <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+                <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CT_DE_THI">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.CT_DE_THI">
+              <MappingFragment StoreEntitySet="CT_DE_THI">
+                <ScalarProperty Name="ID_CTDeThi" ColumnName="ID_CTDeThi" />
+                <ScalarProperty Name="ID_CauHoi" ColumnName="ID_CauHoi" />
+                <ScalarProperty Name="ID_DeThi" ColumnName="ID_DeThi" />
+                <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+                <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+                <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CT_LOP_HOC">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.CT_LOP_HOC">
+              <MappingFragment StoreEntitySet="CT_LOP_HOC">
+                <ScalarProperty Name="ID_CTLopHoc" ColumnName="ID_CTLopHoc" />
+                <ScalarProperty Name="ID_LopHoc" ColumnName="ID_LopHoc" />
+                <ScalarProperty Name="ID_HocVien" ColumnName="ID_HocVien" />
+                <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+                <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+                <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DE_THI">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.DE_THI">
+              <MappingFragment StoreEntitySet="DE_THI">
+                <ScalarProperty Name="ID_DeThi" ColumnName="ID_DeThi" />
+                <ScalarProperty Name="MA_DeThi" ColumnName="MA_DeThi" />
+                <ScalarProperty Name="TEN_DenThi" ColumnName="TEN_DenThi" />
+                <ScalarProperty Name="ID_LBaiThi" ColumnName="ID_LBaiThi" />
+                <ScalarProperty Name="ID_MonHoc" ColumnName="ID_MonHoc" />
+                <ScalarProperty Name="PASS_DeThi" ColumnName="PASS_DeThi" />
+                <ScalarProperty Name="TGIAN_DeThi" ColumnName="TGIAN_DeThi" />
+                <ScalarProperty Name="IS_Locked" ColumnName="IS_Locked" />
+                <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+                <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+                <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOC_VIEN">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.HOC_VIEN">
+              <MappingFragment StoreEntitySet="HOC_VIEN">
+                <ScalarProperty Name="ID_HocVien" ColumnName="ID_HocVien" />
+                <ScalarProperty Name="MA_HocVien" ColumnName="MA_HocVien" />
+                <ScalarProperty Name="TEN_HocVien" ColumnName="TEN_HocVien" />
+                <ScalarProperty Name="NSINH_HocVien" ColumnName="NSINH_HocVien" />
+                <ScalarProperty Name="GTINH_HocVien" ColumnName="GTINH_HocVien" />
+                <ScalarProperty Name="ANH_HocVien" ColumnName="ANH_HocVien" />
+                <ScalarProperty Name="ID_TaiKhoan" ColumnName="ID_TaiKhoan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAI_BAI_THI">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.LOAI_BAI_THI">
+              <MappingFragment StoreEntitySet="LOAI_BAI_THI">
+                <ScalarProperty Name="ID_LBaiThi" ColumnName="ID_LBaiThi" />
+                <ScalarProperty Name="MA_LBaiThi" ColumnName="MA_LBaiThi" />
+                <ScalarProperty Name="TEN_LBaiThi" ColumnName="TEN_LBaiThi" />
+                <ScalarProperty Name="NOTE_LBaiThi" ColumnName="NOTE_LBaiThi" />
+                <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+                <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+                <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MON_HOC">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.MON_HOC">
+              <MappingFragment StoreEntitySet="MON_HOC">
+                <ScalarProperty Name="ID_MonHoc" ColumnName="ID_MonHoc" />
+                <ScalarProperty Name="MA_MonHoc" ColumnName="MA_MonHoc" />
+                <ScalarProperty Name="TEN_MonHoc" ColumnName="TEN_MonHoc" />
+                <ScalarProperty Name="NOTE_MonHoc" ColumnName="NOTE_MonHoc" />
+                <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+                <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+                <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NGUOI_DUNG">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.NGUOI_DUNG">
+              <MappingFragment StoreEntitySet="NGUOI_DUNG">
+                <ScalarProperty Name="ID_NguoiDung" ColumnName="ID_NguoiDung" />
+                <ScalarProperty Name="MA_NguoiDung" ColumnName="MA_NguoiDung" />
+                <ScalarProperty Name="TEN_NguoiDung" ColumnName="TEN_NguoiDung" />
+                <ScalarProperty Name="NSINH_NguoiDung" ColumnName="NSINH_NguoiDung" />
+                <ScalarProperty Name="MAIL_NguoiDung" ColumnName="MAIL_NguoiDung" />
+                <ScalarProperty Name="ANH_NguoiDung" ColumnName="ANH_NguoiDung" />
+                <ScalarProperty Name="ID_TaiKhoan" ColumnName="ID_TaiKhoan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAI_KHOAN">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.TAI_KHOAN">
+              <MappingFragment StoreEntitySet="TAI_KHOAN">
+                <ScalarProperty Name="ID_TaiKhoan" ColumnName="ID_TaiKhoan" />
+                <ScalarProperty Name="USER_TaiKhoan" ColumnName="USER_TaiKhoan" />
+                <ScalarProperty Name="PASS_TaiKhoan" ColumnName="PASS_TaiKhoan" />
+                <ScalarProperty Name="NOTE_TaiKhoan" ColumnName="NOTE_TaiKhoan" />
+                <ScalarProperty Name="IS_Locked" ColumnName="IS_Locked" />
+                <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+                <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+                <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NGANH_HOC">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.NGANH_HOC">
+              <MappingFragment StoreEntitySet="NGANH_HOC">
+                <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+                <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+                <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+                <ScalarProperty Name="NOTE_NganhHoc" ColumnName="NOTE_NganhHoc" />
+                <ScalarProperty Name="TEN_NganhHoc" ColumnName="TEN_NganhHoc" />
+                <ScalarProperty Name="MA_NganhHoc" ColumnName="MA_NganhHoc" />
+                <ScalarProperty Name="ID_NganhHoc" ColumnName="ID_NganhHoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NIEN_KHOA">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.NIEN_KHOA">
+              <MappingFragment StoreEntitySet="NIEN_KHOA">
+                <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+                <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+                <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+                <ScalarProperty Name="NOTE_NienKhoa" ColumnName="NOTE_NienKhoa" />
+                <ScalarProperty Name="TEN_NienKhoa" ColumnName="TEN_NienKhoa" />
+                <ScalarProperty Name="MA_NienKhoa" ColumnName="MA_NienKhoa" />
+                <ScalarProperty Name="ID_NienKhoa" ColumnName="ID_NienKhoa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHOA_HOC">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.KHOA_HOC">
+              <MappingFragment StoreEntitySet="KHOA_HOC">
+                <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+                <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+                <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+                <ScalarProperty Name="NOTE_KhoaHoc" ColumnName="NOTE_KhoaHoc" />
+                <ScalarProperty Name="TEN_KhoaHoc" ColumnName="TEN_KhoaHoc" />
+                <ScalarProperty Name="MA_KhoaHoc" ColumnName="MA_KhoaHoc" />
+                <ScalarProperty Name="ID_KhoaHoc" ColumnName="ID_KhoaHoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOP_HOC">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.LOP_HOC">
+              <MappingFragment StoreEntitySet="LOP_HOC">
+                <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+                <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+                <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+                <ScalarProperty Name="ID_KhoaHoc" ColumnName="ID_KhoaHoc" />
+                <ScalarProperty Name="ID_NienKhoa" ColumnName="ID_NienKhoa" />
+                <ScalarProperty Name="ID_NganhHoc" ColumnName="ID_NganhHoc" />
+                <ScalarProperty Name="TEN_LopHoc" ColumnName="TEN_LopHoc" />
+                <ScalarProperty Name="MA_LopHoc" ColumnName="MA_LopHoc" />
+                <ScalarProperty Name="ID_LopHoc" ColumnName="ID_LopHoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAU_HOI">
+            <EntityTypeMapping TypeName="DB_DATN_QSModel.CAU_HOI">
+              <MappingFragment StoreEntitySet="CAU_HOI">
+                <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+                <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+                <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+                <ScalarProperty Name="ID_MonHoc" ColumnName="ID_MonHoc" />
+                <ScalarProperty Name="ID_Chuong" ColumnName="ID_Chuong" />
+                <ScalarProperty Name="LCHON_Dung" ColumnName="LCHON_Dung" />
+                <ScalarProperty Name="LCHON_4" ColumnName="LCHON_4" />
+                <ScalarProperty Name="LCHON_3" ColumnName="LCHON_3" />
+                <ScalarProperty Name="LCHON_2" ColumnName="LCHON_2" />
+                <ScalarProperty Name="LCHON_1" ColumnName="LCHON_1" />
+                <ScalarProperty Name="ANH_CauHoi" ColumnName="ANH_CauHoi" />
+                <ScalarProperty Name="NDUNG_CauHoi" ColumnName="NDUNG_CauHoi" />
+                <ScalarProperty Name="ID_CauHoi" ColumnName="ID_CauHoi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
