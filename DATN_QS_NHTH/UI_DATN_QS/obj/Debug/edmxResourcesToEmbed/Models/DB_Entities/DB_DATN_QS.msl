@@ -39,23 +39,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DE_THI">
-      <EntityTypeMapping TypeName="DB_DATN_QSModel.DE_THI">
-        <MappingFragment StoreEntitySet="DE_THI">
-          <ScalarProperty Name="ID_DeThi" ColumnName="ID_DeThi" />
-          <ScalarProperty Name="MA_DeThi" ColumnName="MA_DeThi" />
-          <ScalarProperty Name="TEN_DenThi" ColumnName="TEN_DenThi" />
-          <ScalarProperty Name="ID_LBaiThi" ColumnName="ID_LBaiThi" />
-          <ScalarProperty Name="ID_MonHoc" ColumnName="ID_MonHoc" />
-          <ScalarProperty Name="PASS_DeThi" ColumnName="PASS_DeThi" />
-          <ScalarProperty Name="TGIAN_DeThi" ColumnName="TGIAN_DeThi" />
-          <ScalarProperty Name="IS_Locked" ColumnName="IS_Locked" />
-          <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
-          <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
-          <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="HOC_VIEN">
       <EntityTypeMapping TypeName="DB_DATN_QSModel.HOC_VIEN">
         <MappingFragment StoreEntitySet="HOC_VIEN">
@@ -105,20 +88,6 @@
           <ScalarProperty Name="MAIL_NguoiDung" ColumnName="MAIL_NguoiDung" />
           <ScalarProperty Name="ANH_NguoiDung" ColumnName="ANH_NguoiDung" />
           <ScalarProperty Name="ID_TaiKhoan" ColumnName="ID_TaiKhoan" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TAI_KHOAN">
-      <EntityTypeMapping TypeName="DB_DATN_QSModel.TAI_KHOAN">
-        <MappingFragment StoreEntitySet="TAI_KHOAN">
-          <ScalarProperty Name="ID_TaiKhoan" ColumnName="ID_TaiKhoan" />
-          <ScalarProperty Name="USER_TaiKhoan" ColumnName="USER_TaiKhoan" />
-          <ScalarProperty Name="PASS_TaiKhoan" ColumnName="PASS_TaiKhoan" />
-          <ScalarProperty Name="NOTE_TaiKhoan" ColumnName="NOTE_TaiKhoan" />
-          <ScalarProperty Name="IS_Locked" ColumnName="IS_Locked" />
-          <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
-          <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
-          <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -192,6 +161,38 @@
           <ScalarProperty Name="ANH_CauHoi" ColumnName="ANH_CauHoi" />
           <ScalarProperty Name="NDUNG_CauHoi" ColumnName="NDUNG_CauHoi" />
           <ScalarProperty Name="ID_CauHoi" ColumnName="ID_CauHoi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TAI_KHOAN">
+      <EntityTypeMapping TypeName="DB_DATN_QSModel.TAI_KHOAN">
+        <MappingFragment StoreEntitySet="TAI_KHOAN">
+          <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+          <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+          <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+          <ScalarProperty Name="IS_Locked" ColumnName="IS_Locked" />
+          <ScalarProperty Name="LOAI_TaiKhoan" ColumnName="LOAI_TaiKhoan" />
+          <ScalarProperty Name="NOTE_TaiKhoan" ColumnName="NOTE_TaiKhoan" />
+          <ScalarProperty Name="PASS_TaiKhoan" ColumnName="PASS_TaiKhoan" />
+          <ScalarProperty Name="USER_TaiKhoan" ColumnName="USER_TaiKhoan" />
+          <ScalarProperty Name="ID_TaiKhoan" ColumnName="ID_TaiKhoan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DE_THI">
+      <EntityTypeMapping TypeName="DB_DATN_QSModel.DE_THI">
+        <MappingFragment StoreEntitySet="DE_THI">
+          <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+          <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+          <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+          <ScalarProperty Name="IS_Locked" ColumnName="IS_Locked" />
+          <ScalarProperty Name="TGIAN_DeThi" ColumnName="TGIAN_DeThi" />
+          <ScalarProperty Name="PASS_DeThi" ColumnName="PASS_DeThi" />
+          <ScalarProperty Name="ID_MonHoc" ColumnName="ID_MonHoc" />
+          <ScalarProperty Name="ID_LBaiThi" ColumnName="ID_LBaiThi" />
+          <ScalarProperty Name="TEN_DeThi" ColumnName="TEN_DeThi" />
+          <ScalarProperty Name="MA_DeThi" ColumnName="MA_DeThi" />
+          <ScalarProperty Name="ID_DeThi" ColumnName="ID_DeThi" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

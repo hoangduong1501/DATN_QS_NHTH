@@ -28,16 +28,16 @@ namespace UI_DATN_QS.Models.DB_Entities
         public virtual DbSet<BANG_DIEM> BANG_DIEM { get; set; }
         public virtual DbSet<CT_DE_THI> CT_DE_THI { get; set; }
         public virtual DbSet<CT_LOP_HOC> CT_LOP_HOC { get; set; }
-        public virtual DbSet<DE_THI> DE_THI { get; set; }
         public virtual DbSet<HOC_VIEN> HOC_VIEN { get; set; }
         public virtual DbSet<LOAI_BAI_THI> LOAI_BAI_THI { get; set; }
         public virtual DbSet<MON_HOC> MON_HOC { get; set; }
         public virtual DbSet<NGUOI_DUNG> NGUOI_DUNG { get; set; }
-        public virtual DbSet<TAI_KHOAN> TAI_KHOAN { get; set; }
         public virtual DbSet<NGANH_HOC> NGANH_HOC { get; set; }
         public virtual DbSet<NIEN_KHOA> NIEN_KHOA { get; set; }
         public virtual DbSet<KHOA_HOC> KHOA_HOC { get; set; }
         public virtual DbSet<LOP_HOC> LOP_HOC { get; set; }
         public virtual DbSet<CAU_HOI> CAU_HOI { get; set; }
+        public virtual DbSet<TAI_KHOAN> TAI_KHOAN { get; set; }
+        public virtual DbSet<DE_THI> DE_THI { get; set; }
     }
 }

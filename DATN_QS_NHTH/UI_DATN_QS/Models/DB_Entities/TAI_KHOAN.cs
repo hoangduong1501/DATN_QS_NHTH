@@ -18,6 +18,7 @@ namespace UI_DATN_QS.Models.DB_Entities
         public string USER_TaiKhoan { get; set; }
         public string PASS_TaiKhoan { get; set; }
         public string NOTE_TaiKhoan { get; set; }
+        public Nullable<int> LOAI_TaiKhoan { get; set; }
         public Nullable<int> IS_Locked { get; set; }
         public Nullable<int> IS_Deleted { get; set; }
         public Nullable<System.DateTime> TIME_Create { get; set; }

@@ -52,7 +52,7 @@
                             <h5 id="name_NguoiDung" class="nav-link text-center text-light" style="padding: 5% 6% 0 6%;">Nguyễn Hoàng Dương</h5>
                         </div>
                         <div class="sb-sidenav-menu-heading text-light">QUẢN LÝ</div>
-                        <a class="nav-link" href="charts.html">
+                        <a class="nav-link" href="@Url.Action("GET_TrangChu", "TrangChu", new { area = "NguoiDung" })">
                             <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Trang Chủ
                         </a>
@@ -79,8 +79,8 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 @Html.ActionLink("Loại Đề", "GET_LoaiBaiThi", "KyThi", new { area = "NguoiDung" }, new { @class = "nav-link" })
                                 @Html.ActionLink("Môn Học", "GET_MonHoc", "KyThi", new { area = "NguoiDung" }, new { @class = "nav-link" })
-                                @Html.ActionLink("Câu Hỏi Thi", "CauHoi_KyThi_MA", "KyThi", new { area = "NguoiDung" }, new { @class = "nav-link" })
-                                @Html.ActionLink("Đề Thi", "DeThi_KyThi_MA", "KyThi", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Câu Hỏi", "GET_CauHoi", "KyThi", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Đề Thi", "GET_DeThi", "KyThi", new { area = "NguoiDung" }, new { @class = "nav-link" })
                                 @Html.ActionLink("Niên Khóa", "GET_NienKhoa", "KyThi", new { area = "NguoiDung" }, new { @class = "nav-link" })
                             </nav>
                         </div>

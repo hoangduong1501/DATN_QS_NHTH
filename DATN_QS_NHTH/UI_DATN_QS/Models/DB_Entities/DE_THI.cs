@@ -16,7 +16,7 @@ namespace UI_DATN_QS.Models.DB_Entities
     {
         public int ID_DeThi { get; set; }
         public string MA_DeThi { get; set; }
-        public string TEN_DenThi { get; set; }
+        public string TEN_DeThi { get; set; }
         public Nullable<int> ID_LBaiThi { get; set; }
         public Nullable<int> ID_MonHoc { get; set; }
         public string PASS_DeThi { get; set; }

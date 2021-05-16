@@ -9,7 +9,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
     public class TrangChuController : Controller
     {
         // GET: NguoiDung/TrangChu
-        public ActionResult Index()
+        public ActionResult GET_TrangChu()
         {
             return View();
         }

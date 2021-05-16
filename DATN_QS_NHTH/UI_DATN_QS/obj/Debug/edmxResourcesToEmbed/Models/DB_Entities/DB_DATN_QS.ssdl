@@ -59,7 +59,7 @@
     </Key>
     <Property Name="ID_DeThi" Type="int" Nullable="false" />
     <Property Name="MA_DeThi" Type="nchar" MaxLength="20" />
-    <Property Name="TEN_DenThi" Type="nvarchar" MaxLength="50" />
+    <Property Name="TEN_DeThi" Type="nvarchar" MaxLength="50" />
     <Property Name="ID_LBaiThi" Type="int" />
     <Property Name="ID_MonHoc" Type="int" />
     <Property Name="PASS_DeThi" Type="nchar" MaxLength="32" />
@@ -175,6 +175,7 @@
     <Property Name="USER_TaiKhoan" Type="nchar" MaxLength="20" />
     <Property Name="PASS_TaiKhoan" Type="nchar" MaxLength="32" />
     <Property Name="NOTE_TaiKhoan" Type="ntext" />
+    <Property Name="LOAI_TaiKhoan" Type="int" />
     <Property Name="IS_Locked" Type="int" />
     <Property Name="IS_Deleted" Type="int" />
     <Property Name="TIME_Create" Type="date" />

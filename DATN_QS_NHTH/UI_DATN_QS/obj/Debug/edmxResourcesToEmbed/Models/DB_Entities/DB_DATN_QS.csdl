@@ -35,22 +35,6 @@
     <Property Name="TIME_Create" Type="DateTime" Precision="0" />
     <Property Name="TIME_Update" Type="DateTime" Precision="0" />
   </EntityType>
-  <EntityType Name="DE_THI">
-    <Key>
-      <PropertyRef Name="ID_DeThi" />
-    </Key>
-    <Property Name="ID_DeThi" Type="Int32" Nullable="false" />
-    <Property Name="MA_DeThi" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-    <Property Name="TEN_DenThi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ID_LBaiThi" Type="Int32" />
-    <Property Name="ID_MonHoc" Type="Int32" />
-    <Property Name="PASS_DeThi" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
-    <Property Name="TGIAN_DeThi" Type="Int32" />
-    <Property Name="IS_Locked" Type="Int32" />
-    <Property Name="IS_Deleted" Type="Int32" />
-    <Property Name="TIME_Create" Type="DateTime" Precision="0" />
-    <Property Name="TIME_Update" Type="DateTime" Precision="0" />
-  </EntityType>
   <EntityType Name="HOC_VIEN">
     <Key>
       <PropertyRef Name="ID_HocVien" />
@@ -99,34 +83,21 @@
     <Property Name="ANH_NguoiDung" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="ID_TaiKhoan" Type="Int32" />
   </EntityType>
-  <EntityType Name="TAI_KHOAN">
-    <Key>
-      <PropertyRef Name="ID_TaiKhoan" />
-    </Key>
-    <Property Name="ID_TaiKhoan" Type="Int32" Nullable="false" />
-    <Property Name="USER_TaiKhoan" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-    <Property Name="PASS_TaiKhoan" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
-    <Property Name="NOTE_TaiKhoan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IS_Locked" Type="Int32" />
-    <Property Name="IS_Deleted" Type="Int32" />
-    <Property Name="TIME_Create" Type="DateTime" Precision="0" />
-    <Property Name="TIME_Update" Type="DateTime" Precision="0" />
-  </EntityType>
   <EntityContainer Name="DB_DATN_QSEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="BANG_DIEM" EntityType="Self.BANG_DIEM" />
     <EntitySet Name="CT_DE_THI" EntityType="Self.CT_DE_THI" />
     <EntitySet Name="CT_LOP_HOC" EntityType="Self.CT_LOP_HOC" />
-    <EntitySet Name="DE_THI" EntityType="Self.DE_THI" />
     <EntitySet Name="HOC_VIEN" EntityType="Self.HOC_VIEN" />
     <EntitySet Name="LOAI_BAI_THI" EntityType="Self.LOAI_BAI_THI" />
     <EntitySet Name="MON_HOC" EntityType="Self.MON_HOC" />
     <EntitySet Name="NGUOI_DUNG" EntityType="Self.NGUOI_DUNG" />
-    <EntitySet Name="TAI_KHOAN" EntityType="Self.TAI_KHOAN" />
     <EntitySet Name="NGANH_HOC" EntityType="DB_DATN_QSModel.NGANH_HOC" />
     <EntitySet Name="NIEN_KHOA" EntityType="DB_DATN_QSModel.NIEN_KHOA" />
     <EntitySet Name="KHOA_HOC" EntityType="DB_DATN_QSModel.KHOA_HOC" />
     <EntitySet Name="LOP_HOC" EntityType="DB_DATN_QSModel.LOP_HOC" />
     <EntitySet Name="CAU_HOI" EntityType="DB_DATN_QSModel.CAU_HOI" />
+    <EntitySet Name="TAI_KHOAN" EntityType="DB_DATN_QSModel.TAI_KHOAN" />
+    <EntitySet Name="DE_THI" EntityType="DB_DATN_QSModel.DE_THI" />
   </EntityContainer>
   <EntityType Name="NGANH_HOC">
     <Key>
@@ -192,6 +163,36 @@
     <Property Name="LCHON_Dung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ID_Chuong" Type="Int32" />
     <Property Name="ID_MonHoc" Type="Int32" />
+    <Property Name="IS_Deleted" Type="Int32" />
+    <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+    <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="TAI_KHOAN">
+    <Key>
+      <PropertyRef Name="ID_TaiKhoan" />
+    </Key>
+    <Property Name="ID_TaiKhoan" Type="Int32" Nullable="false" />
+    <Property Name="USER_TaiKhoan" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="PASS_TaiKhoan" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+    <Property Name="NOTE_TaiKhoan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LOAI_TaiKhoan" Type="Int32" />
+    <Property Name="IS_Locked" Type="Int32" />
+    <Property Name="IS_Deleted" Type="Int32" />
+    <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+    <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="DE_THI">
+    <Key>
+      <PropertyRef Name="ID_DeThi" />
+    </Key>
+    <Property Name="ID_DeThi" Type="Int32" Nullable="false" />
+    <Property Name="MA_DeThi" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="TEN_DeThi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ID_LBaiThi" Type="Int32" />
+    <Property Name="ID_MonHoc" Type="Int32" />
+    <Property Name="PASS_DeThi" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+    <Property Name="TGIAN_DeThi" Type="Int32" />
+    <Property Name="IS_Locked" Type="Int32" />
     <Property Name="IS_Deleted" Type="Int32" />
     <Property Name="TIME_Create" Type="DateTime" Precision="0" />
     <Property Name="TIME_Update" Type="DateTime" Precision="0" />

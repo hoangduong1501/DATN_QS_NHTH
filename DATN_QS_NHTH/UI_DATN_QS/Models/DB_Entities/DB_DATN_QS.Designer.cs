@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\WEB C#\DATN_QS_NHTH\UI_DATN_QS\Models\DB_Entities\DB_DATN_QS.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\Models\DB_Entities\DB_DATN_QS.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
