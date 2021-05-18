@@ -113,6 +113,7 @@
     <Compile Include="Areas\NguoiDung\Controllers\NguoiDungController.cs" />
     <Compile Include="Areas\NguoiDung\Controllers\TrangChuController.cs" />
     <Compile Include="Areas\NguoiDung\NguoiDungAreaRegistration.cs" />
+    <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -178,8 +179,10 @@
     <Compile Include="Models\DB_Models\HocVien_Model.cs" />
     <Compile Include="Models\DB_Models\LopHoc_Model.cs" />
     <Compile Include="Models\DB_Models\NguoiDung_Model.cs" />
+    <Compile Include="Models\DB_Models\UserSession_Model.cs" />
     <Compile Include="Models\HashCodes\Hash_MD5.cs" />
     <Compile Include="Models\HashCodes\StringRandom.cs" />
+    <Compile Include="Models\Sessions\SessionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CauHoi_ViewModel.cs" />
     <Compile Include="ViewModels\DeThi_ViewModel.cs" />
@@ -241,6 +244,7 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\DangNhap\Dang_Nhap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -251,8 +255,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\NguoiDung\Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\Sessions\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

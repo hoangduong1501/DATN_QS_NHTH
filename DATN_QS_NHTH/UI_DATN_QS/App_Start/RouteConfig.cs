@@ -16,7 +16,7 @@ namespace UI_DATN_QS
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "DangNhap", action = "Dang_Nhap", id = UrlParameter.Optional }
             );
         }
     }

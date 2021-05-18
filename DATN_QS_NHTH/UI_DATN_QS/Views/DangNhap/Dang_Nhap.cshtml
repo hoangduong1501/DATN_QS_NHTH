@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "TrangChu_MA";
+    Layout = null;
+}
+@model UI_DATN_QS.Models.DB_Entities.TAI_KHOAN
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Quiz System - Managerment</title>
+
+    <link href="~/Content/Styles_Layout.css" rel="stylesheet" />
+    <link href="~/Content/Style_Scrollbar_Custom.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+
+</head>
+<body>
+    <div class="container h-100">
+        <div class="row align-items-center h-100">
+            <div class="col-md-4 mx-auto">
+                <div class="card shadow-lg rounded">
+                    <div class="card-header bg-dark border-0">
+                        <h2 class="text-center font-weight-light text-light my-4">
+                            <i class="fas fa-user-graduate"></i> Login
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm("Dang_Nhap", "DangNhap", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <div class="form-group">
+                                @*@Html.LabelFor(model => model.user_TaiKhoan)*@
+                                <label class="mb-1" for="inputEmailAddress">Tên đăng nhập</label>
+                                @Html.TextBoxFor(model => model.USER_TaiKhoan, new { @class = "form-control", @placeholder = "Mã học viên/ số CCCD", @autofocus = "autofous", @type = "text", @required = "required" })
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-1" for="inputPassword">Mật khẩu</label>
+                                @Html.TextBoxFor(model => model.PASS_TaiKhoan, new { @class = "form-control", @placeholder = "Gồm số và chữ", @type = "password", @required = "required" })
+                            </div><div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                <button type="submit" class="btn btn-success w-100">Login</button>
+                            </div><div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                @*<p class="text-danger"><i class="fas fa-exclamation-triangle"></i> Tài khoản sẽ bị khóa nếu nhập sai mật khẩu quá 3 lần!</p>*@
+                                @if (ViewBag.StatusAccount != null)
+                                {
+                                    <p class="text-danger"><i class="fas fa-exclamation-triangle"></i> Tên đăng nhập hoặc mật khẩu không đúng!</p>
+                                }
+                            </div>
+                        }
+                    </div>
+                    <div class="card-footer bg-dark"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* popup_Notify thông báo  *@
+    <div class="modal fade" id="notify_Popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="title_Popup">
+                        <i class="fas fa-exclamation-triangle text-warning"></i> Thông Báo
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="modal-title" id="message_Popup">Bạn có chắc muốn xóa?</h6>
+                </div>
+                <div class="modal-footer">
+                    <button id="btn_OK_Notify" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* popup_Notify thông báo  *@
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/Script/Script_Notify.js"></script>
+
+</body>
+</html>

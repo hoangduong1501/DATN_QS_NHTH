@@ -118,7 +118,8 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                             NOTE_TaiKhoan = "None",
                             PASS_TaiKhoan = UI_DATN_QS.Models.HashCodes.Hash_MD5.GetHash_MD5("123456"),
                             TIME_Create = DateTime.Today,
-                            TIME_Update = DateTime.Today
+                            TIME_Update = DateTime.Today,
+                            LOAI_TaiKhoan = 1
                         });
 
                         entities.CT_LOP_HOC.Add(new CT_LOP_HOC()
