@@ -1058,6 +1058,76 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult DELETE_DeThi(int pID_DeThi)
+        {
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                {
+                    entities.DE_THI.Where(p => p.ID_DeThi == pID_DeThi).FirstOrDefault().IS_Deleted = 1;
+                    entities.SaveChanges();
+                }
+
+                return RedirectToAction("GET_DeThi", "KyThi", new { area = "NguoiDung" });
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DELETE_DeThi(FormCollection formCollection)
+        {
+            try
+            {
+                if (formCollection.Count > 1)
+                {
+                    string[] ids = formCollection["ID_DeThi"].Split(new char[] { ',' });
+
+                    using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                    {
+                        foreach (string item in ids)
+                        {
+                            int id = int.Parse(item);
+                            entities.DE_THI.Where(p => p.ID_DeThi == id).FirstOrDefault().IS_Deleted = 1;
+                            entities.SaveChanges();
+
+                        }
+                    }
+
+                }
+                return RedirectToAction("GET_DeThi", "KyThi", new { area = "NguoiDung" });
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+       
+        [HttpGet]
+        public ActionResult IsLock_DeThi(int pID_DeThi)
+        {
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                {
+                    DE_THI DeThi = entities.DE_THI.Where(p => p.ID_DeThi == pID_DeThi).FirstOrDefault();
+
+                    if (DeThi.IS_Locked == 1) DeThi.IS_Locked = 0;
+                    else DeThi.IS_Locked = 1;
+
+                    entities.SaveChanges();
+                }
+
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
         #endregion
     }
 }
