@@ -22,5 +22,7 @@ namespace UI_DATN_QS.Models.DB_Models
         public int ID_LBaiThi { get; set; }
         public string MA_LBaiThi { get; set; }
         public string TEN_LBaiThi { get; set; }
+
+        public int NUM_DeThi { get; set; }
     }
 }

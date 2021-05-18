@@ -12,5 +12,8 @@ namespace UI_DATN_QS.ViewModels
         public List<MON_HOC> list_MonHoc { get; set; }
         public List<DeThi_Model> list_DeThi { get; set; }
         public int ID_MonHoc { get; set; }
+        public DeThi_Model object_DeThi { get; set; }
+        public List<LOAI_BAI_THI> list_LBaiThi { get; set; }
+        public List<CauHoi_Model> list_CauHoi { get; set; }
     }
 }

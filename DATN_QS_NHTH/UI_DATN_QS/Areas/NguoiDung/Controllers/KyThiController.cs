@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using UI_DATN_QS.Models.DB_Entities;
 using UI_DATN_QS.Models.DB_Models;
+using UI_DATN_QS.Models.HashCodes;
 using UI_DATN_QS.ViewModels;
 
 namespace UI_DATN_QS.Areas.NguoiDung.Controllers
@@ -810,6 +811,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                         CauHoi.LCHON_4 = CauHoi.LCHON_Dung = pCauHoi.object_CauHoi.LCHON_Dung;
                         CauHoi.ID_Chuong = pCauHoi.object_CauHoi.ID_Chuong;
                         CauHoi.TIME_Update = DateTime.Today;
+                        CauHoi.ID_MonHoc = pCauHoi.object_CauHoi.ID_MonHoc;
 
                         if (fileLoad != null)
                         {
@@ -956,11 +958,99 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         }
 
         [HttpGet]
-        public ActionResult INSERT_DeThi()
+        public ActionResult INSERT_DeThi(int pID_MonHoc = 0)
         {
             try
             {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                {
+                    if (pID_MonHoc == 0) pID_MonHoc = entities.MON_HOC.Where(p => p.IS_Deleted == 0).Min(c => c.ID_MonHoc);
+
+                    string MA_DeThi_Tmp = StringRandom.GeneratePassword();
+
+                    while (entities.DE_THI.Where(p => p.MA_DeThi == MA_DeThi_Tmp).Count() > 0)
+                    {
+                        MA_DeThi_Tmp = StringRandom.GeneratePassword();
+                    }
+
+                    DeThi_ViewModel CauHoi = new DeThi_ViewModel()
+                    {
+                        list_MonHoc = entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList(),
+                        list_LBaiThi = entities.LOAI_BAI_THI.Where(p => p.IS_Deleted == 0).ToList(),
+                        ID_MonHoc = pID_MonHoc,
+                        object_DeThi = new DeThi_Model()
+                        {
+                            ID_MonHoc = pID_MonHoc,
+                            MA_DeThi = MA_DeThi_Tmp
+                        },
+                        list_CauHoi = entities.CAU_HOI.Where(p => p.IS_Deleted == 0 && p.ID_MonHoc == pID_MonHoc).ToList().GroupBy(p => p.ID_Chuong).
+                                                Select(tb1 => new { ID_Chuong = tb1.Key, NUM_CauHoi = tb1.Count() }).
+                                                Select(tb2 => new CauHoi_Model() { ID_Chuong = (int)tb2.ID_Chuong, NUM_CauHoi = tb2.NUM_CauHoi }).ToList()
+                    };
+
+                    return View(CauHoi);
+                }
+            }
+            catch (Exception)
+            {
                 return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult INSERT_DeThi(DeThi_ViewModel pDeThi)
+        {
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                {
+                    if (entities.DE_THI.Count() == 0) pDeThi.object_DeThi.ID_DeThi = 1;
+                    else pDeThi.object_DeThi.ID_DeThi = entities.DE_THI.Max(p => p.ID_DeThi) + 1;
+
+                    entities.DE_THI.Add(new DE_THI()
+                    {
+                        ID_DeThi = pDeThi.object_DeThi.ID_DeThi,
+                        MA_DeThi = pDeThi.object_DeThi.MA_DeThi,
+                        IS_Deleted = 0,
+                        IS_Locked = 0,
+                        ID_LBaiThi = pDeThi.object_DeThi.ID_LBaiThi,
+                        ID_MonHoc = pDeThi.object_DeThi.ID_MonHoc,
+                        PASS_DeThi = pDeThi.object_DeThi.PASS_DeThi,
+                        TIME_Create = DateTime.Today,
+                        TGIAN_DeThi = pDeThi.object_DeThi.TGIAN_DeThi
+                    });
+
+                    entities.SaveChanges();
+
+                    foreach (var item in pDeThi.list_CauHoi)
+                    {
+                        if(item.NUM_CauHoi > 0)
+                        {
+                            foreach (CAU_HOI item_CauHoi in entities.CAU_HOI.Where(p => p.ID_Chuong == item.ID_Chuong && p.ID_MonHoc == pDeThi.object_DeThi.ID_MonHoc).ToList().
+                            OrderBy(p => Guid.NewGuid()).Take(item.NUM_CauHoi).ToList())
+                            {
+                                int id = 1;
+
+                                if (entities.CT_DE_THI.Count() > 0) id = entities.CT_DE_THI.Max(p => p.ID_CTDeThi) + 1;
+
+                                entities.CT_DE_THI.Add(new CT_DE_THI()
+                                {
+                                    ID_CTDeThi = id,
+                                    ID_CauHoi = item_CauHoi.ID_CauHoi,
+                                    ID_DeThi = pDeThi.object_DeThi.ID_DeThi,
+                                    IS_Deleted = 0,
+                                    TIME_Create = DateTime.Today,
+                                    TIME_Update = DateTime.Today
+                                });
+
+                                entities.SaveChanges();
+                            }
+                        }
+                    }
+
+                }
+                return RedirectToAction("GET_DeThi", "KyThi", new { area = "NguoiDung" });
             }
             catch (Exception)
             {

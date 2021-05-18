@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <br />
         <br />
-        <h3 class="text-center" id="exampleModalLongTitle">TẠO CÂU HỎI</h3>
+        <h3 class="text-center" id="exampleModalLongTitle">SỬA CÂU HỎI</h3>
         <br />
         @using (Html.BeginForm("UPDATE_CauHoi", "KyThi", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
@@ -22,7 +22,7 @@
             <div class="form-group row">
                 <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Chương</label>
                 <div class="col-sm-8 col-md-10">
-                    @Html.TextBoxFor(mo => mo.object_CauHoi.ID_Chuong, new { @Value = "1", @class = "form-control", @type = "number" })
+                    @Html.TextBoxFor(mo => mo.object_CauHoi.ID_Chuong, new { @class = "form-control", @type = "number" })
                     @Html.ValidationMessageFor(mo => mo.object_CauHoi.LCHON_1, null, new { @class = "text-danger" })
                 </div>
             </div>
