@@ -114,6 +114,7 @@
     <Compile Include="Areas\NguoiDung\Controllers\TrangChuController.cs" />
     <Compile Include="Areas\NguoiDung\NguoiDungAreaRegistration.cs" />
     <Compile Include="Controllers\DangNhapController.cs" />
+    <Compile Include="Controllers\DeThiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -245,6 +246,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\DangNhap\Dang_Nhap.cshtml" />
+    <Content Include="Views\DeThi\GET_DeThi.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

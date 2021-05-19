@@ -31,20 +31,35 @@ namespace UI_DATN_QS.Controllers
                         TAI_KHOAN TaiKhoan = entities.TAI_KHOAN.Where(p => p.USER_TaiKhoan == pTaiKhoan.USER_TaiKhoan).FirstOrDefault();
                         if (TaiKhoan != null && TaiKhoan.PASS_TaiKhoan.Equals(Models.HashCodes.Hash_MD5.GetHash_MD5(pTaiKhoan.PASS_TaiKhoan)))
                         {
-                            if (SessionHelper.Get_Session() != null) SessionHelper.Remove_Session();
-
-                            if (TaiKhoan.LOAI_TaiKhoan == 2)
+                            
+                            if (TaiKhoan.LOAI_TaiKhoan == 1)
                             {
-                                SessionHelper.Set_Session(new UserSession_Model
+                                if (SessionHelper.Get_SessionHV() != null) SessionHelper.Remove_SessionHV();
+
+                                SessionHelper.Set_SessionHV(new UserSession_Model()
                                 {
                                     ID_TaiKhoan = TaiKhoan.ID_TaiKhoan,
                                     USER_TaiKhoan = TaiKhoan.USER_TaiKhoan,
-                                    TEN_NguoiDung = entities.NGUOI_DUNG.Where(p => p.ID_TaiKhoan == TaiKhoan.ID_TaiKhoan).FirstOrDefault().TEN_NguoiDung
+                                    TEN_NguoiDung = entities.HOC_VIEN.Where(p => p.ID_TaiKhoan == TaiKhoan.ID_TaiKhoan).FirstOrDefault().TEN_HocVien,
+                                    ANH_NguoiDung = entities.HOC_VIEN.Where(p => p.ID_TaiKhoan == TaiKhoan.ID_TaiKhoan).FirstOrDefault().ANH_HocVien
+                                });
+
+                                return RedirectToAction("GET_DeThi", "DeThi", new { area = "" });
+                            }
+                            else if (TaiKhoan.LOAI_TaiKhoan == 2)
+                            {
+                                if (SessionHelper.Get_SessionND() != null) SessionHelper.Remove_SessionND();
+
+                                SessionHelper.Set_SessionND(new UserSession_Model()
+                                {
+                                    ID_TaiKhoan = TaiKhoan.ID_TaiKhoan,
+                                    USER_TaiKhoan = TaiKhoan.USER_TaiKhoan,
+                                    TEN_NguoiDung = entities.NGUOI_DUNG.Where(p => p.ID_TaiKhoan == TaiKhoan.ID_TaiKhoan).FirstOrDefault().TEN_NguoiDung,
+                                    ANH_NguoiDung = entities.NGUOI_DUNG.Where(p => p.ID_TaiKhoan == TaiKhoan.ID_TaiKhoan).FirstOrDefault().ANH_NguoiDung
                                 });
 
                                 return RedirectToAction("GET_TrangChu", "TrangChu", new { area = "NguoiDung" });
                             }
-                            else return View();
                         }
                         else
                         {

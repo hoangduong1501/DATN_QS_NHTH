@@ -13,8 +13,9 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         // GET: NguoiDung/TrangChu
         public ActionResult GET_TrangChu()
         {
-            UserSession_Model user_Session = SessionHelper.Get_Session();
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
             if(user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
             return View();
         }
     }
