@@ -187,6 +187,7 @@
     <Compile Include="Models\Sessions\SessionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CauHoi_ViewModel.cs" />
+    <Compile Include="ViewModels\CTDeThi_ViewModel.cs" />
     <Compile Include="ViewModels\DeThi_ViewModel.cs" />
     <Compile Include="ViewModels\HocVien_ViewModel.cs" />
     <Compile Include="ViewModels\LopHoc_ViewModel.cs" />
@@ -250,6 +251,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\DangNhap\Dang_Nhap.cshtml" />
     <Content Include="Views\DeThi\GET_DeThi.cshtml" />
+    <Content Include="Views\DeThi\GET_CauHoi.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

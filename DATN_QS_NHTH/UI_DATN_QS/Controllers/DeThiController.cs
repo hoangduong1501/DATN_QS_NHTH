@@ -12,7 +12,7 @@ namespace UI_DATN_QS.Controllers
 {
     public class DeThiController : Controller
     {
-        // GET: DeThi
+        [HttpGet]
         public ActionResult GET_DeThi(int pID_MonHoc = 0)
         {
             UserSession_Model user_Session = SessionHelper.Get_SessionHV();
@@ -87,6 +87,49 @@ namespace UI_DATN_QS.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public ActionResult GET_CauHoi(int pID_DeThi)
+        {
+            UserSession_Model user_Session = SessionHelper.Get_SessionHV();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                {
+                    CTDeThi_ViewModel CauHoi = new CTDeThi_ViewModel()
+                    {
+                        ID_DeThi = pID_DeThi,
+                        list_CauHoi = entities.CT_DE_THI.Where(p => p.ID_DeThi == pID_DeThi).ToList().
+                                    Join(entities.CAU_HOI.Where(p => p.IS_Deleted == 0).ToList(), ct => ct.ID_CauHoi, ch => ch.ID_CauHoi, (ct, ch) => new { ct, ch }).
+                                    Select(tb => new CAU_HOI
+                                    {
+                                        NDUNG_CauHoi = tb.ch.NDUNG_CauHoi,
+                                        ANH_CauHoi = tb.ch.ANH_CauHoi,
+                                        ID_CauHoi = tb.ch.ID_CauHoi,
+                                        LCHON_1 = tb.ch.LCHON_1,
+                                        LCHON_2 = tb.ch.LCHON_2,
+                                        LCHON_3 = tb.ch.LCHON_3,
+                                        LCHON_4 = tb.ch.LCHON_4
+                                    }).ToList()
+                    };
+
+                    return View(CauHoi);
+                }
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult GET_CauHoi(CTDeThi_ViewModel pCT_DeThi)
+        {
+            return View();
         }
     }
 }
