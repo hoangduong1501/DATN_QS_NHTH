@@ -1,7 +1,125 @@
 ﻿
-@{
-    ViewBag.Title = "De_Thi";
+@using UI_DATN_QS.Models.DB_Models;
+
+@model UI_DATN_QS.ViewModels.DeThi_ViewModel
+
+@using (Html.BeginForm("DELETE_DeThi", "KyThi", FormMethod.Post))
+{
+    <div class="container-fluid">
+        <br />
+        <div class="form-group row">
+            <label for="inputPassword" class="col-form-label" style="margin-left: 1rem;">Môn học</label>
+            <div class="col-md-3 .col-lg-2">
+                @Html.DropDownListFor(mo => mo.ID_MonHoc, new SelectList(Model.list_MonHoc, "ID_MonHoc", "TEN_MonHoc", Model.ID_MonHoc), new { @id = "cboMonHoc", @class = "form-control" })
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12 table-responsive" style="padding-top: 1rem;">
+                <table id="dataTable" class="table table-bordered  display nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Mã đề</th>
+                            <th>Bài thi</th>
+                            <th>Môn</th>
+                            <th>Thời gian</th>
+                            <th>Ngày tạo</th>
+                            <th>Trạng thái</th>
+                            <th>Thi</th>
+                        </tr>
+                    </thead>
+                    <div>
+                        <tbody>
+                            @{int count = 1; }
+                            @foreach (DeThi_Model item in Model.list_DeThi)
+                            {
+                                <tr>
+                                    <td>@item.MA_DeThi</td>
+                                    <td>@item.TEN_LBaiThi</td>
+                                    <td>@item.TEN_MonHoc</td>
+                                    <td>@item.TGIAN_DeThi phút</td>
+                                    <td>@item.TIME_Create.Value.ToString("dd/MM/yyyy")</td>
+                                    <td class="text-center">
+                                        @{
+                                            if (item.IS_Locked == 0)
+                                            { <a class="btn btn-sm btn-success"><i class="fas fa-unlock"></i></a> }
+                                            else
+                                            { <a class="btn btn-sm btn-secondary"><i class="fas fa-lock"></i></a> }
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (item.IS_Locked == 0)
+                                            {
+                                                <a class="btn btn-sm btn-primary" href="@Url.Action("DELETE_DeThi", "KyThi", new { pID_DeThi = item.ID_DeThi })" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="right" title="Làm Bài">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-sm btn-secondary disabled" href="@Url.Action("DELETE_DeThi", "KyThi", new { pID_DeThi = item.ID_DeThi })" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="right" title="Làm Bài">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                            }
+                                        }
+
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </div>
+                    <tfoot>
+                        <tr>
+                            <th>Mã đề</th>
+                            <th>Bài thi</th>
+                            <th>Môn</th>
+                            <th>Thời gian</th>
+                            <th>Ngày tạo</th>
+                            <th>Trạng thái</th>
+                            <th>Thi</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
 }
 
-<h2>De_Thi</h2>
+<br />
+<br />
+
+@section JSFooter{
+    <script>
+        $(document).ready(function () {
+
+            $('table.display').DataTable({
+                responsive: true,
+                "order": [[0, "asc"]],
+                "columnDefs": [
+                    { "orderable": false, "targets": 5 },
+                    { "orderable": false, "targets": 6 }
+                ]
+            });
+
+            $("#notify_Popup").modal();
+
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked"))
+                    $('.CheckBoxItem').prop('checked', true);
+                else $('.CheckBoxItem').prop('checked', false);
+            });
+
+            $('#cboMonHoc').on('change', function () {
+                var url = $(this).val(); // get selected value
+                if (url) { // require a URL
+                    window.location.href = "/DeThi/GET_DeThi?pID_MonHoc=" + url; // redirect
+                }
+                return false;
+            });
+        });
+    </script>
+
+}
 
