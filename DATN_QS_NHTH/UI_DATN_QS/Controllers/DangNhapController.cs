@@ -15,7 +15,17 @@ namespace UI_DATN_QS.Controllers
         [HttpGet]
         public ActionResult Dang_Nhap()
         {
-            return View();
+            try
+            {
+                if (SessionHelper.Get_SessionND() != null) return RedirectToAction("GET_TrangChu", "TrangChu", new { area = "NguoiDung" });
+                if (SessionHelper.Get_SessionHV() != null) return RedirectToAction("GET_DeThi", "DeThi", new { area = "" });
+
+                return View();
+            }
+            catch (Exception)
+            {
+                return View();
+            }
         }
 
         [HttpPost]
@@ -29,9 +39,9 @@ namespace UI_DATN_QS.Controllers
                     using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
                     {
                         TAI_KHOAN TaiKhoan = entities.TAI_KHOAN.Where(p => p.USER_TaiKhoan == pTaiKhoan.USER_TaiKhoan).FirstOrDefault();
-                        if (TaiKhoan != null && TaiKhoan.PASS_TaiKhoan.Equals(Models.HashCodes.Hash_MD5.GetHash_MD5(pTaiKhoan.PASS_TaiKhoan)))
+                        if (TaiKhoan != null && TaiKhoan.IS_Locked == 0 && TaiKhoan.PASS_TaiKhoan.Equals(Models.HashCodes.Hash_MD5.GetHash_MD5(pTaiKhoan.PASS_TaiKhoan)))
                         {
-                            
+
                             if (TaiKhoan.LOAI_TaiKhoan == 1)
                             {
                                 if (SessionHelper.Get_SessionHV() != null) SessionHelper.Remove_SessionHV();
@@ -61,11 +71,15 @@ namespace UI_DATN_QS.Controllers
                                 return RedirectToAction("GET_TrangChu", "TrangChu", new { area = "NguoiDung" });
                             }
                         }
+                        else if (TaiKhoan != null && TaiKhoan.IS_Locked != 0)
+                        {
+                            ViewBag.StatusAccount = 2;
+                        }
                         else
                         {
-                            ViewBag.StatusAccount = 1;
-                            return View();
+                            ViewBag.StatusAccount = 1;                            
                         }
+                        return View();
                     }
                 }
 

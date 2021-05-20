@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using UI_DATN_QS.Models.DB_Entities;
 using UI_DATN_QS.Models.DB_Models;
 using UI_DATN_QS.Models.HashCodes;
+using UI_DATN_QS.Models.Sessions;
 using UI_DATN_QS.ViewModels;
 
 namespace UI_DATN_QS.Areas.NguoiDung.Controllers
@@ -17,6 +18,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult GET_NienKhoa()
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -36,6 +41,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult INSERT_NienKhoa()
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 return View();
@@ -80,6 +89,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult UPDATE_NienKhoa(int pID_NienKhoa)
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -178,6 +191,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult GET_LoaiBaiThi()
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -197,6 +214,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult INSERT_LoaiBaiThi()
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 return View();
@@ -241,6 +262,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult UPDATE_LoaiBaiThi(int pID_LBaiThi)
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -338,6 +363,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult GET_KhoaHoc()
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -357,6 +386,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult INSERT_KhoaHoc()
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 return View();
@@ -401,6 +434,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult UPDATE_KhoaHoc(int pID_KhoaHoc)
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -499,6 +536,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult GET_MonHoc()
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -517,6 +558,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult INSERT_MonHoc()
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 return View();
@@ -561,6 +606,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult UPDATE_MonHoc(int pID_MonHoc)
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -659,6 +708,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult GET_CauHoi(int pID_MonHoc = 0)
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -702,6 +755,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult INSERT_CauHoi()
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -765,6 +822,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult UPDATE_CauHoi(int pID_CauHoi)
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -887,6 +948,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult GET_DeThi(int pID_MonHoc = 0)
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -960,6 +1025,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult INSERT_DeThi(int pID_MonHoc = 0)
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())

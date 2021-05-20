@@ -179,6 +179,7 @@
     <Compile Include="Models\DB_Models\DeThi_Model.cs" />
     <Compile Include="Models\DB_Models\HocVien_Model.cs" />
     <Compile Include="Models\DB_Models\LopHoc_Model.cs" />
+    <Compile Include="Models\DB_Models\MatKhau_Model.cs" />
     <Compile Include="Models\DB_Models\NguoiDung_Model.cs" />
     <Compile Include="Models\DB_Models\UserSession_Model.cs" />
     <Compile Include="Models\HashCodes\Hash_MD5.cs" />
@@ -242,6 +243,8 @@
     <Content Include="Areas\NguoiDung\Views\TrangChu\GET_TrangChu.cshtml" />
     <Content Include="Areas\NguoiDung\Views\KyThi\GET_DeThi.cshtml" />
     <Content Include="Areas\NguoiDung\Views\KyThi\INSERT_DeThi.cshtml" />
+    <Content Include="Areas\NguoiDung\Views\NguoiDung\CHANGE_MatKhau.cshtml" />
+    <Content Include="Areas\NguoiDung\Views\HocVien\CHANGE_MatKhau.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

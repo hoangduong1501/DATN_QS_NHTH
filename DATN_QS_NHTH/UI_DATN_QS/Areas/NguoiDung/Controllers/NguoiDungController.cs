@@ -6,16 +6,21 @@ using System.Web;
 using System.Web.Mvc;
 using UI_DATN_QS.Models.DB_Entities;
 using UI_DATN_QS.Models.DB_Models;
+using UI_DATN_QS.Models.Sessions;
 
 namespace UI_DATN_QS.Areas.NguoiDung.Controllers
 {
     public class NguoiDungController : Controller
     {
-        /*HocVien*/
+        /*NguoiDung*/
         #region
         [HttpGet]
         public ActionResult GET_NguoiDung()
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -53,6 +58,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult INSERT_NguoiDung()
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 return View();
@@ -131,6 +140,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult UPDATE_NguoiDung(int pID_NguoiDung)
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
@@ -238,7 +251,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                 {
                     TAI_KHOAN TaiKhoan = entities.TAI_KHOAN.Where(p => p.ID_TaiKhoan == pID_TaiKhoan).FirstOrDefault();
                     TaiKhoan.PASS_TaiKhoan = UI_DATN_QS.Models.HashCodes.Hash_MD5.GetHash_MD5("123456");
-                    
+
                     entities.SaveChanges();
                 }
 
@@ -296,6 +309,63 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public ActionResult CHANGE_MatKhau()
+        {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
+            try
+            {
+                return View();
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CHANGE_MatKhau(MatKhau_Model pMatKhau)
+        {
+            if (SessionHelper.Get_SessionND() == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                    {
+                        int a = SessionHelper.Get_SessionND().ID_TaiKhoan;
+                        TAI_KHOAN TaiKhoan = entities.TAI_KHOAN.Where(p => p.ID_TaiKhoan == a).FirstOrDefault();
+
+                        if (TaiKhoan.PASS_TaiKhoan.Equals(Models.HashCodes.Hash_MD5.GetHash_MD5(pMatKhau.OLD_Password)))
+                        {
+                            TaiKhoan.PASS_TaiKhoan = Models.HashCodes.Hash_MD5.GetHash_MD5(pMatKhau.NEW_Password);
+
+                            entities.SaveChanges();
+                            return RedirectToAction("GET_TrangChu", "TrangChu", new { area = "NguoiDung" });
+                        }
+                        else
+                        {
+                            ViewBag.Notifi = 1;
+                        }
+                    }
+                }
+                return View();
+            }
+            catch (Exception) { return View(); }
+        }
+
+        [HttpGet]
+        public ActionResult LOGOUT_NguoiDung()
+        {
+            SessionHelper.Remove_SessionND();
+            return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
         }
         #endregion
     }
