@@ -70,6 +70,20 @@ namespace UI_DATN_QS.Controllers
 
                                 return RedirectToAction("GET_TrangChu", "TrangChu", new { area = "NguoiDung" });
                             }
+                            else if (TaiKhoan.LOAI_TaiKhoan == 3)
+                            {
+                                if (SessionHelper.Get_SessionGV() != null) SessionHelper.Remove_SessionGV();
+
+                                SessionHelper.Set_SessionGV(new UserSession_Model()
+                                {
+                                    ID_TaiKhoan = TaiKhoan.ID_TaiKhoan,
+                                    USER_TaiKhoan = TaiKhoan.USER_TaiKhoan,
+                                    TEN_NguoiDung = entities.NGUOI_DUNG.Where(p => p.ID_TaiKhoan == TaiKhoan.ID_TaiKhoan).FirstOrDefault().TEN_NguoiDung,
+                                    ANH_NguoiDung = entities.NGUOI_DUNG.Where(p => p.ID_TaiKhoan == TaiKhoan.ID_TaiKhoan).FirstOrDefault().ANH_NguoiDung
+                                });
+
+                                return RedirectToAction("GET_DeThi", "DeThiGV", new { area = "GiangVien" });
+                            }
                         }
                         else if (TaiKhoan != null && TaiKhoan.IS_Locked != 0)
                         {

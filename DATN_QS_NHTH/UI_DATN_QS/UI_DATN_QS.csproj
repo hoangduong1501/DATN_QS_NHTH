@@ -108,6 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\GiangVien\Controllers\DeThiGVController.cs" />
+    <Compile Include="Areas\GiangVien\GiangVienAreaRegistration.cs" />
     <Compile Include="Areas\NguoiDung\Controllers\HocVienController.cs" />
     <Compile Include="Areas\NguoiDung\Controllers\KyThiController.cs" />
     <Compile Include="Areas\NguoiDung\Controllers\NguoiDungController.cs" />
@@ -246,6 +248,14 @@
     <Content Include="Areas\NguoiDung\Views\KyThi\INSERT_DeThi.cshtml" />
     <Content Include="Areas\NguoiDung\Views\NguoiDung\CHANGE_MatKhau.cshtml" />
     <Content Include="Areas\NguoiDung\Views\HocVien\CHANGE_MatKhau.cshtml" />
+    <Content Include="Areas\GiangVien\Views\web.config" />
+    <Content Include="Areas\GiangVien\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\GiangVien\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\GiangVien\Views\DeThiGV\GET_DeThi.cshtml" />
+    <Content Include="Areas\GiangVien\Views\DeThiGV\GET_CauHoi.cshtml" />
+    <Content Include="Areas\GiangVien\Views\DeThiGV\INSERT_CauHoi.cshtml" />
+    <Content Include="Areas\GiangVien\Views\DeThiGV\INSERT_DeThi.cshtml" />
+    <Content Include="Areas\GiangVien\Views\DeThiGV\UPDATE_CauHoi.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -261,6 +271,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\GiangVien\Data\" />
     <Folder Include="Areas\NguoiDung\Data\" />
   </ItemGroup>
   <ItemGroup>

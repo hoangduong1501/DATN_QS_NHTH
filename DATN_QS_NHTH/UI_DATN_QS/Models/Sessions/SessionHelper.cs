@@ -8,6 +8,8 @@ namespace UI_DATN_QS.Models.Sessions
 {
     public class SessionHelper
     {
+        /* Session Hoc Vien */
+        #region
         public static void Set_SessionHV(UserSession_Model session)
         {
             HttpContext.Current.Session["USER_SESSIONHV"] = session;
@@ -24,7 +26,10 @@ namespace UI_DATN_QS.Models.Sessions
             if (session == null) return null;
             else return session as UserSession_Model;
         }
+        #endregion
 
+        /* Session Nguoi Dung */
+        #region
         public static void Set_SessionND(UserSession_Model session)
         {
             HttpContext.Current.Session["USER_SESSIONND"] = session;
@@ -41,5 +46,26 @@ namespace UI_DATN_QS.Models.Sessions
             if (session == null) return null;
             else return session as UserSession_Model;
         }
+        #endregion
+
+        /* Session Giang Vien */
+        #region
+        public static void Set_SessionGV(UserSession_Model session)
+        {
+            HttpContext.Current.Session["USER_SESSIONGV"] = session;
+        }
+
+        public static void Remove_SessionGV()
+        {
+            HttpContext.Current.Session.Remove("USER_SESSIONGV");
+        }
+
+        public static UserSession_Model Get_SessionGV()
+        {
+            var session = HttpContext.Current.Session["USER_SESSIONGV"];
+            if (session == null) return null;
+            else return session as UserSession_Model;
+        }
+        #endregion
     }
 }

@@ -1,9 +1,6 @@
-﻿
-@{
-    ViewBag.Title = "GET_CauHoi";
-    Layout = null;
+﻿@{
+    //ViewBag.Notify_Message = null;
 }
-@model UI_DATN_QS.ViewModels.CTDeThi_ViewModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,10 +34,11 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog fa-fw text-light"></i></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    @Html.ActionLink("Hồ Sơ", "Profile_Login_AD", "LoginNguoiDung", new { area = "NguoiDung" }, new { @class = "dropdown-item disabled" })
-                    @Html.ActionLink("Đổi Mật Khẩu", "CHANGE_MatKhau", "HocVien", new { area = "NguoiDung" }, new { @class = "dropdown-item disabled" })
+                    @Html.ActionLink("Hồ Sơ", "Profile_Login_AD", "LoginNguoiDung", new { area = "NguoiDung" }, new { @class = "dropdown-item" })
+                    @*<a class="dropdown-item" href="" data-toggle="modal" data-target="#exampleModalCenter">Đổi Mật Khẩu</a>*@
+                    @Html.ActionLink("Đổi Mật Khẩu", "CHANGE_MatKhau", "NguoiDung", new { area = "NguoiDung" }, new { @class = "dropdown-item" })
                     <div class="dropdown-divider"></div>
-                    @Html.ActionLink("Đăng Xuất", "LOGOUT_HocVien", "HocVien", new { area = "" }, new { @class = "dropdown-item disabled" })
+                    @Html.ActionLink("Đăng Xuất", "LOGOUT_NguoiDung", "NguoiDung", new { area = "NguoiDung" }, new { @class = "dropdown-item" })
                 </div>
             </li>
         </ul>
@@ -70,59 +68,50 @@
                             }
 
                         </div>
-                        <br />
-                        @*<div class="border border-secondary row bg-secondary" style="margin: 0.8rem; padding: 0.5rem; border-radius: 1rem;">
-                            @for (int i = 1; i <= 120; i++)
-                            {
-                                <a class="btn btn-sm btn-primary text-center" style="margin: 0.1rem; width: 2.5rem;">@i</a>
-                            }
-                        </div>*@
+                        <div class="sb-sidenav-menu-heading text-light">QUẢN LÝ</div>
+                     
+                        <a class="nav-link" href="@Url.Action("GET_DeThi", "DeThiGV", new { area = "GiangVien" })">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users-cog"></i></div>
+                            Đề Thi
+                        </a>
+                        <a class="nav-link" href="@Url.Action("GET_CauHoi", "DeThiGV", new { area = "GiangVien" })">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users-cog"></i></div>
+                            Câu Hỏi
+                        </a>
+
+                        <div class="sb-sidenav-menu-heading text-light">CÀI ĐẶT</div>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts_TaiKhoan" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-cog"></i></div>
+                            Tài Khoản
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts_TaiKhoan" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                @Html.ActionLink("Đổi Mật Khẩu", "CHANGE_MatKhau", "NguoiDung", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Hồ Sơ", "Profile_Login_AD", "LoginNguoiDung", new { area = "NguoiDung" }, new { @class = "nav-link" })
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts_TroGiup" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-info-circle"></i></div>
+                            Hướng Dẫn
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts_TroGiup" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">Hướng Dẫn</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Thông Tin</a>
+                            </nav>
+                        </div>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    @*<div class="small">Logged in as:</div>
-                        Start Bootstrap*@
+                    <div class="small">Logged in as:</div>
+                    Start Bootstrap
                 </div>
             </nav>
         </div>
         <div id="layoutSidenav_content">
-            @using (Html.BeginForm("GET_CauHoi", "DeThi", FormMethod.Post, new { @id = "myForm" }))
-            {
-                <div style="padding: 0.6rem 1.5rem; position: fixed; background-color: aliceblue;" class="col-sm-12">
-                    <div class="row">
-                        <h4  class="text-dark" data-toggle="tooltip" data-placement="right" title="Thời gian còn lại" style="margin: 0.2rem 1rem;">
-                            <i class="fas fa-hourglass-half"></i> <span id="time-end">@Model.TGIAN_DeThi:00</span>
-                        </h4>
-                        <button class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Kết Thúc Làm Bài">KẾT THÚC</button>
-
-                    </div>
-                </div>
-                <div style="padding: 1rem; margin: 3rem 0 0 0;">
-                    @for (int i = 0; i < Model.list_CauHoi.Count(); i++)
-                    {
-                        <div>
-                            <h6>Câu @(i + 1): @Model.list_CauHoi[i].NDUNG_CauHoi @Model.list_CauHoi[i].ID_CauHoi</h6>
-                            @{
-                                if (Model.list_CauHoi[i].ANH_CauHoi != null)
-                                {
-                                    <img id="imgUpload" class="img-thumbnail" style="height: 15rem;" src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.list_CauHoi[i].ANH_CauHoi))" />
-                                }
-                                
-                            }
-                            <div style="padding: 0 1rem;">
-                                @Html.HiddenFor(m => m.list_CauHoi[i].ID_CauHoi)
-                                @Html.RadioButtonFor(mo => mo.list_CauHoi[i].LCHON_Dung, Model.list_CauHoi[i].LCHON_1) A. @Model.list_CauHoi[i].LCHON_1<br />
-                                @Html.RadioButtonFor(mo => mo.list_CauHoi[i].LCHON_Dung, Model.list_CauHoi[i].LCHON_2) B. @Model.list_CauHoi[i].LCHON_2<br />
-                                @Html.RadioButtonFor(mo => mo.list_CauHoi[i].LCHON_Dung, Model.list_CauHoi[i].LCHON_3) C. @Model.list_CauHoi[i].LCHON_3<br />
-                                @Html.RadioButtonFor(mo => mo.list_CauHoi[i].LCHON_Dung, Model.list_CauHoi[i].LCHON_4) D. @Model.list_CauHoi[i].LCHON_4<br />
-                            </div>
-                            <hr />
-                        </div>
-                    }
-                </div>
-            }
-
-
+            @RenderBody()
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
@@ -155,7 +144,6 @@
             </div>
         </div>
     </div>
-
     @* popupdelte thông báo  *@
 
     @* popup_Notify thông báo  *@
@@ -192,38 +180,35 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="~/Script/Scripts_Layout.js"></script>
     <script src="~/Script/Script_Notify.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>*@
+    @*<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>*@
+    @*<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>*@
     <script type="text/javascript" src="~/Script/datatables1-10-20.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
     <script>
+        $(document).ready(function () {
 
-        function startTimer(duration, display) {
-            var timer = duration, minutes, seconds;
-            setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
+            //$('table.display').DataTable({
+            //    responsive: true,
+            //    "order": [[2, "asc"]],
+            //    "columnDefs": [
+            //        { "orderable": false, "targets": 0 },
+            //        { "orderable": false, "targets": 1 }
+            //    ]
+            //});
 
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
+            //$("#notify_Popup").modal();
 
-                display.textContent = minutes + ":" + seconds;
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked"))
+                    $('.CheckBoxItem').prop('checked', true);
+                else $('.CheckBoxItem').prop('checked', false);
+            });
+        });
 
-                if (--timer < 0) {
-                    document.getElementById("myForm").submit();
-                }
-            }, 1000);
-        }
-
-        window.onload = function () {
-            var minutes = parseInt(document.getElementById("time-end").textContent.split(':')[0]) * 60;
-                display = document.querySelector('#time-end');
-            startTimer(30, display);
-        };
-
-        
     </script>
+    @RenderSection("JSFooter", required: false)
 
 </body>
 </html>
-
-

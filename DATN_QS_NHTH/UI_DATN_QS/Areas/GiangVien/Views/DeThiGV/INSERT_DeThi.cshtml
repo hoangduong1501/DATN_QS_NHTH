@@ -1,0 +1,113 @@
+﻿
+@model UI_DATN_QS.ViewModels.DeThi_ViewModel
+
+<div class="container">
+    <div class="col-md-12">
+        <br />
+        <br />
+        <h3 class="text-center" id="exampleModalLongTitle">TẠO BÀI THI</h3>
+        <br />
+        @using (Html.BeginForm("INSERT_DeThi", "KyThi", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.object_DeThi.MA_DeThi)
+
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Mã đề <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.TextBoxFor(mo => mo.object_DeThi.MA_DeThi, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(mo => mo.object_DeThi.MA_DeThi, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Môn học <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.DropDownListFor(mo => mo.object_DeThi.ID_MonHoc, new SelectList(Model.list_MonHoc, "ID_MonHoc", "TEN_MonHoc", Model.ID_MonHoc), new { @id = "cboMonHoc", @class = "form-control" })
+                    @Html.ValidationMessageFor(mo => mo.object_DeThi.ID_MonHoc, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Bài thi <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.DropDownListFor(mo => mo.object_DeThi.ID_LBaiThi, new SelectList(Model.list_LBaiThi, "ID_LBaiThi", "TEN_LBaiThi", Model.list_LBaiThi.Max(p => p.ID_LBaiThi)), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(mo => mo.object_DeThi.ID_MonHoc, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Thời gian <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.TextBoxFor(mo => mo.object_DeThi.TGIAN_DeThi, new { @Value = "15", @class = "form-control", @type = "number", @min = "10" })
+                    @Html.ValidationMessageFor(mo => mo.object_DeThi.TGIAN_DeThi, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Mật khẩu <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.TextBoxFor(mo => mo.object_DeThi.PASS_DeThi, new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(mo => mo.object_DeThi.PASS_DeThi, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            if (Model.list_CauHoi.Count != 0)
+            {
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-6 col-md-6 col-form-label">Nhập số lượng câu hỏi cho từng chương</label>
+                </div>
+                for (int i = 0; i < Model.list_CauHoi.Count(); i++)
+                {
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-md-3 col-form-label">Chương @Model.list_CauHoi[i].ID_Chuong (tổng @Model.list_CauHoi[i].NUM_CauHoi câu) <span class="text-danger">(*)</span></label>
+                        <div class="col-sm-8 col-md-9">
+                            @Html.TextBoxFor(mo => mo.list_CauHoi[i].NUM_CauHoi, new { @Value = "1", @class = "form-control", @type = "number", @min = "0", @max = Model.list_CauHoi[i].NUM_CauHoi })
+                            @Html.ValidationMessageFor(mo => mo.object_DeThi.PASS_DeThi, null, new { @class = "text-danger" })
+                            @Html.HiddenFor(m => m.list_CauHoi[i].ID_Chuong)
+                        </div>
+                    </div>
+                }
+
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label"></label>
+                    <div class="col-sm-8 col-md-10">
+                        <button class="btn btn-success">
+                            <i class="fas fa-download"></i> Lưu
+                        </button>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-6 col-md-6 col-form-label text-danger">Môn học hiện tại chưa có câu hỏi. Hãy thêm câu hỏi!</label>
+
+                </div>
+            }
+
+
+        }
+    </div>
+</div>
+
+@section JSFooter{
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgUpload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#cboMonHoc').on('change', function () {
+            var url = $(this).val(); // get selected value
+            if (url) { // require a URL
+                window.location.href = "/GiangVien/DeThiGV/INSERT_DeThi?pID_MonHoc=" + url; // redirect
+            }
+            return false;
+        });
+    </script>
+
+}
