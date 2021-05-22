@@ -18,6 +18,7 @@ namespace UI_DATN_QS.Controllers
             try
             {
                 if (SessionHelper.Get_SessionND() != null) return RedirectToAction("GET_TrangChu", "TrangChu", new { area = "NguoiDung" });
+                if (SessionHelper.Get_SessionND() != null) return RedirectToAction("GET_DeThi", "DeThiGV", new { area = "GiangVien" });
                 if (SessionHelper.Get_SessionHV() != null) return RedirectToAction("GET_DeThi", "DeThi", new { area = "" });
 
                 return View();

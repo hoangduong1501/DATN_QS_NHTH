@@ -1094,7 +1094,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
 
                     foreach (var item in pDeThi.list_CauHoi)
                     {
-                        if(item.NUM_CauHoi > 0)
+                        if (item.NUM_CauHoi > 0)
                         {
                             foreach (CAU_HOI item_CauHoi in entities.CAU_HOI.Where(p => p.ID_Chuong == item.ID_Chuong && p.ID_MonHoc == pDeThi.object_DeThi.ID_MonHoc).ToList().
                             OrderBy(p => Guid.NewGuid()).Take(item.NUM_CauHoi).ToList())
@@ -1174,7 +1174,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                 return View();
             }
         }
-       
+
         [HttpGet]
         public ActionResult IsLock_DeThi(int pID_DeThi)
         {
@@ -1191,6 +1191,39 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                 }
 
                 return Redirect(Request.UrlReferrer.ToString());
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult GET_CTDeThi(int pID_DeThi)
+        {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                {
+                    return View(entities.CT_DE_THI.Where(p => p.ID_DeThi == pID_DeThi && p.IS_Deleted == 0).ToList().
+                                Join(entities.CAU_HOI.ToList(), ct => ct.ID_CauHoi, ch => ch.ID_CauHoi, (ct, ch) => new { ct, ch }).
+                                Select(tb1 => new CAU_HOI()
+                                {
+                                    ID_CauHoi = tb1.ch.ID_CauHoi,
+                                    ANH_CauHoi = tb1.ch.ANH_CauHoi,
+                                    LCHON_1 = tb1.ch.LCHON_1,
+                                    LCHON_2 = tb1.ch.LCHON_2,
+                                    LCHON_3 = tb1.ch.LCHON_3,
+                                    LCHON_4 = tb1.ch.LCHON_4,
+                                    LCHON_Dung = tb1.ch.LCHON_Dung,
+                                    NDUNG_CauHoi = tb1.ch.NDUNG_CauHoi,
+
+                                }).ToList());
+                }
             }
             catch (Exception)
             {

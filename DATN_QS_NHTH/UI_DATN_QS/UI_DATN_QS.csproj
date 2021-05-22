@@ -258,12 +258,15 @@
     <Content Include="Areas\GiangVien\Views\DeThiGV\INSERT_CauHoi.cshtml" />
     <Content Include="Areas\GiangVien\Views\DeThiGV\INSERT_DeThi.cshtml" />
     <Content Include="Areas\GiangVien\Views\DeThiGV\UPDATE_CauHoi.cshtml" />
+    <Content Include="Areas\GiangVien\Views\DangXuatGV\CHANGE_MatKhau.cshtml" />
+    <Content Include="Areas\NguoiDung\Views\KyThi\GET_CTDeThi.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\DangNhap\Dang_Nhap.cshtml" />
     <Content Include="Views\DeThi\GET_DeThi.cshtml" />
     <Content Include="Views\DeThi\GET_CauHoi.cshtml" />
+    <Content Include="Views\DangXuat\CHANGE_MatKhau.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -274,9 +277,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\GiangVien\Data\" />
-    <Folder Include="Areas\GiangVien\Views\DangXuatGV\" />
     <Folder Include="Areas\NguoiDung\Data\" />
-    <Folder Include="Views\DangXuat\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
