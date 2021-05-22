@@ -338,13 +338,6 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         }
 
         [HttpGet]
-        public ActionResult LOGOUT_HocVien()
-        {
-            SessionHelper.Remove_SessionHV();
-            return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
-        }
-
-        [HttpGet]
         public ActionResult CHANGE_MatKhau()
         {
             UserSession_Model user_Session = SessionHelper.Get_SessionHV();

@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\GiangVien\Controllers\DangXuatGVController.cs" />
     <Compile Include="Areas\GiangVien\Controllers\DeThiGVController.cs" />
     <Compile Include="Areas\GiangVien\GiangVienAreaRegistration.cs" />
     <Compile Include="Areas\NguoiDung\Controllers\HocVienController.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Areas\NguoiDung\Controllers\TrangChuController.cs" />
     <Compile Include="Areas\NguoiDung\NguoiDungAreaRegistration.cs" />
     <Compile Include="Controllers\DangNhapController.cs" />
+    <Compile Include="Controllers\DangXuatController.cs" />
     <Compile Include="Controllers\DeThiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -272,7 +274,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\GiangVien\Data\" />
+    <Folder Include="Areas\GiangVien\Views\DangXuatGV\" />
     <Folder Include="Areas\NguoiDung\Data\" />
+    <Folder Include="Views\DangXuat\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
