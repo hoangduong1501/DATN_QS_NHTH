@@ -13,6 +13,7 @@ namespace UI_DATN_QS.Models.DB_Models
         public Nullable<System.DateTime> NSINH_NguoiDung { get; set; }
         public string MAIL_NguoiDung { get; set; }
         public byte[] ANH_NguoiDung { get; set; }
+        public int LOAI_NguoiDung { get; set; }
 
         public int ID_TaiKhoan { get; set; }
         public string USER_TaiKhoan { get; set; }

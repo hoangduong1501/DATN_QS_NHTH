@@ -16,46 +16,46 @@
 <div class="container">
     <div class="col-md-12">
         <br />
-        <h3 class="text-center" id="exampleModalLongTitle">TẠO LỚP HỌC</h3>
+        <h3 class="text-center" id="exampleModalLongTitle">SỬA LỚP HỌC</h3>
         <br />
         @using (Html.BeginForm("UPDATE_LopHoc", "HocVien", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             @Html.Hidden("object_LopHoc.ID_LopHoc", Model.object_LopHoc.ID_LopHoc)
             <div class="form-group row">
-                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Mã lớp</label>
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Mã lớp <span class="text-danger">(*)</span></label>
                 <div class="col-sm-8 col-md-10">
-                    @Html.TextBoxFor(mo => mo.object_LopHoc.MA_LopHoc, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(mo => mo.object_LopHoc.MA_LopHoc, null, new { @class = "text-danger" })
+                    @Html.TextBoxFor(mo => mo.object_LopHoc.MA_LopHoc, new { @class = "form-control", @required = "required" })
+                    @*@Html.ValidationMessageFor(mo => mo.object_LopHoc.MA_LopHoc, null, new { @class = "text-danger" })*@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Tên lớp</label>
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Tên lớp <span class="text-danger">(*)</span></label>
                 <div class="col-sm-8 col-md-10">
-                    @Html.TextBoxFor(mo => mo.object_LopHoc.TEN_LopHoc, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(mo => mo.object_LopHoc.TEN_LopHoc, null, new { @class = "text-danger" })
+                    @Html.TextBoxFor(mo => mo.object_LopHoc.TEN_LopHoc, new { @class = "form-control", @required = "required" })
+                    @*@Html.ValidationMessageFor(mo => mo.object_LopHoc.TEN_LopHoc, null, new { @class = "text-danger" })*@
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Niên khóa</label>
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Niên khóa <span class="text-danger">(*)</span></label>
                 <div class="col-sm-8 col-md-10">
                     @Html.DropDownListFor(mo => mo.object_LopHoc.ID_NienKhoa, new SelectList(Model.list_NienKhoa, "ID_NienKhoa", "TEN_NienKhoa", Model.list_NienKhoa.Max(p => p.ID_NienKhoa)), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(mo => mo.object_LopHoc.ID_NienKhoa, null, new { @class = "text-danger" })
+                    @*@Html.ValidationMessageFor(mo => mo.object_LopHoc.ID_NienKhoa, null, new { @class = "text-danger" })*@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Ngành học</label>
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Ngành học <span class="text-danger">(*)</span></label>
                 <div class="col-sm-8 col-md-10">
                     @Html.DropDownListFor(mo => mo.object_LopHoc.ID_NganhHoc, new SelectList(Model.list_NganhHoc, "ID_NganhHoc", "TEN_NganhHoc", Model.list_NganhHoc.Min(p => p.ID_NganhHoc)), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(mo => mo.object_LopHoc.ID_NganhHoc, null, new { @class = "text-danger" })
+                    @*@Html.ValidationMessageFor(mo => mo.object_LopHoc.ID_NganhHoc, null, new { @class = "text-danger" })*@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Khóa học</label>
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Khóa học <span class="text-danger">(*)</span></label>
                 <div class="col-sm-8 col-md-10">
                     @Html.DropDownListFor(mo => mo.object_LopHoc.ID_KhoaHoc, new SelectList(Model.list_KhoaHoc, "ID_KhoaHoc", "TEN_KhoaHoc", Model.list_KhoaHoc.Max(p => p.ID_KhoaHoc)), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(mo => mo.object_LopHoc.ID_KhoaHoc, null, new { @class = "text-danger" })
+                    @*@Html.ValidationMessageFor(mo => mo.object_LopHoc.ID_KhoaHoc, null, new { @class = "text-danger" })*@
                 </div>
             </div>
 
