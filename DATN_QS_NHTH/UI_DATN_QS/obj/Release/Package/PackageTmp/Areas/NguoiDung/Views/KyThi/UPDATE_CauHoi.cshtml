@@ -1,0 +1,109 @@
+﻿
+@model UI_DATN_QS.ViewModels.CauHoi_ViewModel
+
+<div class="container">
+    <div class="col-md-12">
+        <br />
+        <br />
+        <h3 class="text-center" id="exampleModalLongTitle">SỬA CÂU HỎI</h3>
+        <br />
+        @using (Html.BeginForm("UPDATE_CauHoi", "KyThi", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("object_CauHoi.ID_CauHoi", Model.object_CauHoi.ID_CauHoi)
+
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Môn học <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.DropDownListFor(mo => mo.object_CauHoi.ID_MonHoc, new SelectList(Model.list_MonHoc, "ID_MonHoc", "TEN_MonHoc", Model.list_MonHoc.Min(p => p.ID_MonHoc)), new { @class = "form-control" })
+                    @*@Html.ValidationMessageFor(mo => mo.object_CauHoi.ID_MonHoc, null, new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Chương <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.TextBoxFor(mo => mo.object_CauHoi.ID_Chuong, new { @class = "form-control", @type = "number" })
+                    @*@Html.ValidationMessageFor(mo => mo.object_CauHoi.LCHON_1, null, new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Nội dung câu hỏi <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.TextAreaFor(mo => mo.object_CauHoi.NDUNG_CauHoi, new { @class = "form-control", @rows = "2" })
+                    @*@Html.ValidationMessageFor(mo => mo.object_CauHoi.NDUNG_CauHoi, null, new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Hình ảnh câu hỏi</label>
+                <div class="col-sm-8 col-md-10">
+                    <div>
+                        @{
+                            if (Model.object_CauHoi.ANH_CauHoi != null)
+                            {
+                                <img id="imgUpload" class="img-thumbnail" style="height: 15rem;" src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.object_CauHoi.ANH_CauHoi))" />
+                            }
+                            else
+                            {
+                                <img id="imgUpload" class="img-thumbnail" style="height: 15rem;" src="~/Images/image-none.jpg" />
+                            }
+                        }
+                    </div>
+                    @Html.TextBox("fileLoad", "", new { @type = "file", @accept = "image/png, image/jpeg" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Lựa chọn 1 <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.TextBoxFor(mo => mo.object_CauHoi.LCHON_1, new { @class = "form-control", @required = "required" })
+                    @*@Html.ValidationMessageFor(mo => mo.object_CauHoi.LCHON_1, null, new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Lựa chọn 2 <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.TextBoxFor(mo => mo.object_CauHoi.LCHON_2, new { @class = "form-control", @required = "required" })
+                    @*@Html.ValidationMessageFor(mo => mo.object_CauHoi.LCHON_2, null, new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Lựa chọn 3 <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.TextBoxFor(mo => mo.object_CauHoi.LCHON_3, new { @class = "form-control", @required = "required" })
+                    @*@Html.ValidationMessageFor(mo => mo.object_CauHoi.LCHON_3, null, new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Đáp án <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.TextBoxFor(mo => mo.object_CauHoi.LCHON_Dung, new { @class = "form-control", @required = "required" })
+                    @*@Html.ValidationMessageFor(mo => mo.object_CauHoi.LCHON_Dung, null, new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label"></label>
+                <div class="col-sm-8 col-md-10">
+                    <button class="btn btn-success">
+                        <i class="fas fa-download"></i> Lưu
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section JSFooter{
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgUpload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+}

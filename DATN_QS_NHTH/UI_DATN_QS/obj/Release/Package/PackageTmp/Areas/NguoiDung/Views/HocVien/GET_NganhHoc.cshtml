@@ -1,0 +1,110 @@
+﻿
+@using UI_DATN_QS.Models.DB_Entities;
+
+@model IEnumerable<NGANH_HOC>
+
+
+@using (Html.BeginForm("DELETE_NganhHoc", "HocVien", FormMethod.Post))
+{
+    <div class="container-fluid" style="padding-top: 1rem;">
+        <a class="btn btn-primary" href="@Url.Action("INSERT_NganhHoc", "HocVien", new { area = "NguoiDung" })">
+            <i class="fas fa-plus"></i> Tạo Chuyên Ngành
+        </a>
+        <a class="btn btn-primary" href="@Url.Action("INSERT_NganhHoc", "HocVien", new { area = "NguoiDung" })">
+            <i class="fas fa-file-excel"></i> Tạo Từ File
+        </a>
+        <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit">
+            <i class="fas fa-trash-alt"></i> Xóa Mục Đã Chọn
+        </button>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 table-responsive" style="padding-top: 1rem;">
+                <table id="dataTable" class="table table-bordered  display nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th class="text-center"><i class="fas fa-paw text-dark"></i></th>
+                            <th class="text-center"><input type="checkbox" id="checkBoxAll" /></th>
+                            <th>Mã ngành</th>
+                            <th>Tên ngành</th>
+                            <th>Ghi chú</th>
+                            <th>Ngày tạo</th>
+                            <th>Ngày sửa</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int count = 1; }
+                        @foreach (NGANH_HOC item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">@(count++)</td>
+                                <td class="text-center">
+                                    <input type="checkbox" class="CheckBoxItem" name="ID_NganhHoc" value="@item.ID_NganhHoc" />
+                                </td>
+                                <td>@item.MA_NganhHoc</td>
+                                <td>@item.TEN_NganhHoc</td>
+                                <td>@item.NOTE_NganhHoc</td>
+                                <td>@item.TIME_Create.Value.ToString("dd/MM/yyyy")</td>
+                                <td>@item.TIME_Update.Value.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <a class="btn btn-sm btn-outline-primary rounded-circle" href="@Url.Action("UPDATE_NganhHoc", "HocVien", new { pID_NganhHoc = item.ID_NganhHoc })" data-toggle="tooltip" data-placement="right" title="Chỉnh Sửa">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-outline-danger rounded-circle" href="@Url.Action("DELETE_NganhHoc", "HocVien", new { pID_NganhHoc = item.ID_NganhHoc })" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="right" title="Xóa">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th class="text-center"><i class="fas fa-paw text-dark"></i></th>
+                            <th></th>
+                            <th>Mã chuyên ngành</th>
+                            <th>Tên chuyên ngành</th>
+                            <th>Ghi chú</th>
+                            <th>Ngày tạo</th>
+                            <th>Ngày sửa</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+<br />
+<br />
+
+@section JSFooter{
+    <script>
+        $(document).ready(function () {
+
+            $('table.display').DataTable({
+                responsive: true,
+                "order": [[2, "asc"]],
+                "columnDefs": [
+                    { "orderable": false, "targets": 0 },
+                    { "orderable": false, "targets": 1 },
+                    { "orderable": false, "targets": 7 }
+                ]
+            });
+
+            $("#notify_Popup").modal();
+
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked"))
+                    $('.CheckBoxItem').prop('checked', true);
+                else $('.CheckBoxItem').prop('checked', false);
+            });
+        });
+    </script>
+
+}

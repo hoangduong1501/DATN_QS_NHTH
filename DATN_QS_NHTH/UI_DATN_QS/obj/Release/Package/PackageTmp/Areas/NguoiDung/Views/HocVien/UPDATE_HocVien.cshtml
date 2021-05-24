@@ -1,0 +1,137 @@
+﻿
+@model UI_DATN_QS.ViewModels.HocVien_ViewModel
+
+<div class="container-fluid">
+    <br />
+    <a class="btn btn-primary" href="@Url.Action("INSERT_LopHoc", "HocVien", new { area = "NguoiDung" })">
+        <i class="fas fa-plus"></i> Tạo Lớp
+    </a>
+</div>
+<div class="container">
+    <div class="col-md-12">
+        <br />
+        <br />
+        <h3 class="text-center" id="exampleModalLongTitle">SỬA HỌC VIÊN</h3>
+        <br />
+        @using (Html.BeginForm("UPDATE_HocVien", "HocVien", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("object_HocVien.ID_HocVien", Model.object_HocVien.ID_HocVien)
+            @Html.Hidden("object_HocVien.ID_TaiKhoan", Model.object_HocVien.ID_TaiKhoan)
+            @Html.Hidden("object_HocVien.ID_CTLopHoc", Model.object_HocVien.ID_CTLopHoc)
+
+            <div class="form-group row">
+                <div class="col-md-8">
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-md-3 col-form-label">Mã học viên <span class="text-danger">(*)</span></label>
+                        <div class="col-sm-5 col-md-8 col-md-8">
+                            @Html.TextBoxFor(mo => mo.object_HocVien.MA_HocVien, new { @class = "form-control", @required = "required" })
+                            @*@Html.ValidationMessageFor(mo => mo.object_HocVien.MA_HocVien, null, new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-md-3 col-form-label">Tên học viên <span class="text-danger">(*)</span></label>
+                        <div class="col-sm-5 col-md-8">
+                            @Html.TextBoxFor(mo => mo.object_HocVien.TEN_HocVien, new { @class = "form-control", @required = "required" })
+                            @*@Html.ValidationMessageFor(mo => mo.object_HocVien.TEN_HocVien, null, new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-md-3 col-form-label">Ngày sinh <span class="text-danger">(*)</span></label>
+                        <div class="col-sm-5 col-md-8">
+                            @Html.TextBoxFor(mo => mo.object_HocVien.NSINH_HocVien, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+                            @*@Html.ValidationMessageFor(mo => mo.object_HocVien.NSINH_HocVien, null, new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-md-3 col-form-label">Giới tính <span class="text-danger">(*)</span></label>
+                        <div class="col-sm-5 col-md-8">
+                            @Html.DropDownListFor(mo => mo.object_HocVien.GTINH_HocVien, new List<SelectListItem>
+                               {
+                                    new SelectListItem { Text="Nam", Value = "1"},
+                                    new SelectListItem { Text="Nữ", Value = "0"}
+                               }, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-md-3 col-form-label">Lớp học <span class="text-danger">(*)</span></label>
+                        <div class="col-sm-5 col-md-8">
+                            @Html.DropDownListFor(mo => mo.object_HocVien.ID_LopHoc, new SelectList(Model.list_LopHoc, "ID_LopHoc", "TEN_LopHoc", Model.list_LopHoc.Min(p => p.ID_LopHoc)), new { @class = "form-control" })
+                            @*@Html.ValidationMessageFor(mo => mo.object_HocVien.ID_LopHoc, null, new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-md-3 col-form-label">Tên đăng nhập <span class="text-danger">(*)</span></label>
+                        <div class="col-sm-5 col-md-8">
+                            @Html.TextBoxFor(mo => mo.object_HocVien.USER_TaiKhoan, new { @class = "form-control", @required = "required" })
+                            @*@Html.ValidationMessageFor(mo => mo.object_HocVien.USER_TaiKhoan, null, new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div>
+                        @{
+                            if (Model.object_HocVien.ANH_HocVien != null)
+                            {
+                                <img id="imgUpload" class="img-thumbnail" style="height: 15rem;" src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.object_HocVien.ANH_HocVien))" />
+                            }
+                            else
+                            {
+                                <img id="imgUpload" class="img-thumbnail" style="height: 15rem;" src="~/Images/avatar-none.jpg" />
+                            }
+                        }
+                    </div>
+                    @Html.TextBox("fileLoad", "", new { @type = "file", @accept = "image/png, image/jpeg" })
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-2 col-form-label"></label>
+                <div class="col-sm-8 col-md-10">
+                    <button class="btn btn-success">
+                        <i class="fas fa-download"></i> Lưu
+                    </button>
+                    <a class="btn btn-dark" href="@Url.Action("Reset_HocVien", "HocVien", new { pID_TaiKhoan = Model.object_HocVien.ID_TaiKhoan, area = "NguoiDung" })">
+                        <i class="fas fa-file-excel"></i> Khôi Phục Mật Khẩu
+                    </a>
+                    @{
+                        if (Model.object_HocVien.IS_Locked == 1)
+                        {
+                            <a class="btn btn-secondary" href="@Url.Action("IsLock_HocVien", "HocVien", new { pID_TaiKhoan = Model.object_HocVien.ID_TaiKhoan })">
+                                <i class="fas fa-unlock"></i> Mở khóa
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-primary" href="@Url.Action("IsLock_HocVien", "HocVien", new { pID_TaiKhoan = Model.object_HocVien.ID_TaiKhoan })">
+                                <i class="fas fa-lock"></i> Khóa
+                            </a>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-md-2 col-form-label"></label>
+                <p class="text-danger">Mật khẩu mặc định là: 123456</p>
+            </div>
+        }
+    </div>
+</div>
+
+@section JSFooter{
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgUpload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+}
