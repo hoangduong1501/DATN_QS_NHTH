@@ -894,6 +894,25 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         }
 
         [HttpGet]
+        public ActionResult DELETE_AnhCauHoi(int pID_CauHoi)
+        {
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                {
+                    entities.CAU_HOI.Where(p => p.ID_CauHoi == pID_CauHoi).FirstOrDefault().ANH_CauHoi = null;
+                    entities.SaveChanges();
+                }
+
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
         public ActionResult DELETE_CauHoi(int pID_CauHoi)
         {
             try
