@@ -267,6 +267,8 @@
     <Content Include="Views\DeThi\GET_DeThi.cshtml" />
     <Content Include="Views\DeThi\GET_CauHoi.cshtml" />
     <Content Include="Views\DangXuat\CHANGE_MatKhau.cshtml" />
+    <Content Include="Views\DeThi\GET_XacNhanThi.cshtml" />
+    <Content Include="Views\DeThi\GET_CheckCauHoi.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

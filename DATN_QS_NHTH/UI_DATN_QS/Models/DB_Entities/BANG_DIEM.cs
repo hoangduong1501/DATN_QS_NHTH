@@ -17,8 +17,8 @@ namespace UI_DATN_QS.Models.DB_Entities
         public int ID_BangDiem { get; set; }
         public Nullable<int> ID_HocVien { get; set; }
         public Nullable<int> ID_DeThi { get; set; }
-        public Nullable<int> DIEM_BangDiem { get; set; }
-        public Nullable<int> TGIAN_BangDiem { get; set; }
+        public Nullable<double> DIEM_BangDiem { get; set; }
+        public Nullable<int> DUNG_BangDiem { get; set; }
         public Nullable<int> IS_Deleted { get; set; }
         public Nullable<System.DateTime> TIME_Create { get; set; }
         public Nullable<System.DateTime> TIME_Update { get; set; }

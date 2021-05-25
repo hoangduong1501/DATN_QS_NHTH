@@ -90,11 +90,87 @@ namespace UI_DATN_QS.Controllers
         }
 
         [HttpGet]
-        public ActionResult GET_CauHoi(int pID_DeThi)
+        public ActionResult GET_XacNhanThi(int pID_DeThi)
         {
             UserSession_Model user_Session = SessionHelper.Get_SessionHV();
             if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
             ViewBag.USER = user_Session;
+
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                {
+                    DeThi_Model deTHi = entities.DE_THI.Where(p => p.ID_DeThi == pID_DeThi).ToList().
+                                Join(entities.MON_HOC.ToList(), dt => dt.ID_MonHoc, mh => mh.ID_MonHoc, (dt, mh) => new { dt, mh }).
+                                Join(entities.LOAI_BAI_THI.ToList(), tb1 => tb1.dt.ID_LBaiThi, lb => lb.ID_LBaiThi, (tb1, lb) => new { tb1, lb }).
+                                Select(tb2 => new DeThi_Model()
+                                {
+                                    ID_DeThi = tb2.tb1.dt.ID_DeThi,
+                                    MA_DeThi = tb2.tb1.dt.MA_DeThi,
+                                    PASS_DeThi = null,
+                                    TGIAN_DeThi = tb2.tb1.dt.TGIAN_DeThi,
+                                    ID_LBaiThi = tb2.lb.ID_LBaiThi,
+                                    TEN_LBaiThi = tb2.lb.TEN_LBaiThi,
+                                    ID_MonHoc = tb2.tb1.mh.ID_MonHoc,
+                                    TEN_MonHoc = tb2.tb1.mh.TEN_MonHoc,
+                                    TIME_Create = tb2.tb1.dt.TIME_Create,
+                                    IS_Locked = tb2.tb1.dt.IS_Locked
+                                }).FirstOrDefault();
+
+                    return View(deTHi);
+                }
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult GET_XacNhanThi(DeThi_Model pDeThi)
+        {
+            UserSession_Model user_Session = SessionHelper.Get_SessionHV();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                {
+                    int id = entities.HOC_VIEN.Where(p => p.ID_HocVien == user_Session.ID_TaiKhoan).FirstOrDefault().ID_HocVien;
+                    if (entities.BANG_DIEM.Where(p => p.ID_HocVien == id && p.ID_DeThi == pDeThi.ID_DeThi).Count() > 0)
+                    {
+                        ViewBag.StatusPassword = 2;
+                    }
+                    else if (pDeThi.PASS_DeThi.Equals(entities.DE_THI.Where(p => p.ID_DeThi == pDeThi.ID_DeThi).FirstOrDefault().PASS_DeThi.Trim()))
+                    {
+                        SessionHelper.Set_SessionThi();
+                        return RedirectToAction("GET_CauHoi", "DeThi", new { area = "", pID_DeThi = pDeThi.ID_DeThi });
+                    }
+                    else
+                    {
+                        ViewBag.StatusPassword = 1;
+                    }
+
+                    return View(pDeThi);
+                }
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult GET_CauHoi(int pID_DeThi)
+        {
+            if (SessionHelper.Get_SessionThi() == "SIN")
+                return RedirectToAction("GET_DeThi", "DeThi", new { area = "" });
+
+            UserSession_Model user_Session = SessionHelper.Get_SessionHV();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
 
             try
             {
@@ -143,7 +219,7 @@ namespace UI_DATN_QS.Controllers
                 pList[n] = value;
             }
 
-            for(int i = 0; i < pList.Count; i++)
+            for (int i = 0; i < pList.Count; i++)
             {
                 string[] result = Shuffle(new string[] { pList[i].LCHON_1, pList[i].LCHON_2, pList[i].LCHON_3, pList[i].LCHON_4 });
                 pList[i].LCHON_1 = result[0];
@@ -165,13 +241,59 @@ namespace UI_DATN_QS.Controllers
                 wordArray[i] = wordArray[swapIndex];
                 wordArray[swapIndex] = temp;
             }
+
             return wordArray;
         }
 
         [HttpPost]
-        public ActionResult GET_CauHoi(CTDeThi_ViewModel pCT_DeThi)
+        public ActionResult GET_CheckCauHoi(CTDeThi_ViewModel pCT_DeThi)
         {
-            return View();
+            UserSession_Model user_Session = SessionHelper.Get_SessionHV();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
+            SessionHelper.Remove_SessionThi();
+
+            if (SessionHelper.Get_SessionThi() == "SIN")
+            {
+                int a = 0;
+            }
+
+            BANG_DIEM BangDiem = new BANG_DIEM()
+            {
+                ID_DeThi = pCT_DeThi.ID_DeThi,
+            };
+
+            int sum_CauHoi = pCT_DeThi.list_CauHoi.Count();
+            int sum_CauDung = 0;
+            float diem_1_cau = 10 / (float)sum_CauHoi;
+
+            using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+            {
+                foreach (CAU_HOI item in pCT_DeThi.list_CauHoi)
+                {
+                    if (item.LCHON_Dung == entities.CAU_HOI.Where(p => p.ID_CauHoi == item.ID_CauHoi).FirstOrDefault().LCHON_Dung)
+                    {
+                        sum_CauDung++;
+                    }
+                }
+
+                BangDiem.DUNG_BangDiem = sum_CauDung;
+                BangDiem.DIEM_BangDiem = Math.Round(diem_1_cau * sum_CauDung, 1);
+                BangDiem.IS_Deleted = 0;
+                BangDiem.TIME_Create = DateTime.Today;
+
+                if (BangDiem.DIEM_BangDiem > 10.0f) BangDiem.DIEM_BangDiem = 10.0f;
+                BangDiem.ID_HocVien = entities.HOC_VIEN.Where(p => p.ID_HocVien == user_Session.ID_TaiKhoan).FirstOrDefault().ID_HocVien;
+
+                if (entities.BANG_DIEM.Count() == 0) BangDiem.ID_BangDiem = 1;
+                else BangDiem.ID_BangDiem = entities.BANG_DIEM.Max(p => p.ID_BangDiem);
+
+                entities.BANG_DIEM.Add(BangDiem);
+                entities.SaveChanges();
+            }
+
+            return View(BangDiem);
         }
     }
 }

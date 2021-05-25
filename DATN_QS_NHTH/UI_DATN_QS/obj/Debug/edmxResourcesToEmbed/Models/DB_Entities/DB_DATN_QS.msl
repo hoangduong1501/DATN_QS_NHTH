@@ -1,20 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DB_DATN_QSModelStoreContainer" CdmEntityContainer="DB_DATN_QSEntities">
-    <EntitySetMapping Name="BANG_DIEM">
-      <EntityTypeMapping TypeName="DB_DATN_QSModel.BANG_DIEM">
-        <MappingFragment StoreEntitySet="BANG_DIEM">
-          <ScalarProperty Name="ID_BangDiem" ColumnName="ID_BangDiem" />
-          <ScalarProperty Name="ID_HocVien" ColumnName="ID_HocVien" />
-          <ScalarProperty Name="ID_DeThi" ColumnName="ID_DeThi" />
-          <ScalarProperty Name="DIEM_BangDiem" ColumnName="DIEM_BangDiem" />
-          <ScalarProperty Name="TGIAN_BangDiem" ColumnName="TGIAN_BangDiem" />
-          <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
-          <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
-          <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CT_DE_THI">
       <EntityTypeMapping TypeName="DB_DATN_QSModel.CT_DE_THI">
         <MappingFragment StoreEntitySet="CT_DE_THI">
@@ -193,6 +179,20 @@
           <ScalarProperty Name="TEN_DeThi" ColumnName="TEN_DeThi" />
           <ScalarProperty Name="MA_DeThi" ColumnName="MA_DeThi" />
           <ScalarProperty Name="ID_DeThi" ColumnName="ID_DeThi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BANG_DIEM">
+      <EntityTypeMapping TypeName="DB_DATN_QSModel.BANG_DIEM">
+        <MappingFragment StoreEntitySet="BANG_DIEM">
+          <ScalarProperty Name="TIME_Update" ColumnName="TIME_Update" />
+          <ScalarProperty Name="TIME_Create" ColumnName="TIME_Create" />
+          <ScalarProperty Name="IS_Deleted" ColumnName="IS_Deleted" />
+          <ScalarProperty Name="DUNG_BangDiem" ColumnName="DUNG_BangDiem" />
+          <ScalarProperty Name="DIEM_BangDiem" ColumnName="DIEM_BangDiem" />
+          <ScalarProperty Name="ID_DeThi" ColumnName="ID_DeThi" />
+          <ScalarProperty Name="ID_HocVien" ColumnName="ID_HocVien" />
+          <ScalarProperty Name="ID_BangDiem" ColumnName="ID_BangDiem" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

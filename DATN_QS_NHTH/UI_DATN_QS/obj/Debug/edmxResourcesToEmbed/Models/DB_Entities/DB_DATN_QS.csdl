@@ -1,18 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DB_DATN_QSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="BANG_DIEM">
-    <Key>
-      <PropertyRef Name="ID_BangDiem" />
-    </Key>
-    <Property Name="ID_BangDiem" Type="Int32" Nullable="false" />
-    <Property Name="ID_HocVien" Type="Int32" />
-    <Property Name="ID_DeThi" Type="Int32" />
-    <Property Name="DIEM_BangDiem" Type="Int32" />
-    <Property Name="TGIAN_BangDiem" Type="Int32" />
-    <Property Name="IS_Deleted" Type="Int32" />
-    <Property Name="TIME_Create" Type="DateTime" Precision="0" />
-    <Property Name="TIME_Update" Type="DateTime" Precision="0" />
-  </EntityType>
   <EntityType Name="CT_DE_THI">
     <Key>
       <PropertyRef Name="ID_CTDeThi" />
@@ -84,7 +71,6 @@
     <Property Name="ID_TaiKhoan" Type="Int32" />
   </EntityType>
   <EntityContainer Name="DB_DATN_QSEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="BANG_DIEM" EntityType="Self.BANG_DIEM" />
     <EntitySet Name="CT_DE_THI" EntityType="Self.CT_DE_THI" />
     <EntitySet Name="CT_LOP_HOC" EntityType="Self.CT_LOP_HOC" />
     <EntitySet Name="HOC_VIEN" EntityType="Self.HOC_VIEN" />
@@ -98,6 +84,7 @@
     <EntitySet Name="CAU_HOI" EntityType="DB_DATN_QSModel.CAU_HOI" />
     <EntitySet Name="TAI_KHOAN" EntityType="DB_DATN_QSModel.TAI_KHOAN" />
     <EntitySet Name="DE_THI" EntityType="DB_DATN_QSModel.DE_THI" />
+    <EntitySet Name="BANG_DIEM" EntityType="DB_DATN_QSModel.BANG_DIEM" />
   </EntityContainer>
   <EntityType Name="NGANH_HOC">
     <Key>
@@ -193,6 +180,19 @@
     <Property Name="PASS_DeThi" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
     <Property Name="TGIAN_DeThi" Type="Int32" />
     <Property Name="IS_Locked" Type="Int32" />
+    <Property Name="IS_Deleted" Type="Int32" />
+    <Property Name="TIME_Create" Type="DateTime" Precision="0" />
+    <Property Name="TIME_Update" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="BANG_DIEM">
+    <Key>
+      <PropertyRef Name="ID_BangDiem" />
+    </Key>
+    <Property Name="ID_BangDiem" Type="Int32" Nullable="false" />
+    <Property Name="ID_HocVien" Type="Int32" />
+    <Property Name="ID_DeThi" Type="Int32" />
+    <Property Name="DIEM_BangDiem" Type="Double" />
+    <Property Name="DUNG_BangDiem" Type="Int32" />
     <Property Name="IS_Deleted" Type="Int32" />
     <Property Name="TIME_Create" Type="DateTime" Precision="0" />
     <Property Name="TIME_Update" Type="DateTime" Precision="0" />

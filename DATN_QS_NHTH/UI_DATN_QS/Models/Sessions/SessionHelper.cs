@@ -8,7 +8,27 @@ namespace UI_DATN_QS.Models.Sessions
 {
     public class SessionHelper
     {
-        /* Session Hoc Vien */
+        /* Session Thi */
+        #region
+        public static void Set_SessionThi()
+        {
+            HttpContext.Current.Session["THI_SESSION"] = "991501";
+        }
+
+        public static void Remove_SessionThi()
+        {
+            HttpContext.Current.Session.Remove("THI_SESSION");
+        }
+
+        public static string Get_SessionThi()
+        {
+            var session = HttpContext.Current.Session["THI_SESSION"];
+            if (session == null) return "SIN";
+            else return session.ToString();
+        }
+        #endregion
+
+        /* Session Thi */
         #region
         public static void Set_SessionHV(UserSession_Model session)
         {

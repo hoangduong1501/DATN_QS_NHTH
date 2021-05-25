@@ -25,7 +25,6 @@ namespace UI_DATN_QS.Models.DB_Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BANG_DIEM> BANG_DIEM { get; set; }
         public virtual DbSet<CT_DE_THI> CT_DE_THI { get; set; }
         public virtual DbSet<CT_LOP_HOC> CT_LOP_HOC { get; set; }
         public virtual DbSet<HOC_VIEN> HOC_VIEN { get; set; }
@@ -39,5 +38,6 @@ namespace UI_DATN_QS.Models.DB_Entities
         public virtual DbSet<CAU_HOI> CAU_HOI { get; set; }
         public virtual DbSet<TAI_KHOAN> TAI_KHOAN { get; set; }
         public virtual DbSet<DE_THI> DE_THI { get; set; }
+        public virtual DbSet<BANG_DIEM> BANG_DIEM { get; set; }
     }
 }
