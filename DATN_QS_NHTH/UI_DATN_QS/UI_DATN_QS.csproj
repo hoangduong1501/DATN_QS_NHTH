@@ -111,6 +111,7 @@
     <Compile Include="Areas\GiangVien\Controllers\DangXuatGVController.cs" />
     <Compile Include="Areas\GiangVien\Controllers\DeThiGVController.cs" />
     <Compile Include="Areas\GiangVien\GiangVienAreaRegistration.cs" />
+    <Compile Include="Areas\NguoiDung\Controllers\BangDiemController.cs" />
     <Compile Include="Areas\NguoiDung\Controllers\HocVienController.cs" />
     <Compile Include="Areas\NguoiDung\Controllers\KyThiController.cs" />
     <Compile Include="Areas\NguoiDung\Controllers\NguoiDungController.cs" />
@@ -262,6 +263,7 @@
     <Content Include="Areas\GiangVien\Views\DeThiGV\UPDATE_CauHoi.cshtml" />
     <Content Include="Areas\GiangVien\Views\DangXuatGV\CHANGE_MatKhau.cshtml" />
     <Content Include="Areas\NguoiDung\Views\KyThi\GET_CTDeThi.cshtml" />
+    <Content Include="Areas\NguoiDung\Views\BangDiem\GET_BangDiemLop.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
