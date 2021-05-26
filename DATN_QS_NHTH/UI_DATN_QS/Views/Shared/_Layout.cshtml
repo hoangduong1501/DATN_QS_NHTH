@@ -69,21 +69,25 @@
                         </div>
                         <div class="sb-sidenav-menu-heading text-light">HOME</div>
                         <a class="nav-link" href="@Url.Action("GET_DeThi", "DeThi")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Làm Bài Thi
                         </a>
-                       
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts_KetQua" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Kết Quả
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        <a class="nav-link" href="@Url.Action("GET_BangDiem", "BangDiem")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Kết Quả Thi
                         </a>
-                        <div class="collapse" id="collapseLayouts_KetQua" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="layout-static.html">Điểm Theo Môn Học</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">Điểm Theo Lớp Học</a>
-                            </nav>
-                        </div>
+
+                        @*<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts_KetQua" aria-expanded="false" aria-controls="collapsePages">
+            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+            Kết Quả
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="collapseLayouts_KetQua" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link" href="layout-static.html">Điểm Theo Môn Học</a>
+                <a class="nav-link" href="layout-sidenav-light.html">Điểm Theo Lớp Học</a>
+            </nav>
+        </div>*@
 
                         <div class="sb-sidenav-menu-heading text-light">CÀI ĐẶT</div>
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts_TaiKhoan" aria-expanded="false" aria-controls="collapseLayouts">

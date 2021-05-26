@@ -116,6 +116,7 @@
     <Compile Include="Areas\NguoiDung\Controllers\NguoiDungController.cs" />
     <Compile Include="Areas\NguoiDung\Controllers\TrangChuController.cs" />
     <Compile Include="Areas\NguoiDung\NguoiDungAreaRegistration.cs" />
+    <Compile Include="Controllers\BangDiemController.cs" />
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\DangXuatController.cs" />
     <Compile Include="Controllers\DeThiController.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Models\DB_Entities\TAI_KHOAN.cs">
       <DependentUpon>DB_DATN_QS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB_Models\BangDiem_Model.cs" />
     <Compile Include="Models\DB_Models\CauHoi_Model.cs" />
     <Compile Include="Models\DB_Models\DeThi_Model.cs" />
     <Compile Include="Models\DB_Models\HocVien_Model.cs" />
@@ -269,6 +271,7 @@
     <Content Include="Views\DangXuat\CHANGE_MatKhau.cshtml" />
     <Content Include="Views\DeThi\GET_XacNhanThi.cshtml" />
     <Content Include="Views\DeThi\GET_KetQua.cshtml" />
+    <Content Include="Views\BangDiem\GET_BangDiem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
