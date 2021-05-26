@@ -94,7 +94,7 @@
                                 <h1 class="text-danger">@Model.DIEM_BangDiem</h1>
                                 <h6>Số câu đúng: @Model.DUNG_BangDiem.</h6>
                                 
-                                <a class="btn btn-primary w-100" href="@Url.Action("GET_CauHoi", "DeThi", new { pID_DeThi = Model.ID_DeThi})" data-toggle="tooltip" data-placement="right" title="Làm Bài">
+                                <a class="btn btn-primary w-100" href="@Url.Action("GET_DeThi", "DeThi", new { area = "" })" data-toggle="tooltip" data-placement="right" title="Làm Bài">
                                     Xác nhận
                                 </a>
                             </div>

@@ -86,7 +86,7 @@
             </nav>
         </div>
         <div id="layoutSidenav_content">
-            @using (Html.BeginForm("GET_CheckCauHoi", "DeThi", FormMethod.Post, new { @id = "myForm" }))
+            @using (Html.BeginForm("GET_CauHoi", "DeThi", FormMethod.Post, new { @id = "myForm" }))
             {
 
                 @Html.HiddenFor(m => m.ID_DeThi)
@@ -198,6 +198,10 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
     <script>
+
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
 
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
