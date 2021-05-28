@@ -181,6 +181,7 @@
     <Compile Include="Models\DB_Entities\TAI_KHOAN.cs">
       <DependentUpon>DB_DATN_QS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB_Models\BangDiemLop_Model.cs" />
     <Compile Include="Models\DB_Models\BangDiem_Model.cs" />
     <Compile Include="Models\DB_Models\CauHoi_Model.cs" />
     <Compile Include="Models\DB_Models\DeThi_Model.cs" />

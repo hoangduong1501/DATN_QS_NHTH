@@ -1,7 +1,260 @@
 ﻿
-@{
-    ViewBag.Title = "GET_BangDiemLop";
-}
+@model IEnumerable<UI_DATN_QS.Models.DB_Entities.KHOA_HOC>
 
-<h2>GET_BangDiemLop</h2>
+<div class="container-fluid">
+    <br />
+    <div class="form-group row">
+        <label for="inputPassword" class="col-form-label" style="margin-left: 1rem;">Khóa học</label>
+        <div class="col-md-3 .col-lg-2">
+            @Html.DropDownList("cbb_KhoaHoc", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+        </div>
+
+        <label for="inputPassword" class="col-form-label" style="margin-left: 1rem;">Lớp học</label>
+        <div class="col-md-3 .col-lg-2">
+            @Html.DropDownList("cbb_LopHoc", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+        </div>
+
+        <label for="inputPassword" class="col-form-label" style="margin-left: 1rem;">Môn học</label>
+        <div class="col-md-3 .col-lg-2">
+            @Html.DropDownList("cbb_MonHoc", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+        </div>
+        <div style="margin: 1rem;">
+            <button id="btn_XemDiem" class="btn btn-primary">
+                <i class="fas fa-search"></i> Hiển Thị Bảng Điểm
+            </button>
+            <button class="btn btn-success" onclick="RefreshData()">
+                <i class="fas fa-sync-alt"></i> Làm mới
+            </button>
+            <button id="btn_XoaItems" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> Xóa mục đã chọn
+            </button>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12 table-responsive" style="padding-top: 1rem;">
+            <table id="tb_Diem" class="table table-bordered  display nowrap" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th class="text-center"><i class="fas fa-paw text-dark"></i></th>
+                        <th class="text-center"><input type="checkbox" id="checkBoxAll" /></th>
+                        <th>Mã học viên</th>
+                        <th>Tên học viên</th>
+                        <th>Mã đề</th>
+                        <th>Trả lời</th>
+                        <th>Điểm</th>
+                        <th>Ngày thi</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <div>
+                    <tbody>
+                    </tbody>
+                </div>
+                <tfoot>
+                    <tr>
+                        <th class="text-center"><i class="fas fa-paw text-dark"></i></th>
+                        <th></th>
+                        <th>Mã học viên</th>
+                        <th>Tên học viên</th>
+                        <th>Mã đề</th>
+                        <th>Trả lời</th>
+                        <th>Điểm</th>
+                        <th>Ngày thi</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+@section JSFooter{
+    <script>
+
+        function InitTableData() {
+            var obj = {
+                ID_KhoaHoc: $("#cbb_KhoaHoc").val(),
+                ID_LopHoc: $("#cbb_LopHoc").val(),
+                ID_MonHoc: $("#cbb_MonHoc").val()
+            }
+
+            $.ajax({
+                url: 'JSON_BangDiem',
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                datatype: 'JSON',
+                data: JSON.stringify(obj),
+                success: function (result) {
+
+                    $('#tb_Diem').DataTable().clear();
+                    $('#tb_Diem').DataTable().destroy();
+
+                    $('#tb_Diem').DataTable({
+                        "processing": true,
+                        data: result, responsive: true,
+                        "order": [[2, "asc"]],
+                        "columnDefs": [
+                            { "orderable": false, "targets": 0 },
+                            { "orderable": false, "targets": 1 },
+                            { "orderable": false, "targets": 8 }
+                        ],
+                        columns: [
+                            {
+                                data: null,
+                                render: function (data, type, row) {
+                                    return '';
+                                }
+                            },
+                            {
+                                data: 'ID_BangDiem',
+                                className: "text-center",
+                                render: function (data, type, row) {
+                                    return '<input type="checkbox" class="CheckBoxItem" name="ID_DeThi" value=' + data + ' />';
+                                }
+                            },
+                            { data: 'MA_HocVien' },
+                            { data: 'TEN_HocVien' },
+                            { data: 'MA_DeThi', className: "text-center" },
+                            { data: 'DUNG_BangDiem', className: "text-center" },
+                            { data: 'DIEM_BangDiem', className: "text-center" },
+                            { data: 'TIME_Create' },
+                            {
+                                data: 'ID_BangDiem',
+                                className: "text-center",
+                                render: function (data, type, row) {
+                                    return '<button id="' + data + '" class="btn btn-sm btn-outline-danger rounded-circle item-Delete" data-toggle="tooltip" data-placement="right" title="Xóa">' +
+                                        '<i class="fas fa-trash-alt"></i>' +
+                                        '</button>';
+                                }
+                            },
+                        ]
+                    });
+
+                },
+                error: function (result) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+            InitTableData();
+
+            $.ajax({
+                url: 'JSON_KhoaHoc',
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                datatype: 'json',
+                success: function (result) {
+                    $("#cbb_KhoaHoc").append($("<option></option>").val(0).html('--Chọn khóa học--'));
+                    $(result).each(function () {
+                        $("#cbb_KhoaHoc").append($("<option></option>").val(this.ID_KhoaHoc).html(this.TEN_KhoaHoc));
+                    });
+                },
+                error: function (result) {
+                    alert(errormessage.responseText);
+                }
+            });
+
+            $.ajax({
+                url: 'JSON_MonHoc',
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                datatype: 'json',
+                success: function (result) {
+                    $("#cbb_MonHoc").append($("<option></option>").val(0).html('--Chọn môn học--'));
+                    $(result).each(function () {
+                        $("#cbb_MonHoc").append($("<option></option>").val(this.ID_MonHoc).html(this.TEN_MonHoc));
+                    });
+                },
+                error: function (result) {
+                    alert(errormessage.responseText);
+                }
+            });
+
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked"))
+                    $('.CheckBoxItem').prop('checked', true);
+                else $('.CheckBoxItem').prop('checked', false);
+            });
+
+
+        });
+
+        $("#cbb_KhoaHoc").change(function () {
+            $.ajax({
+                url: 'JSON_LopHoc?pID_LopHoc=' + $(this).val() + '',
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                datatype: 'json',
+                success: function (result) {
+                    $("#cbb_LopHoc").empty();
+                    $("#cbb_LopHoc").append($("<option></option>").val(0).html('--Chọn lớp học--'));
+                    $(result).each(function () {
+                        $("#cbb_LopHoc").append($("<option></option>").val(this.ID_LopHoc).html(this.TEN_LopHoc));
+                    });
+                },
+                error: function (result) {
+                    alert(errormessage.responseText);
+                }
+            });
+        });
+
+        function RefreshData() {
+            InitTableData();
+        }
+
+        $('#btn_XemDiem').click(function () {
+            RefreshData();
+        });
+
+        $('#btn_XoaItems').click(function () {
+            
+            var arrayT = [];
+            $(".CheckBoxItem:checked").each(function () {
+                arrayT.push(parseInt($(this).val()));
+            });
+
+            if (confirm('Are you sure?')) {
+                $.ajax({
+                    url: 'JSON_Delete_BangDiem',
+                    type: "POST",
+                    data: { pArray: arrayT },
+                    datatype: 'JSON',
+                    success: function (result) {
+                        alert(result);
+                    },
+                    error: function (result) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            }
+            RefreshData();
+        });
+
+        $('tbody').on("click", '.item-Delete', function () {
+
+            if (confirm('Are you sure?')) {
+                $.ajax({
+                    url: 'JSON_Delete_BangDiem?pID_BangDiem=' + this.id + '',
+                    type: "GET",
+                    contentType: 'application/json; charset=utf-8',
+                    datatype: 'json',
+                    success: function (result) {
+                        alert('' + result);
+                    },
+                    error: function (result) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            }
+
+            RefreshData();
+        });
+
+    </script>
+}
 
