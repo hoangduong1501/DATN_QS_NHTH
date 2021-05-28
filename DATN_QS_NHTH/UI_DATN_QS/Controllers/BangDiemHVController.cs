@@ -9,7 +9,7 @@ using UI_DATN_QS.Models.Sessions;
 
 namespace UI_DATN_QS.Controllers
 {
-    public class BangDiemController : Controller
+    public class BangDiemHVController : Controller
     {
         // GET: BangDiem
         public ActionResult GET_BangDiem()
