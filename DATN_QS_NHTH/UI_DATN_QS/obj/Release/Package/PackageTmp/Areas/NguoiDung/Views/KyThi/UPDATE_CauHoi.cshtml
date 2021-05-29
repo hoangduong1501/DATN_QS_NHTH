@@ -85,6 +85,9 @@
                     <button class="btn btn-success">
                         <i class="fas fa-download"></i> Lưu
                     </button>
+                    <a class="btn btn-secondary"  onclick="return confirm('Are you sure?')"  href="@Url.Action("DELETE_AnhCauHoi", "KyThi", new { pID_TaiKhoan = Model.object_CauHoi.ID_CauHoi, area = "NguoiDung" })">
+                        <i class="fas fa-eraser"></i> Xóa Hình
+                    </a>
                 </div>
             </div>
         }

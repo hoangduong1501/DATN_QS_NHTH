@@ -7,8 +7,8 @@
     <Property Name="ID_BangDiem" Type="int" Nullable="false" />
     <Property Name="ID_HocVien" Type="int" />
     <Property Name="ID_DeThi" Type="int" />
-    <Property Name="DIEM_BangDiem" Type="int" />
-    <Property Name="TGIAN_BangDiem" Type="int" />
+    <Property Name="DIEM_BangDiem" Type="float" />
+    <Property Name="DUNG_BangDiem" Type="int" />
     <Property Name="IS_Deleted" Type="int" />
     <Property Name="TIME_Create" Type="date" />
     <Property Name="TIME_Update" Type="date" />

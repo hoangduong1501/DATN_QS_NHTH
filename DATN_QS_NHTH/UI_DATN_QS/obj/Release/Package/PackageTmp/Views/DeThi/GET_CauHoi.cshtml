@@ -88,9 +88,11 @@
         <div id="layoutSidenav_content">
             @using (Html.BeginForm("GET_CauHoi", "DeThi", FormMethod.Post, new { @id = "myForm" }))
             {
+
+                @Html.HiddenFor(m => m.ID_DeThi)
                 <div style="padding: 0.6rem 1.5rem; position: fixed; background-color: aliceblue;" class="col-sm-12">
                     <div class="row">
-                        <h4  class="text-dark" data-toggle="tooltip" data-placement="right" title="Thời gian còn lại" style="margin: 0.2rem 1rem;">
+                        <h4 class="text-dark" data-toggle="tooltip" data-placement="right" title="Thời gian còn lại" style="margin: 0.2rem 1rem;">
                             <i class="fas fa-hourglass-half"></i> <span id="time-end">@Model.TGIAN_DeThi:00</span>
                         </h4>
                         <button class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Kết Thúc Làm Bài">KẾT THÚC</button>
@@ -107,7 +109,7 @@
                                 {
                                     <img id="imgUpload" class="img-thumbnail" style="height: 15rem;" src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.list_CauHoi[i].ANH_CauHoi))" />
                                 }
-                                
+
                             }
                             <div style="padding: 0 1rem;">
                                 @Html.HiddenFor(m => m.list_CauHoi[i].ID_CauHoi)
@@ -197,6 +199,10 @@
 
     <script>
 
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
             setInterval(function () {
@@ -217,7 +223,7 @@
         window.onload = function () {
             var minutes = parseInt(document.getElementById("time-end").textContent.split(':')[0]) * 60;
                 display = document.querySelector('#time-end');
-            startTimer(30, display);
+            startTimer(minutes, display);
         };
 
         

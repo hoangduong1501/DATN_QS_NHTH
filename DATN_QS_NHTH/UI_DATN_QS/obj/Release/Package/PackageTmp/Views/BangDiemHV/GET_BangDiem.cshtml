@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "GET_BangDiem";
+}
+
+@model IEnumerable<UI_DATN_QS.Models.DB_Models.BangDiem_Model>
+
+<div class="container-fluid">
+    <br />   
+    <div class="row">
+        <div class="col-lg-12 table-responsive" style="padding-top: 1rem;">
+            <table id="dataTable" class="table table-bordered  display nowrap" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Mã đề</th>
+                        <th>Môn</th>
+                        <th>Loại</th>
+                        <th>Số lượng</th>
+                        <th>Điểm</th>
+                        <th>Ngày thi</th>
+                    </tr>
+                </thead>
+                <div>
+                    <tbody>
+                        @foreach (UI_DATN_QS.Models.DB_Models.BangDiem_Model item in Model)
+                        {
+                            <tr>
+                                <td>@item.MA_DeThi</td>
+                                <td>@item.TEN_MonHoc</td>
+                                <td>@item.TEN_LBaiThi</td>
+                                <td>@item.DUNG_BangDiem</td>
+                                <td>@item.DIEM_BangDiem</td>
+                                <td>@item.TIME_Create.Value.ToString("dd/MM/yyyy")</td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </div>
+                <tfoot>
+                    <tr>
+                        <th>Mã đề</th>
+                        <th>Môn</th>
+                        <th>Loại</th>
+                        <th>Số lượng</th>
+                        <th>Điểm</th>
+                        <th>Ngày thi</th>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+@section JSFooter{
+    <script>
+        $(document).ready(function () {
+
+            $('table.display').DataTable({
+                responsive: true,
+                "order": [[5, "asc"]]
+            });
+        });
+    </script>
+}

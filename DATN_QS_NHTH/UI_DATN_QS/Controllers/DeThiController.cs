@@ -203,43 +203,59 @@ namespace UI_DATN_QS.Controllers
 
         private List<CAU_HOI> Shuffle_FisherYates(List<CAU_HOI> pList)
         {
-            Random rng = new Random();
+            Random rand = new Random();
 
             int n = pList.Count;
             while (n > 1)
             {
                 n--;
-                int k = rng.Next(n + 1);
+                int k = rand.Next(n + 1);
                 CAU_HOI value = pList[k];
                 pList[k] = pList[n];
                 pList[n] = value;
-            }
 
-            for (int i = 0; i < pList.Count; i++)
-            {
-                string[] result = Shuffle(new string[] { pList[i].LCHON_1, pList[i].LCHON_2, pList[i].LCHON_3, pList[i].LCHON_4 });
-                pList[i].LCHON_1 = result[0];
-                pList[i].LCHON_2 = result[1];
-                pList[i].LCHON_3 = result[2];
-                pList[i].LCHON_4 = result[3];
+                string[] str_Array_K = new string[] { pList[k].LCHON_1, pList[k].LCHON_2, pList[k].LCHON_3, pList[k].LCHON_4 };
+                List<int> lst = GeneratePassword();
+                pList[k].LCHON_1 = str_Array_K[lst[0]];
+                pList[k].LCHON_2 = str_Array_K[lst[1]];
+                pList[k].LCHON_3 = str_Array_K[lst[2]];
+                pList[k].LCHON_4 = str_Array_K[lst[3]];
             }
 
             return pList;
         }
 
-        private string[] Shuffle(string[] wordArray)
+        public List<int> GeneratePassword()
         {
-            Random random = new Random();
-            for (int i = wordArray.Length - 1; i > 0; i--)
+            System.Random _random = new Random();
+            List<int> lst = new List<int>();
+            while (lst.Count() < 4)
             {
-                int swapIndex = random.Next(i + 1);
-                string temp = wordArray[i];
-                wordArray[i] = wordArray[swapIndex];
-                wordArray[swapIndex] = temp;
+                int a = _random.Next(0, 4);
+                if (lst.Where(item => item == a).Count() == 0)
+                {
+                    lst.Add(a);
+                    Console.Write("" + a + ",");
+                }
             }
-
-            return wordArray;
+            Console.WriteLine("");
+            System.Threading.Thread.Sleep(100);
+            return lst;
         }
+
+        //private string[] Shuffle(string[] wordArray)
+        //{
+        //    Random random = new Random();
+        //    for (int i = wordArray.Length - 1; i > 0; i--)
+        //    {
+        //        int swapIndex = random.Next(i + 1);
+        //        string temp = wordArray[i];
+        //        wordArray[i] = wordArray[swapIndex];
+        //        wordArray[swapIndex] = temp;
+        //    }
+
+        //    return wordArray;
+        //}
 
         [HttpPost]
         public ActionResult GET_CauHoi(CTDeThi_ViewModel pCT_DeThi)
