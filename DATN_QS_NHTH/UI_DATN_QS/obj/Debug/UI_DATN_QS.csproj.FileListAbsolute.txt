@@ -145,8 +145,8 @@ D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\bin\System.Web.Webpages.R
 D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\bin\System.Web.Helpers.xml
 D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\bin\System.Web.Mvc.xml
 D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\obj\Debug\UI_DATN_QS.csprojAssemblyReference.cache
 D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\obj\Debug\UI_DATN_QS.csproj.CoreCompileInputs.cache
 D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\obj\Debug\UI_DATN_QS.csproj.CopyComplete
 D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\obj\Debug\UI_DATN_QS.dll
 D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\obj\Debug\UI_DATN_QS.pdb
+D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\obj\Debug\UI_DATN_QS.csproj.AssemblyReference.cache

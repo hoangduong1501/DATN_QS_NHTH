@@ -265,6 +265,7 @@
     <Content Include="Areas\GiangVien\Views\DangXuatGV\CHANGE_MatKhau.cshtml" />
     <Content Include="Areas\NguoiDung\Views\KyThi\GET_CTDeThi.cshtml" />
     <Content Include="Areas\NguoiDung\Views\BangDiem\GET_BangDiemLop.cshtml" />
+    <Content Include="Areas\NguoiDung\Views\KyThi\UPLOAD_CauHoi.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

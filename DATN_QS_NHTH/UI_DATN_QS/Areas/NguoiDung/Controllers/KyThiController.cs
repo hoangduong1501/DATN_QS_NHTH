@@ -960,6 +960,27 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult UPLOAD_CauHoi()
+        {
+            using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+            {
+                CauHoi_ViewModel CauHoi = new CauHoi_ViewModel()
+                {
+                    list_MonHoc = entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList(),
+                };
+
+                return View(CauHoi);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UPLOAD_CauHoi(CauHoi_ViewModel pCauHoi, HttpPostedFileBase fileLoad)
+        {
+
+            return View();
+        }
+
         #endregion
 
         /*DeThi*/
