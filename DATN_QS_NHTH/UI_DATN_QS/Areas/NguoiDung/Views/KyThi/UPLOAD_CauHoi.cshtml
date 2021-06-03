@@ -1,5 +1,6 @@
 ﻿
 @model UI_DATN_QS.ViewModels.CauHoi_ViewModel
+@using UI_DATN_QS.Models.DB_Entities;
 
 <div class="container">
     <div class="col-md-12">
@@ -14,23 +15,136 @@
             <div class="form-group row">
                 <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Môn học <span class="text-danger">(*)</span></label>
                 <div class="col-sm-8 col-md-10">
-                    @Html.DropDownListFor(mo => mo.object_CauHoi.ID_MonHoc, new SelectList(Model.list_MonHoc, "ID_MonHoc", "TEN_MonHoc", Model.list_MonHoc.Min(p => p.ID_MonHoc)), new { @class = "form-control" })
+                    @Html.DropDownListFor(mo => mo.ID_MonHoc, new SelectList(Model.list_MonHoc, "ID_MonHoc", "TEN_MonHoc", Model.list_MonHoc.Min(p => p.ID_MonHoc)), new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">File Môn Học <span class="text-danger">(*)</span></label>
                 <div class="col-sm-8 col-md-10">
-                    @Html.TextBox("fileLoad", "", new { @type = "file", @accept = "image/png, image/jpeg" })
+                    @Html.TextBox("fileLoad", "", new { @type = "file", @accept = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" })
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label"></label>
                 <div class="col-sm-8 col-md-10">
-                    <button class="btn btn-success">
-                        <i class="fas fa-download"></i> Lưu
+                    <button class="btn btn-primary">
+                        <i class="fas fa-table"></i> Xem Nội Dung
                     </button>
+
                 </div>
             </div>
         }
     </div>
+    <hr />
+    <div class="row">
+        <div class="col-lg-12 table-responsive">
+            @if (Model.list_CauHoi != null)
+            {
+                <div>
+                    <button class="btn btn-success" onclick="SaveKQ()">
+                        <i class="fas fa-download"></i> Lưu Câu Hỏi
+                    </button>
+                </div>
+                <br />
+                <table id="dataTable" class="table table-bordered  display nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Chương</th>
+                            <th>Nội dung</th>
+                            <th>Lựa chọn 1</th>
+                            <th>Lựa chọn 2</th>
+                            <th>Lựa chọn 3</th>
+                            <th>Đáp án</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (CAU_HOI item in Model.list_CauHoi)
+                        {
+                            <tr>
+                                <td>@item.ID_Chuong</td>
+                                <td style="white-space:normal;">
+                                    @{
+                                        if (item.ANH_CauHoi != null)
+                                        { <i class="far fa-images"></i> }
+                                        else
+                                        { <i class="fas fa-spell-check"></i> }
+                                    }
+                                    @item.NDUNG_CauHoi
+                                </td>
+                                <td style="white-space:normal;">@item.LCHON_1</td>
+                                <td style="white-space:normal;">@item.LCHON_2</td>
+                                <td style="white-space:normal;">@item.LCHON_3</td>
+                                <td style="white-space:normal;">@item.LCHON_Dung</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Chương</th>
+                            <th>Nội dung</th>
+                            <th>Lựa chọn 1</th>
+                            <th>Lựa chọn 2</th>
+                            <th>Lựa chọn 3</th>
+                            <th>Đáp án</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            }
+
+        </div>
+
+    </div>
 </div>
+
+@section JSFooter{
+    <script>
+        $(document).ready(function () {
+
+            $('table.display').DataTable({
+                responsive: true,
+                "columnDefs": [
+                    { "orderable": false, "targets": 1 },
+                    { "orderable": false, "targets": 2 },
+                    { "orderable": false, "targets": 3 },
+                    { "orderable": false, "targets": 4 },
+                    { "orderable": false, "targets": 5 }
+                ]
+            });
+
+            $("#notify_Popup").modal();
+
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked"))
+                    $('.CheckBoxItem').prop('checked', true);
+                else $('.CheckBoxItem').prop('checked', false);
+            });
+
+            $('#cboMonHoc').on('change', function () {
+                var url = $(this).val(); // get selected value
+                if (url) { // require a URL
+                    window.location.href = "/NguoiDung/KyThi/GET_CauHoi?pID_MonHoc=" + url; // redirect
+                }
+                return false;
+            });
+        });
+
+        function SaveKQ() {
+                var model = @Html.Raw(Json.Encode(Model));
+                $.ajax({
+                    url: 'https://localhost:44397/NguoiDung/KyThi/Save_CauHoi',
+                    type: "POST",
+                    contentType: 'application/json; charset=utf-8',
+                    datatype: 'JSON',
+                    data: JSON.stringify(model),
+                    success: function (result) {
+                        alert(result);
+                        $(location).attr('href', 'https://localhost:44397/NguoiDung/KyThi/GET_CauHoi');
+                    },
+                    error: function (result) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            }
+    </script>
+}

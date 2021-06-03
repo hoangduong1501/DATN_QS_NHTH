@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -968,6 +972,8 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                 CauHoi_ViewModel CauHoi = new CauHoi_ViewModel()
                 {
                     list_MonHoc = entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList(),
+                    list_CauHoi = null,
+
                 };
 
                 return View(CauHoi);
@@ -977,8 +983,90 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpPost]
         public ActionResult UPLOAD_CauHoi(CauHoi_ViewModel pCauHoi, HttpPostedFileBase fileLoad)
         {
+            string filePath = string.Empty;
+            if (fileLoad != null)
+            {
+                string path = Server.MapPath("~/Uploads/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
 
-            return View();
+                filePath = path + Path.GetFileName(fileLoad.FileName);
+                string extension = Path.GetExtension(fileLoad.FileName);
+                fileLoad.SaveAs(filePath);
+
+                Microsoft.Office.Interop.Excel.Application application = new Microsoft.Office.Interop.Excel.Application();
+                Workbook workBook = application.Workbooks.Open(filePath);
+
+                DataSet dataSet = new DataSet();
+                List<CAU_HOI> lst = new List<CAU_HOI>();
+
+                for (int i = 1; i <= workBook.Sheets.Count; i++)
+                {
+                    Worksheet worksheet = workBook.Worksheets[i];
+
+                    Range excelCell = worksheet.UsedRange;
+                    Object[,] sheetValues = (Object[,])excelCell.Value;
+                    int noOfRows = sheetValues.GetLength(0);
+                    System.Data.DataTable dataTable = new System.Data.DataTable();
+
+                    for (int k = 4; k <= noOfRows; k++)
+                    {
+                        lst.Add(new CAU_HOI()
+                        {
+                            ID_Chuong = (int)((Range)worksheet.Cells[k, 1]).Value,
+                            NDUNG_CauHoi = ((Range)worksheet.Cells[k, 2]).Value,
+                            LCHON_1 = ((Range)worksheet.Cells[k, 3]).Value,
+                            LCHON_2 = ((Range)worksheet.Cells[k, 4]).Value,
+                            LCHON_3 = ((Range)worksheet.Cells[k, 5]).Value,
+                            LCHON_4 = ((Range)worksheet.Cells[k, 6]).Value,
+                            LCHON_Dung = ((Range)worksheet.Cells[k, 6]).Value,
+                            ID_MonHoc = pCauHoi.ID_MonHoc,
+                            IS_Deleted = 0,
+                            TIME_Create = DateTime.Today,
+
+                        });
+                    }
+                    dataSet.Tables.Add(dataTable);
+                }
+
+                pCauHoi.list_CauHoi = lst;
+
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                    pCauHoi.list_MonHoc = entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList();
+
+                workBook.Close(false, filePath, null);
+                System.IO.File.Delete(filePath);
+            }
+            return View(pCauHoi);
+        }
+
+        [HttpPost]
+        public JsonResult Save_CauHoi(CauHoi_ViewModel pCauHoi)
+        {
+            try
+            {
+                using(DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                    foreach(CAU_HOI item in pCauHoi.list_CauHoi)
+                    {
+                        if (entities.CAU_HOI.Count() == 0) item.ID_CauHoi = 1;
+                        else item.ID_CauHoi = entities.CAU_HOI.Max(p => p.ID_CauHoi) + 1;
+
+                        item.ID_MonHoc = pCauHoi.ID_MonHoc;
+                        item.TIME_Create = item.TIME_Update = DateTime.Today;
+                        item.IS_Deleted = 0;
+
+                        entities.CAU_HOI.Add(item);
+                        entities.SaveChanges();
+                    }
+                return Json("Thêm câu hỏi thành công.", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                return Json("Thêm câu hỏi không thành công.", JsonRequestBehavior.AllowGet);
+            }
         }
 
         #endregion
