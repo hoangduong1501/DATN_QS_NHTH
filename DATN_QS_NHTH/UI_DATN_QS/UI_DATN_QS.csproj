@@ -291,6 +291,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\GiangVien\Data\" />
     <Folder Include="Areas\NguoiDung\Data\" />
+    <Folder Include="Templates\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>

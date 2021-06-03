@@ -1069,6 +1069,26 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult DownloadFile()
+        {
+            string fullName = Server.MapPath("~/Templates/FileCauHoi.xlsx");
+
+            byte[] fileBytes = GetFile(fullName);
+            return File(
+                fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, "FileCauHoi.xlsx");
+        }
+
+        private byte[] GetFile(string s)
+        {
+            System.IO.FileStream fs = System.IO.File.OpenRead(s);
+            byte[] data = new byte[fs.Length];
+            int br = fs.Read(data, 0, data.Length);
+            if (br != fs.Length)
+                throw new System.IO.IOException(s);
+            return data;
+        }
+
         #endregion
 
         /*DeThi*/
