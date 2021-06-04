@@ -88,7 +88,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpPost]
         public JsonResult Export_BangDiem(BangDiemLop_Model pInput)
         {
-            string nameFile = StringRandom.GeneratePassword() + ".xlsx";
+            string nameFile = StringRandom.GeneratePassword();
             try
             {
                 using (ExcelPackage package = new ExcelPackage())
@@ -136,7 +136,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
 
                         worksheet.Cells["A:F"].AutoFitColumns();
                         //Byte[] bin = package.GetAsByteArray();
-                        System.IO.File.WriteAllBytes(Server.MapPath("~/Templates/" + nameFile), package.GetAsByteArray());
+                        System.IO.File.WriteAllBytes(Server.MapPath("~/Templates/" + nameFile + ".xlsx"), package.GetAsByteArray());
 
                         return Json(nameFile, JsonRequestBehavior.AllowGet);
                     }
@@ -153,7 +153,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         {
             try
             {
-                string fullName = Server.MapPath("~/Templates/" + file);
+                string fullName = Server.MapPath("~/Templates/" + file+".xlsx");
 
                 System.IO.FileStream fileStream = System.IO.File.OpenRead(fullName);
                 byte[] data = new byte[fileStream.Length];
@@ -167,7 +167,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                 System.IO.File.Delete(fullName);
 
                 return File(
-                    data, System.Net.Mime.MediaTypeNames.Application.Octet, file);
+                    data, System.Net.Mime.MediaTypeNames.Application.Octet, file + ".xlsx");
             }
             catch (Exception)
             {
