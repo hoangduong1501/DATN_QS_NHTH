@@ -28,7 +28,7 @@
             <button id="btn_XoaItems" class="btn btn-danger">
                 <i class="fas fa-trash-alt"></i> Xóa mục đã chọn
             </button>
-            <button id="btn_XuatFile" class="btn btn-secondary">
+            <button id="btn_XuatFile" class="btn btn-secondary" onclick="Export_Excel()">
                 <i class="fas fa-file-download"></i> Xuất File 
             </button>
         </div>
@@ -78,10 +78,25 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#btn_XuatFile").click(function () {
-                TableToExcel.convert(document.getElementById("tb_Diem"), {
-                    name: "BĐ.xlsx",
-                    sheet: {
-                        name: "Sheet1"
+                var obj = {
+                    ID_KhoaHoc: $("#cbb_KhoaHoc").val(),
+                    ID_LopHoc: $("#cbb_LopHoc").val(),
+                    ID_MonHoc: $("#cbb_MonHoc").val()
+                }
+
+                $.ajax({
+                    url: 'Export_BangDiem',
+                    type: "POST",
+                    contentType: 'application/json; charset=utf-8',
+                    datatype: 'JSON',
+                    data: JSON.stringify(obj),
+                    success: function (result) {
+                        if (result != 'FAIL!') {
+                            window.location.href = 'https://localhost:44397/NguoiDung/BangDiem/DownloadFile?file=' + result;
+                        } else alert(result);   
+                    },
+                    error: function (result) {
+                        alert(errormessage.responseText);
                     }
                 });
             });

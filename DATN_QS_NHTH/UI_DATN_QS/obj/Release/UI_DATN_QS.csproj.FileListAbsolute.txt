@@ -73,7 +73,6 @@ D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\obj\Release\UI_DATN_QS.cs
 D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\obj\Release\UI_DATN_QS.csproj.CopyComplete
 D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\obj\Release\UI_DATN_QS.dll
 D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\obj\Release\UI_DATN_QS.pdb
-D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\bin\EPPlus.dll
 D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\bin\Microsoft.IO.RecyclableMemoryStream.dll
 D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\bin\System.ComponentModel.Annotations.dll
 D:\Repository_Git\DATN_QS_NHTH\DATN_QS_NHTH\UI_DATN_QS\bin\Microsoft.IO.RecyclableMemoryStream.xml

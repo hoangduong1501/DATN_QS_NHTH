@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\ThanhHa\Desktop\PublishWeb</_PublishTargetUrl>
-    <History>True|2021-06-04T01:56:17.4691701Z;True|2021-05-29T09:23:55.9162876+07:00;True|2021-05-29T09:23:24.3440552+07:00;True|2021-05-29T09:22:54.3812949+07:00;True|2021-05-28T23:58:54.4547936+07:00;</History>
+    <History>True|2021-06-04T14:15:23.0064741Z;True|2021-06-04T08:56:17.4691701+07:00;True|2021-05-29T09:23:55.9162876+07:00;True|2021-05-29T09:23:24.3440552+07:00;True|2021-05-29T09:22:54.3812949+07:00;True|2021-05-28T23:58:54.4547936+07:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/GiangVien/Views/DangXuatGV/CHANGE_MatKhau.cshtml">
@@ -36,7 +36,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/21/2021 17:01:23</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/BangDiem/GET_BangDiemLop.cshtml">
-      <publishTime>03/06/2021 20:12:33</publishTime>
+      <publishTime>06/04/2021 21:01:46</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/HocVien/CHANGE_MatKhau.cshtml">
       <publishTime>05/20/2021 15:06:02</publishTime>
@@ -69,7 +69,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/23/2021 23:55:39</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/KyThi/GET_CauHoi.cshtml">
-      <publishTime>02/06/2021 20:28:21</publishTime>
+      <publishTime>06/02/2021 20:28:21</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/KyThi/GET_CTDeThi.cshtml">
       <publishTime>05/23/2021 00:19:49</publishTime>
@@ -141,7 +141,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/27/2021 22:36:12</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/TrangChu/GET_TrangChu.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>05/23/2021 21:17:00</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/web.config">
       <publishTime>05/10/2021 00:57:58</publishTime>
@@ -336,10 +336,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
     <File Include="bin/UI_DATN_QS.dll">
-      <publishTime>06/04/2021 08:56:16</publishTime>
+      <publishTime>06/04/2021 21:31:17</publishTime>
     </File>
     <File Include="bin/UI_DATN_QS.pdb">
-      <publishTime>06/04/2021 08:56:16</publishTime>
+      <publishTime>06/04/2021 21:31:17</publishTime>
     </File>
     <File Include="Content/Styles_Layout.css">
       <publishTime>05/10/2021 01:02:47</publishTime>

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using UI_DATN_QS.Models.DB_Entities;
 using UI_DATN_QS.Models.DB_Models;
+using UI_DATN_QS.Models.HashCodes;
 using UI_DATN_QS.Models.Sessions;
 
 namespace UI_DATN_QS.Areas.NguoiDung.Controllers
@@ -87,7 +88,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpPost]
         public JsonResult Export_BangDiem(BangDiemLop_Model pInput)
         {
-            string nameFile = DateTime.Today.Ticks.ToString() + ".xlsx";
+            string nameFile = StringRandom.GeneratePassword() + ".xlsx";
             try
             {
                 using (ExcelPackage package = new ExcelPackage())
