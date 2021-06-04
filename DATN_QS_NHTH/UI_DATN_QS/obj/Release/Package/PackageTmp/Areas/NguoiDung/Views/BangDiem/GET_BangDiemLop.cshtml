@@ -28,6 +28,9 @@
             <button id="btn_XoaItems" class="btn btn-danger">
                 <i class="fas fa-trash-alt"></i> Xóa mục đã chọn
             </button>
+            <button id="btn_XuatFile" class="btn btn-secondary">
+                <i class="fas fa-file-download"></i> Xuất File 
+            </button>
         </div>
 
     </div>
@@ -47,10 +50,10 @@
                         <th>Chức năng</th>
                     </tr>
                 </thead>
-                <div>
-                    <tbody>
-                    </tbody>
-                </div>
+
+                <tbody>
+                </tbody>
+
                 <tfoot>
                     <tr>
                         <th class="text-center"><i class="fas fa-paw text-dark"></i></th>
@@ -71,8 +74,20 @@
 </div>
 
 @section JSFooter{
+    <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn_XuatFile").click(function () {
+                TableToExcel.convert(document.getElementById("tb_Diem"), {
+                    name: "BĐ.xlsx",
+                    sheet: {
+                        name: "Sheet1"
+                    }
+                });
+            });
+        });
+    </script>
     <script>
-
         function InitTableData() {
             var obj = {
                 ID_KhoaHoc: $("#cbb_KhoaHoc").val(),
@@ -93,7 +108,8 @@
 
                     $('#tb_Diem').DataTable({
                         "processing": true,
-                        data: result, responsive: true,
+                        data: result,
+                        responsive: true,
                         "order": [[2, "asc"]],
                         "columnDefs": [
                             { "orderable": false, "targets": 0 },
@@ -212,7 +228,7 @@
         });
 
         $('#btn_XoaItems').click(function () {
-            
+
             var arrayT = [];
             $(".CheckBoxItem:checked").each(function () {
                 arrayT.push(parseInt($(this).val()));

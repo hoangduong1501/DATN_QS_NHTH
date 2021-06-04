@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\ThanhHa\Desktop\PublishWeb</_PublishTargetUrl>
-    <History>True|2021-05-29T02:23:55.9162876Z;True|2021-05-29T09:23:24.3440552+07:00;True|2021-05-29T09:22:54.3812949+07:00;True|2021-05-28T23:58:54.4547936+07:00;</History>
+    <History>True|2021-06-04T01:56:17.4691701Z;True|2021-05-29T09:23:55.9162876+07:00;True|2021-05-29T09:23:24.3440552+07:00;True|2021-05-29T09:22:54.3812949+07:00;True|2021-05-28T23:58:54.4547936+07:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/GiangVien/Views/DangXuatGV/CHANGE_MatKhau.cshtml">
@@ -36,7 +36,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/21/2021 17:01:23</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/BangDiem/GET_BangDiemLop.cshtml">
-      <publishTime>05/28/2021 22:31:25</publishTime>
+      <publishTime>03/06/2021 20:12:33</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/HocVien/CHANGE_MatKhau.cshtml">
       <publishTime>05/20/2021 15:06:02</publishTime>
@@ -69,7 +69,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/23/2021 23:55:39</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/KyThi/GET_CauHoi.cshtml">
-      <publishTime>05/15/2021 19:57:56</publishTime>
+      <publishTime>02/06/2021 20:28:21</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/KyThi/GET_CTDeThi.cshtml">
       <publishTime>05/23/2021 00:19:49</publishTime>
@@ -122,6 +122,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Areas/NguoiDung/Views/KyThi/UPDATE_NienKhoa.cshtml">
       <publishTime>05/24/2021 00:05:56</publishTime>
     </File>
+    <File Include="Areas/NguoiDung/Views/KyThi/UPLOAD_CauHoi.cshtml">
+      <publishTime>06/04/2021 08:47:29</publishTime>
+    </File>
     <File Include="Areas/NguoiDung/Views/NguoiDung/CHANGE_MatKhau.cshtml">
       <publishTime>05/20/2021 14:27:34</publishTime>
     </File>
@@ -152,8 +155,14 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/EntityFramework.SqlServer.dll">
       <publishTime>10/23/2017 13:15:20</publishTime>
     </File>
+    <File Include="bin/EPPlus.dll">
+      <publishTime>06/04/2020 15:23:32</publishTime>
+    </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>09/05/2018 16:10:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IO.RecyclableMemoryStream.dll">
+      <publishTime>03/11/2021 06:48:48</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>07/25/2012 11:48:56</publishTime>
@@ -305,6 +314,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
       <publishTime>08/08/2018 12:18:16</publishTime>
     </File>
+    <File Include="bin/System.ComponentModel.Annotations.dll">
+      <publishTime>05/15/2018 20:29:36</publishTime>
+    </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
@@ -324,10 +336,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
     <File Include="bin/UI_DATN_QS.dll">
-      <publishTime>05/29/2021 09:32:09</publishTime>
+      <publishTime>06/04/2021 08:56:16</publishTime>
     </File>
     <File Include="bin/UI_DATN_QS.pdb">
-      <publishTime>05/29/2021 09:32:09</publishTime>
+      <publishTime>06/04/2021 08:56:16</publishTime>
     </File>
     <File Include="Content/Styles_Layout.css">
       <publishTime>05/10/2021 01:02:47</publishTime>
@@ -366,7 +378,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/22/2021 23:02:28</publishTime>
     </File>
     <File Include="Views/DeThi/GET_CauHoi.cshtml">
-      <publishTime>05/28/2021 22:56:12</publishTime>
+      <publishTime>05/29/2021 16:35:53</publishTime>
     </File>
     <File Include="Views/DeThi/GET_DeThi.cshtml">
       <publishTime>05/25/2021 14:56:09</publishTime>
@@ -387,7 +399,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/19/2021 22:00:45</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/29/2021 09:32:09</publishTime>
+      <publishTime>06/04/2021 08:56:17</publishTime>
     </File>
   </ItemGroup>
 </Project>

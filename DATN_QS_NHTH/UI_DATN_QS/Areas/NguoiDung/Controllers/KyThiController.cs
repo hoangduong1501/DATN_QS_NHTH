@@ -1,9 +1,7 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -983,63 +981,36 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpPost]
         public ActionResult UPLOAD_CauHoi(CauHoi_ViewModel pCauHoi, HttpPostedFileBase fileLoad)
         {
-            string filePath = string.Empty;
-            if (fileLoad != null)
+            try
             {
-                string path = Server.MapPath("~/Uploads/");
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-
-                filePath = path + Path.GetFileName(fileLoad.FileName);
-                string extension = Path.GetExtension(fileLoad.FileName);
-                fileLoad.SaveAs(filePath);
-
-                Microsoft.Office.Interop.Excel.Application application = new Microsoft.Office.Interop.Excel.Application();
-                Workbook workBook = application.Workbooks.Open(filePath);
-
-                DataSet dataSet = new DataSet();
-                List<CAU_HOI> lst = new List<CAU_HOI>();
-
-                for (int i = 1; i <= workBook.Sheets.Count; i++)
-                {
-                    Worksheet worksheet = workBook.Worksheets[i];
-
-                    Range excelCell = worksheet.UsedRange;
-                    Object[,] sheetValues = (Object[,])excelCell.Value;
-                    int noOfRows = sheetValues.GetLength(0);
-                    System.Data.DataTable dataTable = new System.Data.DataTable();
-
-                    for (int k = 4; k <= noOfRows; k++)
-                    {
-                        lst.Add(new CAU_HOI()
-                        {
-                            ID_Chuong = (int)((Range)worksheet.Cells[k, 1]).Value,
-                            NDUNG_CauHoi = ((Range)worksheet.Cells[k, 2]).Value,
-                            LCHON_1 = ((Range)worksheet.Cells[k, 3]).Value,
-                            LCHON_2 = ((Range)worksheet.Cells[k, 4]).Value,
-                            LCHON_3 = ((Range)worksheet.Cells[k, 5]).Value,
-                            LCHON_4 = ((Range)worksheet.Cells[k, 6]).Value,
-                            LCHON_Dung = ((Range)worksheet.Cells[k, 6]).Value,
-                            ID_MonHoc = pCauHoi.ID_MonHoc,
-                            IS_Deleted = 0,
-                            TIME_Create = DateTime.Today,
-
-                        });
-                    }
-                    dataSet.Tables.Add(dataTable);
-                }
-
-                pCauHoi.list_CauHoi = lst;
-
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
                     pCauHoi.list_MonHoc = entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList();
 
-                workBook.Close(false, filePath, null);
-                System.IO.File.Delete(filePath);
+                ExcelPackage package = new ExcelPackage(fileLoad.InputStream);
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.First();
+                var listVoucherInfo = string.Empty;
+                pCauHoi.list_CauHoi = new List<CAU_HOI>();
+
+                for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                {
+                    pCauHoi.list_CauHoi.Add(new CAU_HOI()
+                    {
+                        ID_Chuong =  int.Parse(worksheet.Cells[row, 1].Value.ToString()),
+                        NDUNG_CauHoi = worksheet.Cells[row, 2].Value.ToString(),
+                        LCHON_1 = worksheet.Cells[row, 3].Value.ToString(),
+                        LCHON_2 = worksheet.Cells[row, 4].Value.ToString(),
+                        LCHON_3 = worksheet.Cells[row, 5].Value.ToString(),
+                        LCHON_Dung = worksheet.Cells[row, 6].Value.ToString(),
+
+                    });
+                }
+
+                return View(pCauHoi);
             }
-            return View(pCauHoi);
+            catch (Exception)
+            {
+                return View(pCauHoi);
+            }
         }
 
         [HttpPost]
@@ -1047,8 +1018,8 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         {
             try
             {
-                using(DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
-                    foreach(CAU_HOI item in pCauHoi.list_CauHoi)
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                    foreach (CAU_HOI item in pCauHoi.list_CauHoi)
                     {
                         if (entities.CAU_HOI.Count() == 0) item.ID_CauHoi = 1;
                         else item.ID_CauHoi = entities.CAU_HOI.Max(p => p.ID_CauHoi) + 1;
