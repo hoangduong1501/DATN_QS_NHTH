@@ -607,6 +607,45 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
             }
         }
         
+        public ActionResult GET_CTLopHoc(int pID_LopHoc)
+            {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                {
+                    var lst_HocVien = entities.HOC_VIEN.ToList().
+                            Join(entities.TAI_KHOAN.Where(p => p.IS_Deleted == 0).ToList(), hv => hv.ID_TaiKhoan, tk => tk.ID_TaiKhoan, (hv, tk) => new { hv, tk }).
+                            Join(entities.CT_LOP_HOC.Where(p => p.ID_LopHoc == pID_LopHoc).ToList(), tb1 => tb1.hv.ID_HocVien, ct => ct.ID_HocVien, (tb1, ct) => new { tb1, ct }).
+                             Select(tb2 => new HocVien_Model()
+                             {
+                                 ID_HocVien = tb2.tb1.hv.ID_HocVien,
+                                 MA_HocVien = tb2.tb1.hv.MA_HocVien,
+                                 TEN_HocVien = tb2.tb1.hv.TEN_HocVien,
+                                 NSINH_HocVien = tb2.tb1.hv.NSINH_HocVien,
+                                 GTINH_HocVien = tb2.tb1.hv.GTINH_HocVien,
+                                 ANH_HocVien = tb2.tb1.hv.ANH_HocVien,
+                                 ID_TaiKhoan = tb2.tb1.tk.ID_TaiKhoan,
+                                 USER_TaiKhoan = tb2.tb1.tk.USER_TaiKhoan,
+                                 PASS_TaiKhoan = tb2.tb1.tk.PASS_TaiKhoan,
+                                 NOTE_TaiKhoan = tb2.tb1.tk.NOTE_TaiKhoan,
+                                 IS_Locked = tb2.tb1.tk.IS_Locked
+                             }).ToList();
+
+                    return View(lst_HocVien);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                return View();
+            }
+        }
+
         [HttpGet]
         public ActionResult INSERT_LopHoc()
         {
