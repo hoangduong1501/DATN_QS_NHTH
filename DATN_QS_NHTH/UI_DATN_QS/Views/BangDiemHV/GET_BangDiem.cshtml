@@ -6,21 +6,26 @@
 @model IEnumerable<UI_DATN_QS.Models.DB_Models.BangDiem_Model>
 
 <div class="container-fluid">
-    <br />   
-    <div class="row">
-        <div class="col-lg-12 table-responsive" style="padding-top: 1rem;">
-            <table id="dataTable" class="table table-bordered  display nowrap" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th>Mã đề</th>
-                        <th>Môn</th>
-                        <th>Loại</th>
-                        <th>Số lượng</th>
-                        <th>Điểm</th>
-                        <th>Ngày thi</th>
-                    </tr>
-                </thead>
-                <div>
+    <div>
+        <div style="padding-top: 2rem">
+            <a class="btn btn-primary"  href="@Url.Action("DownloadFile", "BangDiemHV")">
+                <i class="fas fa-file-download"></i> Xuất bảng điểm
+            </a>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12 table-responsive" style="padding-top: 1rem;">
+                <table id="dataTable" class="table table-bordered  display nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Mã đề</th>
+                            <th>Môn</th>
+                            <th>Loại</th>
+                            <th>Số lượng</th>
+                            <th>Điểm</th>
+                            <th>Ngày thi</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         @foreach (UI_DATN_QS.Models.DB_Models.BangDiem_Model item in Model)
                         {
@@ -36,31 +41,30 @@
                         }
 
                     </tbody>
-                </div>
-                <tfoot>
-                    <tr>
-                        <th>Mã đề</th>
-                        <th>Môn</th>
-                        <th>Loại</th>
-                        <th>Số lượng</th>
-                        <th>Điểm</th>
-                        <th>Ngày thi</th>
-                    </tr>
-                </tfoot>
-            </table>
+                    <tfoot>
+                        <tr>
+                            <th>Mã đề</th>
+                            <th>Môn</th>
+                            <th>Loại</th>
+                            <th>Số lượng</th>
+                            <th>Điểm</th>
+                            <th>Ngày thi</th>
+                        </tr>
+                    </tfoot>
+                </table>
 
+            </div>
         </div>
     </div>
-</div>
 
-@section JSFooter{
-    <script>
-        $(document).ready(function () {
+    @section JSFooter{
+        <script>
+            $(document).ready(function () {
 
-            $('table.display').DataTable({
-                responsive: true,
-                "order": [[5, "asc"]]
+                $('table.display').DataTable({
+                    responsive: true,
+                    "order": [[5, "asc"]]
+                });
             });
-        });
-    </script>
-}
+        </script>
+    }

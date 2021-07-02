@@ -112,13 +112,25 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
 
 
                         ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Bảng Điểm");
-                        worksheet.Cells["A1"].Value = "Mã học viên";
-                        worksheet.Cells["B1"].Value = "Tên học viên";
-                        worksheet.Cells["C1"].Value = "Đề thi";
-                        worksheet.Cells["D1"].Value = "Số câu đúng";
-                        worksheet.Cells["E1"].Value = "Điểm";
-                        worksheet.Cells["F1"].Value = "Ngày thi";
-                        int row = 2;
+                        worksheet.Cells["A2:B2"].Merge = worksheet.Cells["A3:B3"].Merge = worksheet.Cells["A4:B4"].Merge = true;
+                        worksheet.Cells["A2:B2"].Style.Font.Bold = worksheet.Cells["A3:B3"].Style.Font.Bold = worksheet.Cells["A4:B4"].Style.Font.Bold = worksheet.Cells["A6:F6"].Style.Font.Bold = true;
+                        worksheet.Cells["A6:F6"].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                        worksheet.Cells["A6:F6"].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Yellow);
+                        worksheet.Cells["A6:F6"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                        worksheet.Cells["D:E"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+
+                        worksheet.Cells["A2"].Value = "Mã môn học: " + pInput.ID_MonHoc;
+                        worksheet.Cells["A3"].Value = "Mã lớp học: " + pInput.ID_LopHoc;
+                        worksheet.Cells["A4"].Value = "Mã khóa học: " + pInput.ID_KhoaHoc;
+                        worksheet.Cells["A5"].Value = "Ngày xuất: " + DateTime.Today.ToString("dd/MM/yyyy");
+
+                        worksheet.Cells["A7"].Value = "Mã học viên";
+                        worksheet.Cells["B7"].Value = "Tên học viên";
+                        worksheet.Cells["C7"].Value = "Đề thi";
+                        worksheet.Cells["D7"].Value = "Số câu đúng";
+                        worksheet.Cells["E7"].Value = "Điểm";
+                        worksheet.Cells["F7"].Value = "Ngày thi";
+                        int row = 8;
 
                         if (lst.Count() > 0)
                         {
