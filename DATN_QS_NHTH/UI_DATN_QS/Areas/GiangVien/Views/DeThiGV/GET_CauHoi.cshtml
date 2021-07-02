@@ -1,7 +1,8 @@
 ﻿
 @using UI_DATN_QS.Models.DB_Entities;
+@using UI_DATN_QS.ViewModels;
 
-@model UI_DATN_QS.ViewModels.CauHoi_ViewModel
+@model UI_DATN_QS.ViewModels.CauHoi_1_ViewModel
 
 @using (Html.BeginForm("DELETE_CauHoi", "KyThi", FormMethod.Post))
 {
@@ -44,6 +45,7 @@
                             <th>Lựa chọn 2</th>
                             <th>Lựa chọn 3</th>
                             <th>Đáp án</th>
+                            <th>Môn</th>
                             <th>Ngày tạo</th>
                             <th>Ngày sửa</th>
                             <th>Chức năng</th>
@@ -52,7 +54,7 @@
                     <div>
                         <tbody>
                             @{int count = 1; }
-                            @foreach (CAU_HOI item in Model.list_CauHoi)
+                            @foreach (CauHoiList_ViewModel item in Model.list_CauHoi)
                             {
                                 <tr>
                                     <td class="text-center">@(count++)</td>
@@ -73,14 +75,15 @@
                                     <td style="white-space:normal;">@item.LCHON_2</td>
                                     <td style="white-space:normal;">@item.LCHON_3</td>
                                     <td style="white-space:normal;">@item.LCHON_Dung</td>
+                                    <td style="white-space:normal;">@item.TEN_MonHoc</td>
 
                                     <td>@item.TIME_Create.Value.ToString("dd/MM/yyyy")</td>
                                     <td>@item.TIME_Update.Value.ToString("dd/MM/yyyy")</td>
                                     <td>
-                                        <a class="btn btn-sm btn-outline-primary rounded-circle" href="@Url.Action("UPDATE_CauHoi", "KyThi", new { pID_CauHoi = item.ID_CauHoi })" data-toggle="tooltip" data-placement="right" title="Chỉnh Sửa">
+                                        <a class="btn btn-sm btn-outline-primary rounded-circle" href="@Url.Action("UPDATE_CauHoi", "DeThiGV", new { pID_CauHoi = item.ID_CauHoi })" data-toggle="tooltip" data-placement="right" title="Chỉnh Sửa">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
-                                        <a class="btn btn-sm btn-outline-danger rounded-circle" href="@Url.Action("DELETE_CauHoi", "KyThi", new { pID_CauHoi = item.ID_CauHoi })" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="right" title="Xóa">
+                                        <a class="btn btn-sm btn-outline-danger rounded-circle" href="@Url.Action("DELETE_CauHoi", "DeThiGV", new { pID_CauHoi = item.ID_CauHoi })" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="right" title="Xóa">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
@@ -99,6 +102,7 @@
                             <th>Lựa chọn 2</th>
                             <th>Lựa chọn 3</th>
                             <th>Đáp án</th>
+                            <th>Môn</th>
                             <th>Ngày tạo</th>
                             <th>Ngày sửa</th>
                             <th>Chức năng</th>

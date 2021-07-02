@@ -718,23 +718,59 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
                 {
-                    CauHoi_ViewModel CauHoi;
+                    CauHoi_1_ViewModel CauHoi;
 
                     if (pID_MonHoc == 0)
                     {
-                        CauHoi = new CauHoi_ViewModel()
+                        CauHoi = new CauHoi_1_ViewModel()
                         {
                             list_MonHoc = entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList(),
-                            list_CauHoi = entities.CAU_HOI.Where(p => p.IS_Deleted == 0).ToList(),
+                            list_CauHoi = entities.CAU_HOI.Where(p => p.IS_Deleted == 0).ToList()
+                                        .Join(entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList(),
+                                        ch => ch.ID_MonHoc,
+                                        mh => mh.ID_MonHoc, (ch, mh) => new { ch, mh })
+                                        .Select(m => new CauHoiList_ViewModel()
+                                        {
+                                            ANH_CauHoi = m.ch.ANH_CauHoi,
+                                            ID_CauHoi = m.ch.ID_CauHoi,
+                                            ID_Chuong = m.ch.ID_Chuong,
+                                            ID_MonHoc = m.ch.ID_MonHoc,
+                                            LCHON_1 = m.ch.LCHON_1,
+                                            LCHON_2 = m.ch.LCHON_2,
+                                            LCHON_3 = m.ch.LCHON_3,
+                                            LCHON_Dung = m.ch.LCHON_Dung,
+                                            NDUNG_CauHoi = m.ch.NDUNG_CauHoi,
+                                            TEN_MonHoc = m.mh.TEN_MonHoc,
+                                            TIME_Create = m.ch.TIME_Create,
+                                            TIME_Update = m.ch.TIME_Update
+                                        }).ToList(),
                             ID_MonHoc = pID_MonHoc
                         };
                     }
                     else
                     {
-                        CauHoi = new CauHoi_ViewModel()
+                        CauHoi = new CauHoi_1_ViewModel()
                         {
                             list_MonHoc = entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList(),
-                            list_CauHoi = entities.CAU_HOI.Where(p => p.IS_Deleted == 0 && p.ID_MonHoc == pID_MonHoc).ToList(),
+                            list_CauHoi = entities.CAU_HOI.Where(p => p.IS_Deleted == 0).ToList()
+                                        .Join(entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList(),
+                                        ch => ch.ID_MonHoc,
+                                        mh => mh.ID_MonHoc, (ch, mh) => new { ch, mh })
+                                        .Select(m => new CauHoiList_ViewModel()
+                                        {
+                                            ANH_CauHoi = m.ch.ANH_CauHoi,
+                                            ID_CauHoi = m.ch.ID_CauHoi,
+                                            ID_Chuong = m.ch.ID_Chuong,
+                                            ID_MonHoc = m.ch.ID_MonHoc,
+                                            LCHON_1 = m.ch.LCHON_1,
+                                            LCHON_2 = m.ch.LCHON_2,
+                                            LCHON_3 = m.ch.LCHON_3,
+                                            LCHON_Dung = m.ch.LCHON_Dung,
+                                            NDUNG_CauHoi = m.ch.NDUNG_CauHoi,
+                                            TEN_MonHoc = m.mh.TEN_MonHoc,
+                                            TIME_Create = m.ch.TIME_Create,
+                                            TIME_Update = m.ch.TIME_Update
+                                        }).ToList(),
                             ID_MonHoc = pID_MonHoc
                         };
                     }
