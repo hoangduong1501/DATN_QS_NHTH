@@ -7,7 +7,7 @@
         <br />
         <h3 class="text-center" id="exampleModalLongTitle">SỬA CÂU HỎI</h3>
         <br />
-        @using (Html.BeginForm("UPDATE_CauHoi", "KyThi", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("UPDATE_CauHoi", "DeThiGV", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @Html.Hidden("object_CauHoi.ID_CauHoi", Model.object_CauHoi.ID_CauHoi)

@@ -58,7 +58,7 @@
                                     <a class="btn btn-sm btn-outline-danger rounded-circle" href="@Url.Action("DELETE_LopHoc", "HocVien", new { pID_LopHoc = item.ID_LopHoc })" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="right" title="Xóa">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    <a class="btn btn-sm btn-outline-dark rounded-circle" href="@Url.Action("DELETE_LopHoc", "HocVien", new { pID_LopHoc = item.ID_LopHoc })" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="right" title="Xóa">
+                                    <a class="btn btn-sm btn-outline-dark rounded-circle" href="@Url.Action("GET_CTLopHoc", "HocVien", new { pID_LopHoc = item.ID_LopHoc })" data-toggle="tooltip" data-placement="right" title="Xem chi tiết">
                                         <i class="fas fa-list"></i>
                                     </a>
                                 </td>
