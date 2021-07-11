@@ -1,0 +1,152 @@
+﻿
+@model UI_DATN_QS.ViewModels.HocVien_ViewModel
+@using UI_DATN_QS.Models.DB_Entities;
+@using UI_DATN_QS.Models.DB_Models;
+
+<div class="container">
+    <div class="col-md-12">
+        <br />
+        <br />
+        <h3 class="text-center" id="exampleModalLongTitle">THÊM HỌC VIÊN</h3>
+        <br />
+        @using (Html.BeginForm("UPLOAD_HocVien", "HocVien", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">Lớp học <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.DropDownListFor(mo => mo.ID_LopHoc, new SelectList(Model.list_LopHoc, "ID_LopHoc", "TEN_LopHoc", Model.list_LopHoc.Min(p => p.ID_LopHoc)), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label">File Môn Học <span class="text-danger">(*)</span></label>
+                <div class="col-sm-8 col-md-10">
+                    @Html.TextBox("fileLoad", "", new { @type = "file", @accept = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-md-2 col-form-label"></label>
+                <div class="col-sm-8 col-md-10">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-table"></i> Xem Danh Sách
+                    </button>
+                    <a class="btn btn-secondary" href="@Url.Action("DownloadFile", "HocVien", new { area = "NguoiDung" })">
+                        <i class="fas fa-file-csv"></i> File Mẫu
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-lg-12 table-responsive">
+            @if (Model.list_HocVien != null)
+            {
+                <div>
+                    <button class="btn btn-success" onclick="SaveKQ()">
+                        <i class="fas fa-download"></i> Lưu Danh Sách
+                    </button> 
+                    <h6 class="text-danger">Mật khẩu mặc định: 12345</h6>
+                </div>
+                <br />
+                <table id="dataTable" class="table table-bordered  display nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã học viên</th>
+                            <th>Họ tên</th>
+                            <th>Ngày sinh</th>
+                            <th>Giới tính</th>
+                            <th>Tên đăng nhập</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int i = 1;
+                            foreach (HocVien_Upload item in Model.list_HocVien)
+                            {
+                                <tr>
+                                    <td class="text-center">@i</td>
+                                    <td style="white-space:normal;">@item.MA_HocVien</td>
+                                    <td style="white-space:normal;">@item.TEN_HocVien</td>
+                                    <td style="white-space:normal;">@(DateTime.Parse(item.NSINH_HocVien).ToShortDateString())</td>
+                                    <td style="white-space:normal;">@(item.GTINH_HocVien == 1 ? "Nam": "Nữ")</td>
+                                    <td style="white-space:normal;">@item.MA_HocVien</td>
+                                </tr>
+                                i++;
+                            }
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã học viên</th>
+                            <th>Họ tên</th>
+                            <th>Ngày sinh</th>
+                            <th>Giới tính</th>
+                            <th>Tên đăng nhập</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            }
+
+        </div>
+
+    </div>
+</div>
+
+@section JSFooter{
+    <script>
+        $(document).ready(function () {
+
+            $('table.display').DataTable({
+                responsive: true,
+                "columnDefs": [
+                    { "orderable": false, "targets": 1 },
+                    { "orderable": false, "targets": 2 },
+                    { "orderable": false, "targets": 3 },
+                    { "orderable": false, "targets": 4 },
+                    { "orderable": false, "targets": 5 }
+                ]
+            });
+
+            //alert("Origin: " + window.location.origin);
+
+            //$("#notify_Popup").modal();
+
+            //$('#checkBoxAll').click(function () {
+            //    if ($(this).is(":checked"))
+            //        $('.CheckBoxItem').prop('checked', true);
+            //    else $('.CheckBoxItem').prop('checked', false);
+            //});
+
+            //$('#cboMonHoc').on('change', function () {
+            //    var url = $(this).val(); // get selected value
+            //    if (url) { // require a URL
+            //        window.location.href = "/NguoiDung/KyThi/GET_CauHoi?pID_MonHoc=" + url; // redirect
+            //    }
+            //    return false;
+            //});
+        });
+
+        function SaveKQ() {
+                var model = @Html.Raw(Json.Encode(Model));
+                $.ajax({
+                    url: window.location.origin + '/NguoiDung/HocVien/Save_DanhSach',
+                    type: "POST",
+                    contentType: 'application/json; charset=utf-8',
+                    datatype: 'JSON',
+                    data: JSON.stringify(model),
+                    success: function (result) {
+                        alert(result);
+                        $(location).attr('href', window.location.origin + '/NguoiDung/HocVien/GET_HocVien');
+                    },
+                    error: function (result) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            }
+    </script>
+}

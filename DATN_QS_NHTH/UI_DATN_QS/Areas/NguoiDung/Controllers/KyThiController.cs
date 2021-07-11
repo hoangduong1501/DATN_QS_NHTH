@@ -753,7 +753,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                         {
                             list_MonHoc = entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList(),
                             list_CauHoi = entities.CAU_HOI.Where(p => p.IS_Deleted == 0).ToList()
-                                        .Join(entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList(),
+                                        .Join(entities.MON_HOC.Where(p => p.IS_Deleted == 0 && p.ID_MonHoc == pID_MonHoc).ToList(),
                                         ch => ch.ID_MonHoc,
                                         mh => mh.ID_MonHoc, (ch, mh) => new { ch, mh })
                                         .Select(m => new CauHoiList_ViewModel()
@@ -1001,6 +1001,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpGet]
         public ActionResult UPLOAD_CauHoi()
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
             {
                 CauHoi_ViewModel CauHoi = new CauHoi_ViewModel()
@@ -1017,6 +1021,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpPost]
         public ActionResult UPLOAD_CauHoi(CauHoi_ViewModel pCauHoi, HttpPostedFileBase fileLoad)
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())

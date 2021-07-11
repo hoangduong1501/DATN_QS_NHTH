@@ -284,6 +284,7 @@
     <Content Include="Areas\NguoiDung\Views\KyThi\UPLOAD_CauHoi.cshtml" />
     <Content Include="Areas\NguoiDung\Views\HocVien\GET_CTLopHoc.cshtml" />
     <Content Include="Areas\NguoiDung\Views\HocVien\UPLOAD_HocVien.cshtml" />
+    <Content Include="Areas\GiangVien\Views\DeThiGV\UPLOAD_CauHoi.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

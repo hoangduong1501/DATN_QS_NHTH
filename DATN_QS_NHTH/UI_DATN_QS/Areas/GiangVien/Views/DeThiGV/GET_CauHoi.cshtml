@@ -11,12 +11,12 @@
         <a class="btn btn-primary" href="@Url.Action("INSERT_CauHoi", "DeThiGV", new { area = "GiangVien" })">
             <i class="fas fa-plus"></i> Tạo Câu Hỏi
         </a>
-        <a class="btn btn-primary" href="@Url.Action("INSERT_NganhHoc", "DeThiGV", new { area = "GiangVien" })">
+        <a class="btn btn-primary" href="@Url.Action("UPLOAD_CauHoi", "DeThiGV", new { area = "GiangVien" })">
             <i class="fas fa-file-excel"></i> Tạo Từ File
         </a>
-        <a class="btn btn-primary" href="@Url.Action("INSERT_MonHoc", "DeThiGV", new { area = "GiangVien" })">
+        @*<a class="btn btn-primary" href="@Url.Action("INSERT_MonHoc", "DeThiGV", new { area = "GiangVien" })">
             <i class="fas fa-plus"></i> Tạo Môn Học
-        </a>
+        </a>*@
         <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit">
             <i class="fas fa-trash-alt"></i> Xóa Mục Đã Chọn
         </button>

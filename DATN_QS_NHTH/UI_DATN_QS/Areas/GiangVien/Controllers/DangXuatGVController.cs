@@ -22,7 +22,7 @@ namespace UI_DATN_QS.Areas.GiangVien.Controllers
         [HttpGet]
         public ActionResult CHANGE_MatKhau()
         {
-            UserSession_Model user_Session = SessionHelper.Get_SessionHV();
+            UserSession_Model user_Session = SessionHelper.Get_SessionGV();
             if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
             ViewBag.USER = user_Session;
 
@@ -40,7 +40,7 @@ namespace UI_DATN_QS.Areas.GiangVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CHANGE_MatKhau(MatKhau_Model pMatKhau)
         {
-            if (SessionHelper.Get_SessionHV() == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            if (SessionHelper.Get_SessionGV() == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
 
             try
             {
@@ -48,7 +48,7 @@ namespace UI_DATN_QS.Areas.GiangVien.Controllers
                 {
                     using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
                     {
-                        int a = SessionHelper.Get_SessionHV().ID_TaiKhoan;
+                        int a = SessionHelper.Get_SessionGV().ID_TaiKhoan;
                         TAI_KHOAN TaiKhoan = entities.TAI_KHOAN.Where(p => p.ID_TaiKhoan == a).FirstOrDefault();
 
                         if (TaiKhoan.PASS_TaiKhoan.Equals(Models.HashCodes.Hash_MD5.GetHash_MD5(pMatKhau.OLD_Password)))

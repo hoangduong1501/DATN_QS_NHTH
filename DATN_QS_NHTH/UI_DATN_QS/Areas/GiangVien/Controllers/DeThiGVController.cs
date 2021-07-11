@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -317,7 +318,7 @@ namespace UI_DATN_QS.Areas.GiangVien.Controllers
                         {
                             list_MonHoc = entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList(),
                             list_CauHoi = entities.CAU_HOI.Where(p => p.IS_Deleted == 0).ToList()
-                                        .Join(entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList(),
+                                        .Join(entities.MON_HOC.Where(p => p.IS_Deleted == 0 && p.ID_MonHoc == pID_MonHoc).ToList(),
                                         ch => ch.ID_MonHoc,
                                         mh => mh.ID_MonHoc, (ch, mh) => new { ch, mh })
                                         .Select(m => new CauHoiList_ViewModel()
@@ -541,6 +542,112 @@ namespace UI_DATN_QS.Areas.GiangVien.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public ActionResult UPLOAD_CauHoi()
+        {
+            UserSession_Model user_Session = SessionHelper.Get_SessionGV();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
+            using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+            {
+                CauHoi_ViewModel CauHoi = new CauHoi_ViewModel()
+                {
+                    list_MonHoc = entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList(),
+                    list_CauHoi = null,
+
+                };
+
+                return View(CauHoi);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UPLOAD_CauHoi(CauHoi_ViewModel pCauHoi, HttpPostedFileBase fileLoad)
+        {
+            UserSession_Model user_Session = SessionHelper.Get_SessionGV();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                    pCauHoi.list_MonHoc = entities.MON_HOC.Where(p => p.IS_Deleted == 0).ToList();
+
+                ExcelPackage package = new ExcelPackage(fileLoad.InputStream);
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.First();
+                var listVoucherInfo = string.Empty;
+                pCauHoi.list_CauHoi = new List<CAU_HOI>();
+
+                for (int row = 4; row <= worksheet.Dimension.End.Row; row++)
+                {
+                    pCauHoi.list_CauHoi.Add(new CAU_HOI()
+                    {
+                        ID_Chuong = int.Parse(worksheet.Cells[row, 1].Value.ToString()),
+                        NDUNG_CauHoi = worksheet.Cells[row, 2].Value.ToString(),
+                        LCHON_1 = worksheet.Cells[row, 3].Value.ToString(),
+                        LCHON_2 = worksheet.Cells[row, 4].Value.ToString(),
+                        LCHON_3 = worksheet.Cells[row, 5].Value.ToString(),
+                        LCHON_Dung = worksheet.Cells[row, 6].Value.ToString(),
+
+                    });
+                }
+
+                return View(pCauHoi);
+            }
+            catch (Exception)
+            {
+                return View(pCauHoi);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Save_CauHoi(CauHoi_ViewModel pCauHoi)
+        {
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                    foreach (CAU_HOI item in pCauHoi.list_CauHoi)
+                    {
+                        if (entities.CAU_HOI.Count() == 0) item.ID_CauHoi = 1;
+                        else item.ID_CauHoi = entities.CAU_HOI.Max(p => p.ID_CauHoi) + 1;
+
+                        item.ID_MonHoc = pCauHoi.ID_MonHoc;
+                        item.TIME_Create = item.TIME_Update = DateTime.Today;
+                        item.IS_Deleted = 0;
+
+                        entities.CAU_HOI.Add(item);
+                        entities.SaveChanges();
+                    }
+                return Json("Thêm câu hỏi thành công.", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                return Json("Thêm câu hỏi không thành công.", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult DownloadFile()
+        {
+            string fullName = Server.MapPath("~/Templates/FileCauHoi.xlsx");
+
+            byte[] fileBytes = GetFile(fullName);
+            return File(
+                fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, "FileCauHoi.xlsx");
+        }
+
+        private byte[] GetFile(string s)
+        {
+            System.IO.FileStream fs = System.IO.File.OpenRead(s);
+            byte[] data = new byte[fs.Length];
+            int br = fs.Read(data, 0, data.Length);
+            if (br != fs.Length)
+                throw new System.IO.IOException(s);
+            return data;
         }
 
         #endregion

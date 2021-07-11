@@ -390,6 +390,10 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
 
         public ActionResult UPLOAD_HocVien()
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
+
             using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
             {
                 HocVien_ViewModel HocVien = new HocVien_ViewModel()
@@ -406,6 +410,9 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         [HttpPost]
         public ActionResult UPLOAD_HocVien(HocVien_ViewModel pHocVien, HttpPostedFileBase fileLoad)
         {
+            UserSession_Model user_Session = SessionHelper.Get_SessionND();
+            if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
+            ViewBag.USER = user_Session;
             try
             {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
