@@ -6,17 +6,17 @@
 @using (Html.BeginForm("DELETE_HocVien", "HocVien", FormMethod.Post))
 {
     @*<div class="container-fluid">
-        <br />
-        <a class="btn btn-primary" href="@Url.Action("INSERT_HocVien", "HocVien", new { area = "NguoiDung" })">
-            <i class="fas fa-calendar-alt"></i> Tạo Hồ Sơ
-        </a>
-        <a class="btn btn-primary" href="@Url.Action("INSERT_NganhHoc", "HocVien", new { area = "NguoiDung" })">
-            <i class="fas fa-file-excel"></i> Tạo Từ File
-        </a>
-        <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit">
-            <i class="fas fa-trash-alt"></i> Xóa Mục Đã Chọn
-        </button>
-    </div>*@
+            <br />
+            <a class="btn btn-primary" href="@Url.Action("INSERT_HocVien", "HocVien", new { area = "NguoiDung" })">
+                <i class="fas fa-calendar-alt"></i> Tạo Hồ Sơ
+            </a>
+            <a class="btn btn-primary" href="@Url.Action("INSERT_NganhHoc", "HocVien", new { area = "NguoiDung" })">
+                <i class="fas fa-file-excel"></i> Tạo Từ File
+            </a>
+            <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit">
+                <i class="fas fa-trash-alt"></i> Xóa Mục Đã Chọn
+            </button>
+        </div>*@
     <br />
 
     <div class="container-fluid">
@@ -47,7 +47,7 @@
                                 </td>
                                 <td>@item.MA_HocVien</td>
                                 <td>@item.TEN_HocVien</td>
-                                <td>@item.NSINH_HocVien.Value.ToString("dd/MM/yyyy")</td>
+                                 <td>@item.NSINH_HocVien.Value.ToString("dd/MM/yyyy")</td>
                                 <td>@(item.GTINH_HocVien == 0 ? "Nữ" : "Nam")</td>
                                 <td>@item.USER_TaiKhoan</td>
                                 <td class="text-center">

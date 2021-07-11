@@ -198,6 +198,7 @@
     <Compile Include="Models\DB_Models\CauHoi_Model.cs" />
     <Compile Include="Models\DB_Models\DeThi_Model.cs" />
     <Compile Include="Models\DB_Models\HocVien_Model.cs" />
+    <Compile Include="Models\DB_Models\HocVien_Upload.cs" />
     <Compile Include="Models\DB_Models\LopHoc_Model.cs" />
     <Compile Include="Models\DB_Models\MatKhau_Model.cs" />
     <Compile Include="Models\DB_Models\NguoiDung_Model.cs" />
@@ -282,6 +283,7 @@
     <Content Include="Areas\NguoiDung\Views\BangDiem\GET_BangDiemLop.cshtml" />
     <Content Include="Areas\NguoiDung\Views\KyThi\UPLOAD_CauHoi.cshtml" />
     <Content Include="Areas\NguoiDung\Views\HocVien\GET_CTLopHoc.cshtml" />
+    <Content Include="Areas\NguoiDung\Views\HocVien\UPLOAD_HocVien.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

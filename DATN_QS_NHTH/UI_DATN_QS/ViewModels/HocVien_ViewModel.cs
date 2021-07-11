@@ -11,5 +11,7 @@ namespace UI_DATN_QS.ViewModels
     {
         public List<LOP_HOC> list_LopHoc { get; set; }
         public HocVien_Model object_HocVien { get; set; }
+        public List<HocVien_Upload> list_HocVien { get; set; }
+        public int ID_LopHoc { get; set; }
     }
 }

@@ -1027,7 +1027,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                 var listVoucherInfo = string.Empty;
                 pCauHoi.list_CauHoi = new List<CAU_HOI>();
 
-                for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                for (int row = 4; row <= worksheet.Dimension.End.Row; row++)
                 {
                     pCauHoi.list_CauHoi.Add(new CAU_HOI()
                     {

@@ -134,14 +134,14 @@
         function SaveKQ() {
                 var model = @Html.Raw(Json.Encode(Model));
                 $.ajax({
-                    url: 'https://localhost:44397/NguoiDung/KyThi/Save_CauHoi',
+                    url: window.location.origin + '/NguoiDung/KyThi/Save_CauHoi',
                     type: "POST",
                     contentType: 'application/json; charset=utf-8',
                     datatype: 'JSON',
                     data: JSON.stringify(model),
                     success: function (result) {
                         alert(result);
-                        $(location).attr('href', 'https://localhost:44397/NguoiDung/KyThi/GET_CauHoi');
+                        $(location).attr('href', window.location.origin + '/NguoiDung/KyThi/GET_CauHoi');
                     },
                     error: function (result) {
                         alert(errormessage.responseText);

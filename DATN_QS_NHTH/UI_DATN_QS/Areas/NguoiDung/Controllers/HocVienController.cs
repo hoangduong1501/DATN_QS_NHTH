@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -41,7 +42,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                                 NOTE_TaiKhoan = m.tk.NOTE_TaiKhoan,
                                 IS_Locked = m.tk.IS_Locked
                             });
-                    
+
                     return View(model_HocVien);
                 }
 
@@ -125,7 +126,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                             IS_Deleted = 0,
                             IS_Locked = 0,
                             NOTE_TaiKhoan = "None",
-                            PASS_TaiKhoan = UI_DATN_QS.Models.HashCodes.Hash_MD5.GetHash_MD5("123456"),
+                            PASS_TaiKhoan = UI_DATN_QS.Models.HashCodes.Hash_MD5.GetHash_MD5("12345"),
                             TIME_Create = DateTime.Today,
                             TIME_Update = DateTime.Today,
                             LOAI_TaiKhoan = 1
@@ -163,7 +164,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
             ViewBag.USER = user_Session;
 
             try
-            {                
+            {
                 using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
                 {
                     HocVien_ViewModel HocVien = new HocVien_ViewModel()
@@ -223,7 +224,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                         HocVien.TEN_HocVien = pHocVien.object_HocVien.TEN_HocVien;
                         HocVien.GTINH_HocVien = pHocVien.object_HocVien.GTINH_HocVien;
                         HocVien.NSINH_HocVien = pHocVien.object_HocVien.NSINH_HocVien;
-                        
+
                         if (fileLoad != null) HocVien.ANH_HocVien = img_Upload;
 
                         TaiKhoan.USER_TaiKhoan = pHocVien.object_HocVien.USER_TaiKhoan;
@@ -267,7 +268,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                 return View();
             }
         }
-        
+
         [HttpGet]
         public ActionResult Reset_HocVien(int pID_TaiKhoan)
         {
@@ -385,6 +386,135 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                 return View();
             }
             catch (Exception) { return View(); }
+        }
+
+        public ActionResult UPLOAD_HocVien()
+        {
+            using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+            {
+                HocVien_ViewModel HocVien = new HocVien_ViewModel()
+                {
+                    list_LopHoc = entities.LOP_HOC.Where(p => p.IS_Deleted == 0).ToList(),
+                    list_HocVien = null,
+
+                };
+
+                return View(HocVien);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UPLOAD_HocVien(HocVien_ViewModel pHocVien, HttpPostedFileBase fileLoad)
+        {
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                    pHocVien.list_LopHoc = entities.LOP_HOC.Where(p => p.IS_Deleted == 0).ToList();
+
+                ExcelPackage package = new ExcelPackage(fileLoad.InputStream);
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.First();
+                pHocVien.list_HocVien = new List<HocVien_Upload>();
+
+                for (int row = 5; row <= worksheet.Dimension.End.Row; row++)
+                {
+                    pHocVien.list_HocVien.Add(new HocVien_Upload()
+                    {
+                        MA_HocVien = worksheet.Cells[row, 2].Value.ToString(),
+                        TEN_HocVien = worksheet.Cells[row, 3].Value.ToString(),
+                        NSINH_HocVien = worksheet.Cells[row, 4].Value.ToString(),
+                        GTINH_HocVien = (worksheet.Cells[row, 5].Value.ToString() == "Nam" ? 1 : 0)
+
+                    });
+                }
+
+                return View(pHocVien);
+            }
+            catch (Exception)
+            {
+                return View(pHocVien);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Save_DanhSach(HocVien_ViewModel pHocVien)
+        {
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                {
+                    foreach(HocVien_Upload item in pHocVien.list_HocVien)
+                    {
+                        int id_HocVien = 1, id_TaiKhoan = 1, id_CTLopHoc = 1;
+
+                        if (entities.HOC_VIEN.Count() > 0) id_HocVien = entities.HOC_VIEN.Max(p => p.ID_HocVien) + 1;
+                        if (entities.TAI_KHOAN.Count() > 0) id_TaiKhoan = entities.TAI_KHOAN.Max(p => p.ID_TaiKhoan) + 1;
+                        if (entities.CT_LOP_HOC.Count() > 0) id_CTLopHoc = entities.CT_LOP_HOC.Max(p => p.ID_CTLopHoc) + 1;
+
+                        entities.HOC_VIEN.Add(new HOC_VIEN()
+                        {
+                            ID_HocVien = id_HocVien,
+                            MA_HocVien = item.MA_HocVien,
+                            TEN_HocVien = item.TEN_HocVien,
+                            ANH_HocVien = null,
+                            GTINH_HocVien = item.GTINH_HocVien,
+                            ID_TaiKhoan = id_TaiKhoan,
+                            NSINH_HocVien = DateTime.Parse(item.NSINH_HocVien.ToString())
+                        });
+
+                        entities.TAI_KHOAN.Add(new TAI_KHOAN()
+                        {
+                            ID_TaiKhoan = id_TaiKhoan,
+                            USER_TaiKhoan = item.MA_HocVien,
+                            IS_Deleted = 0,
+                            IS_Locked = 0,
+                            NOTE_TaiKhoan = "None",
+                            PASS_TaiKhoan = UI_DATN_QS.Models.HashCodes.Hash_MD5.GetHash_MD5("12345"),
+                            TIME_Create = DateTime.Today,
+                            TIME_Update = DateTime.Today,
+                            LOAI_TaiKhoan = 1
+                        });
+
+                        entities.CT_LOP_HOC.Add(new CT_LOP_HOC()
+                        {
+                            ID_CTLopHoc = id_CTLopHoc,
+                            ID_HocVien = id_HocVien,
+                            ID_LopHoc = pHocVien.ID_LopHoc,
+                            IS_Deleted = 0,
+                            TIME_Create = DateTime.Today,
+                            TIME_Update = DateTime.Today
+                        });
+
+                        entities.SaveChanges();
+                    }
+                    
+                }
+                return Json("Thêm học viên thành công.", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                return Json("Thêm học viên không thành công.", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult DownloadFile()
+        {
+            string fullName = Server.MapPath("~/Templates/DANH_SACH_HOC_VIEN.xlsx");
+
+            byte[] fileBytes = GetFile(fullName);
+            return File(
+                fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, "DANH_SACH_HOC_VIEN.xlsx");
+        }
+
+        private byte[] GetFile(string s)
+        {
+            System.IO.FileStream fs = System.IO.File.OpenRead(s);
+            byte[] data = new byte[fs.Length];
+            int br = fs.Read(data, 0, data.Length);
+            if (br != fs.Length)
+                throw new System.IO.IOException(s);
+            return data;
         }
 
         #endregion
@@ -579,8 +709,8 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                        Join(entities.NGANH_HOC.ToList(), lop => lop.ID_NganhHoc, nganh => nganh.ID_NganhHoc, (lop, nganh) => new { lop, nganh }).
                        Join(entities.NIEN_KHOA.ToList(), tb1 => tb1.lop.ID_NienKhoa, nam => nam.ID_NienKhoa, (tb1, nam) => new { tb1, nam }).
                        Join(entities.KHOA_HOC.ToList(), tb2 => tb2.tb1.lop.ID_KhoaHoc, khoa => khoa.ID_KhoaHoc, (tb2, khoa) => new { tb2, khoa }).
-                       Join(entities.CT_LOP_HOC.ToList().GroupBy(p => p.ID_LopHoc).Select(lg => new { ID_LopHoc = lg.Key, NUM_LopHoc = lg.Count() }).ToList(), 
-                                tb3 => tb3.tb2.tb1.lop.ID_LopHoc, p => p.ID_LopHoc, (tb3, p) => new { tb3, p}).
+                       Join(entities.CT_LOP_HOC.ToList().GroupBy(p => p.ID_LopHoc).Select(lg => new { ID_LopHoc = lg.Key, NUM_LopHoc = lg.Count() }).ToList(),
+                                tb3 => tb3.tb2.tb1.lop.ID_LopHoc, p => p.ID_LopHoc, (tb3, p) => new { tb3, p }).
                        Select(tb4 => new LopHoc_Model()
                        {
                            ID_LopHoc = tb4.tb3.tb2.tb1.lop.ID_LopHoc,
@@ -606,9 +736,9 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                 return View();
             }
         }
-        
+
         public ActionResult GET_CTLopHoc(int pID_LopHoc)
-            {
+        {
             UserSession_Model user_Session = SessionHelper.Get_SessionND();
             if (user_Session == null) return RedirectToAction("Dang_Nhap", "DangNhap", new { area = "" });
             ViewBag.USER = user_Session;
