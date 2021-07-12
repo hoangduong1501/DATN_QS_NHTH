@@ -1,0 +1,92 @@
+﻿@using UI_DATN_QS.Models.DB_Entities;
+
+@model IEnumerable<CAU_HOI>
+
+@using (Html.BeginForm("DELETE_CauHoi", "KyThi", FormMethod.Post))
+{
+    <div class="container-fluid">
+
+    </div>
+
+    <div class="container-fluid">
+        <br />
+
+        <div class="row">
+            <div class="col-lg-12 table-responsive" style="padding-top: 1rem;">
+                <table id="dataTable" class="table table-bordered  display nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Nội dung</th>
+                            <th>Lựa chọn 1</th>
+                            <th>Lựa chọn 2</th>
+                            <th>Lựa chọn 3</th>
+                            <th>Đáp án</th>
+                            <th>Hình ảnh</th>
+                        </tr>
+                    </thead>
+                    <div>
+                    <tbody>
+                        @foreach (CAU_HOI item in Model)
+                        {
+                            <tr>
+                                <td style="white-space:normal;">
+                                    @{
+                                        if (item.ANH_CauHoi != null)
+                                        { <i class="far fa-images"></i> }
+                                        else
+                                        { <i class="fas fa-spell-check"></i> }
+                                    }
+                                    @item.NDUNG_CauHoi
+                                </td>
+                                <td style="white-space:normal;">@item.LCHON_1</td>
+                                <td style="white-space:normal;">@item.LCHON_2</td>
+                                <td style="white-space:normal;">@item.LCHON_3</td>
+                                <td style="white-space:normal;">@item.LCHON_Dung</td>
+                                <td>
+                                    @{
+                                        if (item.ANH_CauHoi != null)
+                                        {
+                                            <img id="imgUpload" class="img-thumbnail" style="width: 20rem;" src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.ANH_CauHoi))" />
+                                        }
+
+                                    }
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+            </div>
+            <tfoot>
+                <tr>
+                    <th>Nội dung</th>
+                    <th>Lựa chọn 1</th>
+                    <th>Lựa chọn 2</th>
+                    <th>Lựa chọn 3</th>
+                    <th>Đáp án</th>
+                    <th>Hình ảnh</th>
+                </tr>
+            </tfoot>
+            </table>
+
+        </div>
+    </div>
+    </div>
+}
+
+<br />
+<br />
+
+@section JSFooter{
+    <script>
+        $(document).ready(function () {
+
+            $('table.display').DataTable({
+                responsive: true,
+                "order": [[2, "asc"]],
+
+            });
+
+        });
+    </script>
+}

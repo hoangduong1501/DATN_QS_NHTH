@@ -5,11 +5,9 @@ using System.Web;
 
 namespace UI_DATN_QS.Models.DB_Models
 {
-    public class BangDiemLop_Model
+    public class MaDeThi_Model
     {
-        public int ID_LopHoc { get; set; }
-        public int ID_KhoaHoc { get; set; }
-        public int ID_MonHoc { get; set; }
         public string MA_DeThi { get; set; }
+        public int SLuong_DeThi { get; set; }
     }
 }

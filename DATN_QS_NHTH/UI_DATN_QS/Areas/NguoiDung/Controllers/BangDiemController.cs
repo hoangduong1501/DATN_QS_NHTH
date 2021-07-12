@@ -54,6 +54,23 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         }
 
         [HttpPost]
+        public JsonResult JSON_MaDeThi(BangDiemLop_Model pInput)
+        {
+            using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+            {
+
+                return Json((entities.CT_LOP_HOC.Where(p => p.IS_Deleted == 0 && p.ID_LopHoc == pInput.ID_LopHoc).ToList().
+                                        Join(entities.HOC_VIEN.ToList(), ctl => ctl.ID_HocVien, hv => hv.ID_HocVien, (ctl, hv) => new { ctl, hv }).
+                                        Join(entities.BANG_DIEM.Where(p => p.IS_Deleted == 0).ToList(), tb1 => tb1.hv.ID_HocVien, bd => bd.ID_HocVien, (tb1, bd) => new { tb1, bd }).
+                                        Join(entities.DE_THI.Where(p => p.ID_MonHoc == pInput.ID_MonHoc).ToList(), tb2 => tb2.bd.ID_DeThi, dt => dt.ID_DeThi, (tb2, dt) => new { tb2, dt }).
+                                        Select(tb3 => new
+                                        {
+                                            MA_DeThi = tb3.dt.MA_DeThi
+                                        }).ToList().GroupBy(a => a.MA_DeThi).Select(g => new { MaDeThi = g.Key, SL = g.Count() })).ToList(), JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
         public JsonResult JSON_BangDiem(BangDiemLop_Model pInput)
         {
             try
@@ -64,7 +81,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                                     entities.CT_LOP_HOC.Where(p => p.IS_Deleted == 0 && p.ID_LopHoc == pInput.ID_LopHoc).ToList().
                                         Join(entities.HOC_VIEN.ToList(), ctl => ctl.ID_HocVien, hv => hv.ID_HocVien, (ctl, hv) => new { ctl, hv }).
                                         Join(entities.BANG_DIEM.Where(p => p.IS_Deleted == 0).ToList(), tb1 => tb1.hv.ID_HocVien, bd => bd.ID_HocVien, (tb1, bd) => new { tb1, bd }).
-                                        Join(entities.DE_THI.Where(p => p.ID_MonHoc == pInput.ID_MonHoc).ToList(), tb2 => tb2.bd.ID_DeThi, dt => dt.ID_DeThi, (tb2, dt) => new { tb2, dt }).
+                                        Join(entities.DE_THI.Where(p => p.ID_MonHoc == pInput.ID_MonHoc && p.MA_DeThi == pInput.MA_DeThi).ToList(), tb2 => tb2.bd.ID_DeThi, dt => dt.ID_DeThi, (tb2, dt) => new { tb2, dt }).
                                         Select(tb3 => new
                                         {
                                             MA_HocVien = tb3.tb2.tb1.hv.MA_HocVien,
@@ -98,7 +115,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                         var lst = entities.CT_LOP_HOC.Where(p => p.IS_Deleted == 0 && p.ID_LopHoc == pInput.ID_LopHoc).ToList().
                                             Join(entities.HOC_VIEN.ToList(), ctl => ctl.ID_HocVien, hv => hv.ID_HocVien, (ctl, hv) => new { ctl, hv }).
                                             Join(entities.BANG_DIEM.Where(p => p.IS_Deleted == 0).ToList(), tb1 => tb1.hv.ID_HocVien, bd => bd.ID_HocVien, (tb1, bd) => new { tb1, bd }).
-                                            Join(entities.DE_THI.Where(p => p.ID_MonHoc == pInput.ID_MonHoc).ToList(), tb2 => tb2.bd.ID_DeThi, dt => dt.ID_DeThi, (tb2, dt) => new { tb2, dt }).
+                                            Join(entities.DE_THI.Where(p => p.ID_MonHoc == pInput.ID_MonHoc && p.MA_DeThi == pInput.MA_DeThi).ToList(), tb2 => tb2.bd.ID_DeThi, dt => dt.ID_DeThi, (tb2, dt) => new { tb2, dt }).
                                             Select(tb3 => new
                                             {
                                                 MA_HocVien = tb3.tb2.tb1.hv.MA_HocVien,
@@ -112,17 +129,20 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
 
 
                         ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Bảng Điểm");
-                        worksheet.Cells["A2:B2"].Merge = worksheet.Cells["A3:B3"].Merge = worksheet.Cells["A4:B4"].Merge = true;
-                        worksheet.Cells["A2:B2"].Style.Font.Bold = worksheet.Cells["A3:B3"].Style.Font.Bold = worksheet.Cells["A4:B4"].Style.Font.Bold = worksheet.Cells["A6:F6"].Style.Font.Bold = true;
-                        worksheet.Cells["A6:F6"].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                        worksheet.Cells["A6:F6"].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Yellow);
-                        worksheet.Cells["A6:F6"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                        worksheet.Cells["A2:B2"].Merge = worksheet.Cells["A3:F3"].Merge = worksheet.Cells["A4:B4"].Merge = worksheet.Cells["A5:B5"].Merge = true;
+                        worksheet.Cells["A2:B2"].Style.Font.Bold
+                            = worksheet.Cells["A3:F3"].Style.Font.Bold
+                            = worksheet.Cells["A4:B4"].Style.Font.Bold
+                            = worksheet.Cells["A5:B5"].Style.Font.Bold
+                            = worksheet.Cells["A7:F7"].Style.Font.Bold = true;
+                        worksheet.Cells["A7:F7"].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                        worksheet.Cells["A7:F7"].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Yellow);
                         worksheet.Cells["D:E"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
 
-                        worksheet.Cells["A2"].Value = "Mã môn học: " + pInput.ID_MonHoc;
-                        worksheet.Cells["A3"].Value = "Mã lớp học: " + pInput.ID_LopHoc;
-                        worksheet.Cells["A4"].Value = "Mã khóa học: " + pInput.ID_KhoaHoc;
-                        worksheet.Cells["A5"].Value = "Ngày xuất: " + DateTime.Today.ToString("dd/MM/yyyy");
+                        worksheet.Cells["A2"].Value = "Mã môn học: " + entities.MON_HOC.Find(pInput.ID_MonHoc).MA_MonHoc;
+                        worksheet.Cells["A3"].Value = "Tên môn học: " + entities.MON_HOC.Find(pInput.ID_MonHoc).TEN_MonHoc;
+                        worksheet.Cells["A4"].Value = "Ngày xuất: " + DateTime.Today.ToString("dd/MM/yyyy");
+                        worksheet.Cells["A5"].Value = "Mã đề: " + pInput.MA_DeThi;
 
                         worksheet.Cells["A7"].Value = "Mã học viên";
                         worksheet.Cells["B7"].Value = "Tên học viên";
@@ -165,12 +185,12 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
         {
             try
             {
-                string fullName = Server.MapPath("~/Templates/" + file+".xlsx");
+                string fullName = Server.MapPath("~/Templates/" + file + ".xlsx");
 
                 System.IO.FileStream fileStream = System.IO.File.OpenRead(fullName);
                 byte[] data = new byte[fileStream.Length];
                 int br = fileStream.Read(data, 0, data.Length);
-               
+
 
                 if (br != fileStream.Length)
                     throw new System.IO.IOException(fullName);

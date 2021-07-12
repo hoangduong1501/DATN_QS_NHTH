@@ -200,6 +200,7 @@
     <Compile Include="Models\DB_Models\HocVien_Model.cs" />
     <Compile Include="Models\DB_Models\HocVien_Upload.cs" />
     <Compile Include="Models\DB_Models\LopHoc_Model.cs" />
+    <Compile Include="Models\DB_Models\MaDeThi_Model.cs" />
     <Compile Include="Models\DB_Models\MatKhau_Model.cs" />
     <Compile Include="Models\DB_Models\NguoiDung_Model.cs" />
     <Compile Include="Models\DB_Models\UserSession_Model.cs" />
@@ -285,6 +286,7 @@
     <Content Include="Areas\NguoiDung\Views\HocVien\GET_CTLopHoc.cshtml" />
     <Content Include="Areas\NguoiDung\Views\HocVien\UPLOAD_HocVien.cshtml" />
     <Content Include="Areas\GiangVien\Views\DeThiGV\UPLOAD_CauHoi.cshtml" />
+    <Content Include="Areas\GiangVien\Views\DeThiGV\GET_CTDeThi.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

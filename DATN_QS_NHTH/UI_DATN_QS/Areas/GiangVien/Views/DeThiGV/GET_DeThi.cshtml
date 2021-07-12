@@ -3,7 +3,7 @@
 
 @model UI_DATN_QS.ViewModels.DeThi_ViewModel
 
-@using (Html.BeginForm("DELETE_DeThi", "GiangVien", FormMethod.Post))
+@using (Html.BeginForm("DELETE_DeThi", "DeThiGV", FormMethod.Post))
 {
     <div class="container-fluid">
         <br />
@@ -70,12 +70,9 @@
                                         }
                                     </td>
                                     <td>
-                                        <a class="btn btn-sm btn-outline-dark rounded-circle" href="@Url.Action("UPDATE_CauHoi", "DeThiGV", new { pID_DeThi = item.ID_DeThi })" data-toggle="tooltip" data-placement="right" title="Chỉnh Sửa">
+                                        <a class="btn btn-sm btn-outline-dark rounded-circle" href="@Url.Action("GET_CTDeThi", "DeThiGV", new { pID_DeThi = item.ID_DeThi })" data-toggle="tooltip" data-placement="right" title="Xem chi tiết">
                                             <i class="fas fa-search"></i>
                                         </a>
-                                        @*<a class="btn btn-sm btn-outline-primary rounded-circle" href="@Url.Action("UPDATE_CauHoi", "GiangVien", new { pID_CauHoi = item.ID_DeThi })" data-toggle="tooltip" data-placement="right" title="Chỉnh Sửa">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </a>*@
                                         <a class="btn btn-sm btn-outline-danger rounded-circle" href="@Url.Action("DELETE_DeThi", "DeThiGV", new { pID_DeThi = item.ID_DeThi })" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="right" title="Xóa">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
