@@ -45,47 +45,48 @@
                             <th>Chức năng</th>
                         </tr>
                     </thead>
-                    <div>
-                        <tbody>
-                            @{int count = 1; }
-                            @foreach (DeThi_Model item in Model.list_DeThi)
-                            {
-                                <tr>
-                                    <td class="text-center">@(count++)</td>
-                                    <td class="text-center">
-                                        <input type="checkbox" class="CheckBoxItem" name="ID_DeThi" value="@item.ID_DeThi" />
-                                    </td>
-                                    <td>@item.MA_DeThi</td>
-                                    <td>@item.TEN_LBaiThi</td>
-                                    <td>@item.TEN_MonHoc</td>
-                                    <td>@item.PASS_DeThi</td>
-                                    <td>@item.TGIAN_DeThi phút</td>
-                                    <td>@item.TIME_Create.Value.ToString("dd/MM/yyyy")</td>
-                                    <td class="text-center">
-                                        @{
-                                            if (item.IS_Locked == 0)
-                                            { <a class="btn btn-sm btn-success" href="@Url.Action("IsLock_DeThi", "KyThi", new { pID_DeThi = item.ID_DeThi })" data-toggle="tooltip" data-placement="right" title="Bấm để khóa"><i class="fas fa-unlock"></i></a> }
-                                            else
-                                            { <a class="btn btn-sm btn-secondary" href="@Url.Action("IsLock_DeThi", "KyThi", new { pID_DeThi = item.ID_DeThi })" data-toggle="tooltip" data-placement="right" title="Bấm để mở"><i class="fas fa-lock"></i></a> }
-                                        }
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-sm btn-outline-dark rounded-circle" href="@Url.Action("GET_CTDeThi", "KyThi", new { pID_DeThi = item.ID_DeThi })" data-toggle="tooltip" data-placement="right" title="Xem">
-                                            <i class="fas fa-search"></i>
-                                        </a>
-                                        <a class="btn btn-sm btn-outline-danger rounded-circle" href="@Url.Action("DELETE_DeThi", "KyThi", new { pID_DeThi = item.ID_DeThi })" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="right" title="Xóa">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
+                    <tbody>
+                        @{int count = 1; }
+                        @foreach (DeThi_Model item in Model.list_DeThi)
+                        {
+                            <tr>
+                                <td class="text-center">@(count++)</td>
+                                <td class="text-center">
+                                    <input type="checkbox" class="CheckBoxItem" name="ID_DeThi" value="@item.ID_DeThi" />
+                                </td>
+                                <td>@item.MA_DeThi</td>
+                                <td>@item.TEN_LBaiThi</td>
+                                <td>@item.TEN_MonHoc</td>
+                                <td>@item.PASS_DeThi</td>
+                                <td>@item.TGIAN_DeThi phút</td>
+                                <td>@item.TIME_Create.Value.ToString("dd/MM/yyyy")</td>
+                                <td class="text-center">
+                                    @{
+                                        if (item.IS_Locked == 0)
+                                        { <a class="btn btn-sm btn-success" href="@Url.Action("IsLock_DeThi", "KyThi", new { pID_DeThi = item.ID_DeThi })" data-toggle="tooltip" data-placement="right" title="Bấm để khóa"><i class="fas fa-unlock"></i></a> }
+                                        else
+                                        { <a class="btn btn-sm btn-secondary" href="@Url.Action("IsLock_DeThi", "KyThi", new { pID_DeThi = item.ID_DeThi })" data-toggle="tooltip" data-placement="right" title="Bấm để mở"><i class="fas fa-lock"></i></a> }
+                                    }
+                                </td>
+                                <td>
+                                    <button id="@item.MA_DeThi" type="button" class="btn btn-sm btn-outline-primary rounded-circle" data-toggle="modal" data-target="#ChangePass_Popup" onclick="ChangePass_Modal(this.id)">
+                                        <i class="fas fa-key"></i>
+                                    </button>
+                                    <a class="btn btn-sm btn-outline-dark rounded-circle" href="@Url.Action("GET_CTDeThi", "KyThi", new { pID_DeThi = item.ID_DeThi })" data-toggle="tooltip" data-placement="right" title="Xem">
+                                        <i class="fas fa-search"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-outline-danger rounded-circle" href="@Url.Action("DELETE_DeThi", "KyThi", new { pID_DeThi = item.ID_DeThi })" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="right" title="Xóa">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
 
-                        </tbody>
-                    </div>
+                    </tbody>
                     <tfoot>
                         <tr>
                             <th class="text-center"><i class="fas fa-paw text-dark"></i></th>
-                            <th></th>
+                            <th class="text-center"><input type="checkbox" id="checkBoxAll" /></th>
                             <th>Mã đề</th>
                             <th>Bài thi</th>
                             <th>Môn</th>
@@ -102,6 +103,39 @@
         </div>
     </div>
 }
+
+<div class="modal fade" id="ChangePass_Popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title_Popup">
+                    <i class="fas fa-exclamation-triangle text-warning"></i> Đổi mật khẩu đề thi
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Mã đề thi:</label>
+                        <input type="text" class="form-control" id="MaDeThi" readonly>
+                        <label for="recipient-name" class="col-form-label">Mật khẩu mới:</label>
+                        <input type="text" class="form-control" id="MatKhauDe">
+                    </div>
+                    <div class="form-group">
+                        <button id="SavePass" class="btn btn-success float-right" onclick="Save_Pass()">
+                            <i class="fas fa-download"></i> Lưu
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <br />
 <br />
@@ -121,8 +155,6 @@
                 ]
             });
 
-            $("#notify_Popup").modal();
-
             $('#checkBoxAll').click(function () {
                 if ($(this).is(":checked"))
                     $('.CheckBoxItem').prop('checked', true);
@@ -136,7 +168,35 @@
                 }
                 return false;
             });
+
         });
+
+        function ChangePass_Modal(pID) {
+            $("#MaDeThi").val("" + pID);
+        }
+
+        function Save_Pass() {
+            var obj = {
+                MaDeThi: $("#MaDeThi").val(),
+                MatKhau: $("#MatKhauDe").val()
+            }
+
+            $.ajax({
+                url: 'ChangePass',
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                datatype: 'JSON',
+                data: JSON.stringify(obj),
+                success: function (result) {
+                    alert(result);
+                    location.reload();
+                },
+                error: function (result) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
     </script>
 
 }

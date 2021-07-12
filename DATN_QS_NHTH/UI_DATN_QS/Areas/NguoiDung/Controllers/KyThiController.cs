@@ -1039,7 +1039,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                 {
                     pCauHoi.list_CauHoi.Add(new CAU_HOI()
                     {
-                        ID_Chuong =  int.Parse(worksheet.Cells[row, 1].Value.ToString()),
+                        ID_Chuong = int.Parse(worksheet.Cells[row, 1].Value.ToString()),
                         NDUNG_CauHoi = worksheet.Cells[row, 2].Value.ToString(),
                         LCHON_1 = worksheet.Cells[row, 3].Value.ToString(),
                         LCHON_2 = worksheet.Cells[row, 4].Value.ToString(),
@@ -1393,6 +1393,29 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+        public JsonResult ChangePass(string MaDeThi, string MatKhau)
+        {
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                {
+                    DE_THI dE_THI = entities.DE_THI.Where(p => p.MA_DeThi == MaDeThi.Trim()).FirstOrDefault();
+
+                    dE_THI.PASS_DeThi = MatKhau;
+
+                    entities.SaveChanges();
+                }
+
+                return Json("Đổi mật khẩu thành công.", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exp)
+            {
+                return Json("Đổi mật khẩu không thành công.", JsonRequestBehavior.AllowGet);
+            }
+        }
+
         #endregion
     }
 }

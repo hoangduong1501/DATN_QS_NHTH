@@ -3,21 +3,32 @@
 
 <div class="container-fluid">
     <br />
-    <div class="form-group row">
-        <label for="inputPassword" class="col-form-label" style="margin-left: 1rem;">Khóa học</label>
-        <div class="col-md-3 .col-lg-2">
-            @Html.DropDownList("cbb_KhoaHoc", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+    <div class="form-group">
+        <div class="row">
+            <label for="inputPassword" class="col-form-label " style="margin-left: 1rem;">Khóa học</label>
+            <div class="col-md-3">
+                @Html.DropDownList("cbb_KhoaHoc", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+            </div>
+
+            <label for="inputPassword" class="col-form-label" style="margin-left: 1rem;">Lớp học</label>
+            <div class="col-md-3">
+                @Html.DropDownList("cbb_LopHoc", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+            </div>
+
+            <label for="inputPassword" class="col-form-label" style="margin-left: 1rem;">Môn học</label>
+            <div class="col-md-3">
+                @Html.DropDownList("cbb_MonHoc", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+            </div>
+
         </div>
 
-        <label for="inputPassword" class="col-form-label" style="margin-left: 1rem;">Lớp học</label>
-        <div class="col-md-3 .col-lg-2">
-            @Html.DropDownList("cbb_LopHoc", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+        <div class="row mt-3">
+            <label for="inputPassword" class="col-form-label" style="margin-left: 1rem; width: 65px">Mã đề</label>
+            <div class="col-md-3">
+                @Html.DropDownList("cbb_MaDeThi", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
+            </div>
         </div>
 
-        <label for="inputPassword" class="col-form-label" style="margin-left: 1rem;">Môn học</label>
-        <div class="col-md-3 .col-lg-2">
-            @Html.DropDownList("cbb_MonHoc", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
-        </div>
         <div style="margin: 1rem;">
             <button id="btn_XemDiem" class="btn btn-primary">
                 <i class="fas fa-search"></i> Hiển Thị Bảng Điểm
@@ -28,8 +39,8 @@
             <button id="btn_XoaItems" class="btn btn-danger">
                 <i class="fas fa-trash-alt"></i> Xóa mục đã chọn
             </button>
-            <button id="btn_XuatFile" class="btn btn-secondary" onclick="Export_Excel()">
-                <i class="fas fa-file-download"></i> Xuất File 
+            <button id="btn_XuatFile" class="btn btn-secondary">
+                <i class="fas fa-file-download"></i> Xuất File
             </button>
         </div>
 
@@ -81,7 +92,8 @@
                 var obj = {
                     ID_KhoaHoc: $("#cbb_KhoaHoc").val(),
                     ID_LopHoc: $("#cbb_LopHoc").val(),
-                    ID_MonHoc: $("#cbb_MonHoc").val()
+                    ID_MonHoc: $("#cbb_MonHoc").val(),
+                    MA_DeThi: $("#cbb_MaDeThi").val()
                 }
 
                 $.ajax({
@@ -92,8 +104,7 @@
                     data: JSON.stringify(obj),
                     success: function (result) {
                         if (result != 'FAIL!') {
-                            window.location.href = 'https://localhost:44397/NguoiDung/BangDiem/DownloadFile?file=' + result;
-                            //window.location.href = 'http://dnh-990115-34.somee.com/NguoiDung/BangDiem/DownloadFile?file=' + result;
+                            window.location.href = window.location.origin + '/NguoiDung/BangDiem/DownloadFile?file=' + result;
                         } else alert(result);   
                     },
                     error: function (result) {
@@ -108,7 +119,8 @@
             var obj = {
                 ID_KhoaHoc: $("#cbb_KhoaHoc").val(),
                 ID_LopHoc: $("#cbb_LopHoc").val(),
-                ID_MonHoc: $("#cbb_MonHoc").val()
+                ID_MonHoc: $("#cbb_MonHoc").val(),
+                MA_DeThi: $("#cbb_MaDeThi").val()
             }
 
             $.ajax({
@@ -182,9 +194,12 @@
                 datatype: 'json',
                 success: function (result) {
                     $("#cbb_KhoaHoc").append($("<option></option>").val(0).html('--Chọn khóa học--'));
+                    $("#cbb_LopHoc").append($("<option></option>").val(0).html('--Chọn lớp học--'));
+                    $("#cbb_MaDeThi").append($("<option></option>").val(0).html('--Chọn mã đề--'));
                     $(result).each(function () {
                         $("#cbb_KhoaHoc").append($("<option></option>").val(this.ID_KhoaHoc).html(this.TEN_KhoaHoc));
                     });
+
                 },
                 error: function (result) {
                     alert(errormessage.responseText);
@@ -201,6 +216,7 @@
                     $(result).each(function () {
                         $("#cbb_MonHoc").append($("<option></option>").val(this.ID_MonHoc).html(this.TEN_MonHoc));
                     });
+
                 },
                 error: function (result) {
                     alert(errormessage.responseText);
@@ -216,7 +232,7 @@
 
         });
 
-        $("#cbb_KhoaHoc").change(function () {
+        $('#cbb_KhoaHoc').change(function () {
             $.ajax({
                 url: 'JSON_LopHoc?pID_LopHoc=' + $(this).val() + '',
                 type: "GET",
@@ -228,12 +244,51 @@
                     $(result).each(function () {
                         $("#cbb_LopHoc").append($("<option></option>").val(this.ID_LopHoc).html(this.TEN_LopHoc));
                     });
+
+                    Get_MaDeThi();
                 },
                 error: function (result) {
                     alert(errormessage.responseText);
                 }
             });
         });
+
+        $('#cbb_LopHoc').change(function () {
+            Get_MaDeThi();
+        });
+
+        $('#cbb_MonHoc').change(function () {
+            Get_MaDeThi();
+        });
+
+        function Get_MaDeThi() {
+            if ($("#cbb_KhoaHoc").prop('selectedIndex') > 0 && $("#cbb_LopHoc").prop('selectedIndex') > 0 && $("#cbb_MonHoc").prop('selectedIndex') > 0) {
+                var obj = {
+                    ID_KhoaHoc: $("#cbb_KhoaHoc").val(),
+                    ID_LopHoc: $("#cbb_LopHoc").val(),
+                    ID_MonHoc: $("#cbb_MonHoc").val(),
+                    MA_DeThi: null
+                }
+
+                $.ajax({
+                    url: 'JSON_MaDeThi',
+                    type: "POST",
+                    contentType: 'application/json; charset=utf-8',
+                    datatype: 'JSON',
+                    data: JSON.stringify(obj),
+                    success: function (result) {
+                        $("#cbb_MaDeThi").empty();
+                        $("#cbb_MaDeThi").append($("<option></option>").val(0).html('--Chọn mã đề--'));
+                        $(result).each(function () {
+                            $("#cbb_MaDeThi").append($("<option></option>").val(this.MaDeThi).html(this.MaDeThi));
+                        });
+                    },
+                    error: function (result) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            }
+        }
 
         function RefreshData() {
             InitTableData();
@@ -277,6 +332,7 @@
                     datatype: 'json',
                     success: function (result) {
                         alert('' + result);
+                        RefreshData();
                     },
                     error: function (result) {
                         alert(errormessage.responseText);

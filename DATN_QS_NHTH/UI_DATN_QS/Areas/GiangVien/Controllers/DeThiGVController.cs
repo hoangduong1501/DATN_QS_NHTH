@@ -301,6 +301,28 @@ namespace UI_DATN_QS.Areas.GiangVien.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+        public JsonResult ChangePass(string MaDeThi, string MatKhau)
+        {
+            try
+            {
+                using (DB_DATN_QSEntities entities = new DB_DATN_QSEntities())
+                {
+                    DE_THI dE_THI = entities.DE_THI.Where(p => p.MA_DeThi == MaDeThi.Trim()).FirstOrDefault();
+
+                    dE_THI.PASS_DeThi = MatKhau;
+
+                    entities.SaveChanges();
+                }
+
+                return Json("Đổi mật khẩu thành công.", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exp)
+            {
+                return Json("Đổi mật khẩu không thành công.", JsonRequestBehavior.AllowGet);
+            }
+        }
         #endregion
 
         /*Cau Hoi*/

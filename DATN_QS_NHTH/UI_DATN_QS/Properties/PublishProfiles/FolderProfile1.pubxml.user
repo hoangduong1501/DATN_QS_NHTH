@@ -5,17 +5,20 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\ThanhHa\Desktop\PublishWeb</_PublishTargetUrl>
-    <History>True|2021-07-11T17:06:45.0415198Z;True|2021-07-11T22:16:02.2707323+07:00;True|2021-07-11T22:10:38.3085930+07:00;True|2021-07-11T22:00:50.9970383+07:00;True|2021-07-08T20:00:24.0951685+07:00;</History>
+    <History>True|2021-07-12T14:29:54.4130749Z;True|2021-07-12T00:06:45.0415198+07:00;True|2021-07-11T22:16:02.2707323+07:00;True|2021-07-11T22:10:38.3085930+07:00;True|2021-07-11T22:00:50.9970383+07:00;True|2021-07-08T20:00:24.0951685+07:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/GiangVien/Views/DangXuatGV/CHANGE_MatKhau.cshtml">
       <publishTime>07/11/2021 23:56:20</publishTime>
     </File>
     <File Include="Areas/GiangVien/Views/DeThiGV/GET_CauHoi.cshtml">
-      <publishTime>07/11/2021 23:17:50</publishTime>
+      <publishTime>07/12/2021 09:19:28</publishTime>
+    </File>
+    <File Include="Areas/GiangVien/Views/DeThiGV/GET_CTDeThi.cshtml">
+      <publishTime>07/12/2021 08:58:38</publishTime>
     </File>
     <File Include="Areas/GiangVien/Views/DeThiGV/GET_DeThi.cshtml">
-      <publishTime>05/29/2021 08:56:13</publishTime>
+      <publishTime>07/12/2021 21:15:57</publishTime>
     </File>
     <File Include="Areas/GiangVien/Views/DeThiGV/INSERT_CauHoi.cshtml">
       <publishTime>05/21/2021 20:49:32</publishTime>
@@ -24,10 +27,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/21/2021 20:47:21</publishTime>
     </File>
     <File Include="Areas/GiangVien/Views/DeThiGV/UPDATE_CauHoi.cshtml">
-      <publishTime>07/02/2021 08:35:36</publishTime>
+      <publishTime>02/07/2021 08:35:36</publishTime>
     </File>
     <File Include="Areas/GiangVien/Views/DeThiGV/UPLOAD_CauHoi.cshtml">
-      <publishTime>07/11/2021 23:49:45</publishTime>
+      <publishTime>07/12/2021 08:19:11</publishTime>
     </File>
     <File Include="Areas/GiangVien/Views/Shared/_Layout.cshtml">
       <publishTime>07/12/2021 00:05:03</publishTime>
@@ -39,7 +42,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/21/2021 17:01:23</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/BangDiem/GET_BangDiemLop.cshtml">
-      <publishTime>06/04/2021 21:45:53</publishTime>
+      <publishTime>07/12/2021 15:37:33</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/HocVien/CHANGE_MatKhau.cshtml">
       <publishTime>05/20/2021 15:06:02</publishTime>
@@ -57,7 +60,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/12/2021 01:45:05</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/HocVien/INSERT_HocVien.cshtml">
-      <publishTime>05/23/2021 22:53:42</publishTime>
+      <publishTime>07/12/2021 15:41:10</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/HocVien/INSERT_LopHoc.cshtml">
       <publishTime>05/23/2021 22:58:30</publishTime>
@@ -78,13 +81,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/10/2021 22:11:57</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/KyThi/GET_CauHoi.cshtml">
-      <publishTime>07/02/2021 14:56:40</publishTime>
+      <publishTime>02/07/2021 14:56:40</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/KyThi/GET_CTDeThi.cshtml">
       <publishTime>05/23/2021 00:19:49</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/KyThi/GET_DeThi.cshtml">
-      <publishTime>05/22/2021 23:59:04</publishTime>
+      <publishTime>07/12/2021 21:14:47</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/KyThi/GET_KhoaHoc.cshtml">
       <publishTime>05/12/2021 00:56:50</publishTime>
@@ -141,13 +144,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/11/2021 16:40:30</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/NguoiDung/INSERT_NguoiDung.cshtml">
-      <publishTime>05/23/2021 22:47:58</publishTime>
+      <publishTime>07/12/2021 15:40:44</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/NguoiDung/UPDATE_NguoiDung.cshtml">
       <publishTime>05/23/2021 22:48:17</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/Shared/_Layout.cshtml">
-      <publishTime>07/02/2021 08:41:07</publishTime>
+      <publishTime>02/07/2021 08:41:07</publishTime>
     </File>
     <File Include="Areas/NguoiDung/Views/TrangChu/GET_TrangChu.cshtml">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -165,13 +168,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/23/2017 13:15:20</publishTime>
     </File>
     <File Include="bin/EPPlus.dll">
-      <publishTime>06/04/2020 15:23:32</publishTime>
+      <publishTime>04/06/2020 15:23:32</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
-      <publishTime>09/05/2018 16:10:50</publishTime>
+      <publishTime>05/09/2018 16:10:50</publishTime>
     </File>
     <File Include="bin/Microsoft.IO.RecyclableMemoryStream.dll">
-      <publishTime>03/11/2021 06:48:48</publishTime>
+      <publishTime>11/03/2021 06:48:48</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>07/25/2012 11:48:56</publishTime>
@@ -216,10 +219,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/08/2018 12:09:42</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
-      <publishTime>12/05/2017 09:36:44</publishTime>
+      <publishTime>05/12/2017 09:36:44</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
-      <publishTime>12/05/2017 09:36:44</publishTime>
+      <publishTime>05/12/2017 09:36:44</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Managed.Core.targets">
       <publishTime>08/08/2018 12:09:42</publishTime>
@@ -228,85 +231,85 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/08/2018 12:09:42</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Win32.Primitives.dll">
-      <publishTime>11/05/2016 18:55:32</publishTime>
+      <publishTime>05/11/2016 18:55:32</publishTime>
     </File>
     <File Include="bin/roslyn/System.AppContext.dll">
-      <publishTime>11/05/2016 18:55:34</publishTime>
+      <publishTime>05/11/2016 18:55:34</publishTime>
     </File>
     <File Include="bin/roslyn/System.Collections.Immutable.dll">
       <publishTime>05/16/2018 03:29:34</publishTime>
     </File>
     <File Include="bin/roslyn/System.Console.dll">
-      <publishTime>11/05/2016 18:55:48</publishTime>
+      <publishTime>05/11/2016 18:55:48</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.DiagnosticSource.dll">
-      <publishTime>11/05/2016 18:55:52</publishTime>
+      <publishTime>05/11/2016 18:55:52</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.FileVersionInfo.dll">
-      <publishTime>11/05/2016 18:55:56</publishTime>
+      <publishTime>05/11/2016 18:55:56</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
-      <publishTime>11/05/2016 18:55:52</publishTime>
+      <publishTime>05/11/2016 18:55:52</publishTime>
     </File>
     <File Include="bin/roslyn/System.Globalization.Calendars.dll">
-      <publishTime>11/05/2016 18:56:02</publishTime>
+      <publishTime>05/11/2016 18:56:02</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.Compression.dll">
-      <publishTime>11/05/2016 18:56:08</publishTime>
+      <publishTime>05/11/2016 18:56:08</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.Compression.ZipFile.dll">
-      <publishTime>11/05/2016 18:56:04</publishTime>
+      <publishTime>05/11/2016 18:56:04</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.dll">
-      <publishTime>11/05/2016 18:56:08</publishTime>
+      <publishTime>05/11/2016 18:56:08</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
-      <publishTime>11/05/2016 18:56:08</publishTime>
+      <publishTime>05/11/2016 18:56:08</publishTime>
     </File>
     <File Include="bin/roslyn/System.Net.Http.dll">
-      <publishTime>11/05/2016 18:56:30</publishTime>
+      <publishTime>05/11/2016 18:56:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Net.Sockets.dll">
-      <publishTime>11/05/2016 18:56:34</publishTime>
+      <publishTime>05/11/2016 18:56:34</publishTime>
     </File>
     <File Include="bin/roslyn/System.Reflection.Metadata.dll">
       <publishTime>05/16/2018 03:29:44</publishTime>
     </File>
     <File Include="bin/roslyn/System.Runtime.InteropServices.RuntimeInformation.dll">
-      <publishTime>11/05/2016 18:57:00</publishTime>
+      <publishTime>05/11/2016 18:57:00</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.Algorithms.dll">
-      <publishTime>11/05/2016 18:57:14</publishTime>
+      <publishTime>05/11/2016 18:57:14</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.Encoding.dll">
-      <publishTime>11/05/2016 18:57:08</publishTime>
+      <publishTime>05/11/2016 18:57:08</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.Primitives.dll">
-      <publishTime>11/05/2016 18:57:18</publishTime>
+      <publishTime>05/11/2016 18:57:18</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.X509Certificates.dll">
-      <publishTime>11/05/2016 18:57:18</publishTime>
+      <publishTime>05/11/2016 18:57:18</publishTime>
     </File>
     <File Include="bin/roslyn/System.Text.Encoding.CodePages.dll">
-      <publishTime>11/05/2016 18:57:20</publishTime>
+      <publishTime>05/11/2016 18:57:20</publishTime>
     </File>
     <File Include="bin/roslyn/System.Threading.Tasks.Extensions.dll">
-      <publishTime>11/05/2016 18:57:24</publishTime>
+      <publishTime>05/11/2016 18:57:24</publishTime>
     </File>
     <File Include="bin/roslyn/System.ValueTuple.dll">
-      <publishTime>11/05/2016 18:57:30</publishTime>
+      <publishTime>05/11/2016 18:57:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.ReaderWriter.dll">
-      <publishTime>11/05/2016 18:57:36</publishTime>
+      <publishTime>05/11/2016 18:57:36</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.XmlDocument.dll">
-      <publishTime>11/05/2016 18:57:34</publishTime>
+      <publishTime>05/11/2016 18:57:34</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.XPath.dll">
-      <publishTime>11/05/2016 18:57:40</publishTime>
+      <publishTime>05/11/2016 18:57:40</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.XPath.XDocument.dll">
-      <publishTime>11/05/2016 18:57:34</publishTime>
+      <publishTime>05/11/2016 18:57:34</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe">
       <publishTime>08/08/2018 05:38:48</publishTime>
@@ -345,10 +348,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
     <File Include="bin/UI_DATN_QS.dll">
-      <publishTime>07/12/2021 00:06:44</publishTime>
+      <publishTime>07/12/2021 21:29:53</publishTime>
     </File>
     <File Include="bin/UI_DATN_QS.pdb">
-      <publishTime>07/12/2021 00:06:44</publishTime>
+      <publishTime>07/12/2021 21:29:53</publishTime>
     </File>
     <File Include="Content/Styles_Layout.css">
       <publishTime>05/10/2021 01:02:47</publishTime>
@@ -378,7 +381,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/10/2021 01:03:22</publishTime>
     </File>
     <File Include="Views/BangDiemHV/GET_BangDiem.cshtml">
-      <publishTime>07/02/2021 21:32:41</publishTime>
+      <publishTime>02/07/2021 21:32:41</publishTime>
     </File>
     <File Include="Views/DangNhap/Dang_Nhap.cshtml">
       <publishTime>05/25/2021 22:00:36</publishTime>
@@ -396,10 +399,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/26/2021 17:38:57</publishTime>
     </File>
     <File Include="Views/DeThi/GET_XacNhanThi.cshtml">
-      <publishTime>07/02/2021 08:52:36</publishTime>
+      <publishTime>02/07/2021 08:52:36</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>07/02/2021 08:41:32</publishTime>
+      <publishTime>02/07/2021 08:41:32</publishTime>
     </File>
     <File Include="Views/web.config">
       <publishTime>05/10/2021 00:55:28</publishTime>
