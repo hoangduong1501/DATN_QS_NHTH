@@ -7,7 +7,7 @@
         <br />
         <h3 class="text-center" id="exampleModalLongTitle">TẠO BÀI THI</h3>
         <br />
-        @using (Html.BeginForm("INSERT_DeThi", "KyThi", FormMethod.Post))
+        @using (Html.BeginForm("INSERT_DeThi", "DeThiGV", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.object_DeThi.MA_DeThi)

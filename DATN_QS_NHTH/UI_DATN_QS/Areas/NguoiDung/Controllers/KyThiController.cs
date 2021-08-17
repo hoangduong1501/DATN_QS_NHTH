@@ -1070,6 +1070,7 @@ namespace UI_DATN_QS.Areas.NguoiDung.Controllers
 
                         item.ID_MonHoc = pCauHoi.ID_MonHoc;
                         item.TIME_Create = item.TIME_Update = DateTime.Today;
+                        item.LCHON_4 = item.LCHON_Dung;
                         item.IS_Deleted = 0;
 
                         entities.CAU_HOI.Add(item);
